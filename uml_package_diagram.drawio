@@ -22,13 +22,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="L5o9BScCnMkhzsHsFVj7-9" value="&lt;span style=&quot;font-weight: normal;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;Interface&lt;/font&gt;&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Helvetica;fontSize=12;fontColor=default;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="445" y="250" width="60" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="L5o9BScCnMkhzsHsFVj7-10" value="&lt;font style=&quot;font-size: 11px; font-weight: normal;&quot;&gt;Model_classes&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Helvetica;fontSize=12;fontColor=default;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="445" y="540" width="60" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="L5o9BScCnMkhzsHsFVj7-11" value="&lt;span style=&quot;font-weight: normal;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;Data_base_access&lt;/font&gt;&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Helvetica;fontSize=12;fontColor=default;fontStyle=1;" vertex="1" parent="1">
+        <mxCell id="L5o9BScCnMkhzsHsFVj7-11" value="&lt;span style=&quot;font-weight: normal;&quot;&gt;&lt;font style=&quot;font-size: 12px;&quot;&gt;Data_base_access&lt;/font&gt;&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Helvetica;fontSize=12;fontColor=default;fontStyle=1;" vertex="1" parent="1">
           <mxGeometry x="445" y="820" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="L5o9BScCnMkhzsHsFVj7-12" value="Needs" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;" edge="1" parent="1">
@@ -39,6 +33,12 @@
               <mxPoint x="474.62" y="660" />
             </Array>
           </mxGeometry>
+        </mxCell>
+        <mxCell id="L5o9BScCnMkhzsHsFVj7-17" value="&lt;span style=&quot;font-weight: normal;&quot;&gt;API&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Helvetica;fontSize=12;fontColor=default;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="445" y="250" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="L5o9BScCnMkhzsHsFVj7-18" value="&lt;span style=&quot;font-weight: normal;&quot;&gt;Core models (User, Place, Review, Amenity&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Helvetica;fontSize=12;fontColor=default;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="422.5" y="550" width="105" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
