@@ -72,10 +72,14 @@ direction TB
 
     class ReviewEntity {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    +Float rating
 =======
 	    +double rating
 >>>>>>> 6b1d323 (fix: moved all files to the directory part1)
+=======
+	    +Float rating
+>>>>>>> 37e7963 (Update Readme Double become float)
 	    +String comment
 	    +Date dateCreation
 	    +Date dateModification
@@ -114,6 +118,7 @@ direction TB
 	    +String title
 	    +String description
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    +Float price
 	    +Float latitude
 	    +Float longitude
@@ -122,6 +127,11 @@ direction TB
 	    +Double latitude
 	    +Double longitude
 >>>>>>> 6b1d323 (fix: moved all files to the directory part1)
+=======
+	    +Float price
+	    +Float latitude
+	    +Float longitude
+>>>>>>> 37e7963 (Update Readme Double become float)
 	    +Date dateCreation
 	    +Date dateModification
 	    +createPlace()
