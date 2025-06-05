@@ -48,7 +48,7 @@ direction TB
 	    +updateUser()
 	    +deleteUser()
 		+listUser()
-		+listAdmn()
+		+listAdmin()
     }
 
     class PlaceEntity {
