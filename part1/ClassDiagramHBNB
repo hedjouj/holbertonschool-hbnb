@@ -17,10 +17,14 @@ direction TB
 
     class ReviewEntity {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    +Float rating
 =======
 	    +double rating
 >>>>>>> 6b1d323 (fix: moved all files to the directory part1)
+=======
+	    +Float rating
+>>>>>>> 7f3bf11 (Use float than double)
 	    +String comment
 	    +Date dateCreation
 	    +Date dateModification
@@ -59,6 +63,7 @@ direction TB
 	    +String title
 	    +String description
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    +Float price
 	    +Float latitude
 	    +Float longitude
@@ -67,6 +72,11 @@ direction TB
 	    +Double latitude
 	    +Double longitude
 >>>>>>> 6b1d323 (fix: moved all files to the directory part1)
+=======
+	    +Float price
+	    +Float latitude
+	    +Float longitude
+>>>>>>> 7f3bf11 (Use float than double)
 	    +Date dateCreation
 	    +Date dateModification
 	    +createPlace()
