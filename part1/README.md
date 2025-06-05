@@ -107,10 +107,14 @@ direction TB
 	    +deleteUser()
 		+listUser()
 <<<<<<< HEAD
+<<<<<<< HEAD
 		+listAdmin()
 =======
 		+listAdmn()
 >>>>>>> 6b1d323 (fix: moved all files to the directory part1)
+=======
+		+listAdmin()
+>>>>>>> fe36ca4 (remove typo listadmin)
     }
 
     class PlaceEntity {
@@ -147,7 +151,11 @@ direction TB
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ```
 =======
 ```
 >>>>>>> 6b1d323 (fix: moved all files to the directory part1)
+=======
+```
+>>>>>>> fe36ca4 (remove typo listadmin)
