@@ -23,7 +23,8 @@ direction TB
 	    +int idPlace
 	    +int idUser
 	    +listReviewByPlace(idPlace) List Review
-	    +createReview()
+	    +listReviewByUser(idUser) List Review
+		+createReview()
 	    +updateReview()
 	    +deleteReview()
     }
@@ -41,6 +42,8 @@ direction TB
 	    +createUser()
 	    +updateUser()
 	    +deleteUser()
+		+listUser()
+		+listAdmn()
     }
 
     class PlaceEntity {
@@ -55,8 +58,11 @@ direction TB
 	    +createPlace()
 	    +updatePlace()
 	    +deletePlace()
+		+listPlace()
+		+listAmenity(idPlace) List:Amenity
     }
 }
     PlaceEntity *-- AmenityEntity
     PlaceEntity "1" -- "*" ReviewEntity
     ReviewEntity "*" -- "1" UserEntity
+
