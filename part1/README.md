@@ -1,4 +1,5 @@
 # holbertonschool-hbnb
+<<<<<<< HEAD
 Technical documentation of mini version of Hbnb
 
 ## Introduction
@@ -46,6 +47,11 @@ Relation between place and review.
 1 Review is written by one user and one place
 1 user can create many review
 
+=======
+Technical documentation of mini version of Airbnb
+
+## Class Diagram 
+>>>>>>> 6b1d323 (fix: moved all files to the directory part1)
 ```mermaid
 classDiagram
 direction TB
@@ -65,7 +71,11 @@ direction TB
     }
 
     class ReviewEntity {
+<<<<<<< HEAD
 	    +Float rating
+=======
+	    +double rating
+>>>>>>> 6b1d323 (fix: moved all files to the directory part1)
 	    +String comment
 	    +Date dateCreation
 	    +Date dateModification
@@ -92,16 +102,26 @@ direction TB
 	    +updateUser()
 	    +deleteUser()
 		+listUser()
+<<<<<<< HEAD
 		+listAdmin()
+=======
+		+listAdmn()
+>>>>>>> 6b1d323 (fix: moved all files to the directory part1)
     }
 
     class PlaceEntity {
 	    +int idPlace
 	    +String title
 	    +String description
+<<<<<<< HEAD
 	    +Float price
 	    +Float latitude
 	    +Float longitude
+=======
+	    +Double price
+	    +Double latitude
+	    +Double longitude
+>>>>>>> 6b1d323 (fix: moved all files to the directory part1)
 	    +Date dateCreation
 	    +Date dateModification
 	    +createPlace()
@@ -116,4 +136,8 @@ direction TB
     ReviewEntity "*" -- "1" UserEntity
 
 
+<<<<<<< HEAD
 ```
+=======
+```
+>>>>>>> 6b1d323 (fix: moved all files to the directory part1)
