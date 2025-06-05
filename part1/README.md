@@ -21,7 +21,7 @@ direction TB
     }
 
     class ReviewEntity {
-	    +double rating
+	    +Float rating
 	    +String comment
 	    +Date dateCreation
 	    +Date dateModification
@@ -55,9 +55,9 @@ direction TB
 	    +int idPlace
 	    +String title
 	    +String description
-	    +Double price
-	    +Double latitude
-	    +Double longitude
+	    +Float price
+	    +Float latitude
+	    +Float longitude
 	    +Date dateCreation
 	    +Date dateModification
 	    +createPlace()
