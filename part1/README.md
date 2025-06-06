@@ -51,13 +51,13 @@ direction TB
 * This diagram describe the interaction with the différent Logic component.
 
 * Interaction between class : 
-- First the place have some amenity, a amenity cannot exist without place. 
-- A place is located by a user, this user can make a review about the quality of service. 
+  - First the place have some amenity, a amenity cannot exist without place. 
+  - A place is located by a user, this user can make a review about the quality of service. 
 AMENITY, USER, PLACE AND REVIEW are the entity use by the website via the BusinessLogicLayer
-- Relation between place and review. 
-- 1 place can have many review
-- 1 Review is written by one user and one place
-- 1 user can create many review
+  - Relation between place and review : 
+  - 1 place can have many review
+  - 1 Review is written by one user and one place
+  - 1 user can create many review
 
 ```mermaid
 classDiagram
