@@ -1,5 +1,39 @@
 # holbertonschool-hbnb
-Technical documentation of mini version of Airbnb
+Technical documentation of mini version of Hbnb
+
+## Introduction
+The HBNB project is a website to rent place between users.
+The user can set some informations about the place, users, review and amenity.
+In this document you will see the diagram use for the project.
+
+## Package Diagram 
+
+```mermaid
+classDiagram
+direction TB
+    class PresentationLayer {
+	    +ServiceAPI
+    }
+
+    class BusinessLogicLayer {
+	    +User
+        +Review
+        +Place
+        +Amenity
+    }
+
+    class PersistenceLayer {
+	    +DatabaseAccess
+    }
+
+ 
+
+	<<WebsiteHBNB>> PresentationLayer
+
+    PresentationLayer --> BusinessLogicLayer : Facade Pattern
+    BusinessLogicLayer --> PersistenceLayer : Database Operations
+```
+
 
 ## Class Diagram 
 
