@@ -1,10 +1,11 @@
 # holbertonschool-hbnb
-Technical documentation of mini version of Hbnb
+HBnB - Technical documentation
 
 ## Introduction
 The HBNB project is a website to rent place between users.
 The user can set some informations about the place, users, review and amenity.
-In this document you will see the diagram use for the project.
+This document constitutes the complete technical information for the HBnB project.
+It brings together all the UML diagrams produced to illustrate the application architecture, the business logic and the communication flows between layers. 
 
 ## Package Diagram 
 
