@@ -143,7 +143,8 @@ In this Sequence we created sequence diagrams that represent the flow of interac
 
 ## User Registration
 User account creation process. The user fills in their information on the homepage, which is transmitted via the web API to be stored in the database with confirmation email sending.
-```sequenceDiagram
+```mermaid
+sequenceDiagram
     participant User
     participant Homepage
     participant "Web API" as API
@@ -167,7 +168,8 @@ Key Interactions:
 ## Place creation
 Simplified listing creation process. The user enters their listing details on the website, which saves them directly to the database and confirms successful creation.
 
-```sequenceDiagram
+```mermaid
+sequenceDiagram
     participant User
     participant Website
     participant Database
@@ -187,7 +189,8 @@ Key Interactions:
 ## Review Submission
 User review submission flow. The system processes and validates the review through business logic before storing it in the database and confirming submission to the user.
 
-```sequenceDiagram
+```mermaid
+sequenceDiagram
     participant User
     participant Website
     participant BusinessLogic
@@ -211,7 +214,8 @@ Key Interactions:
 ## Fetching a List of Places 
  Place search flow based on user-specified criteria. The user enters their criteria via the website, which interacts with business logic to retrieve and display results from the database.
 
- ```sequenceDiagram
+ ```mermaid
+ sequenceDiagram
     participant User
     participant Website
     participant BusinessLogic
