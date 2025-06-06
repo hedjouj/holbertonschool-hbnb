@@ -42,34 +42,6 @@ Relation between place and review.
 1 user can create many review
 
 ```mermaid
-## Class Diagram 
-
-* This diagram discribe the business logic layer and interaction with the different Logic component.
-  
-* This diagram represent 4 Class :
-  - Place where the user can live for a night or more
-  - The amenity of the place Wifi, Number of pieces, Number of piece
-  - The user connect to the website and if the user is an admin with more power of moderate the website
-  - The review with the notation of a place by a user and comments about the place
-  - AMENITY, USER, PLACE AND REVIEW are the entity use by the website via the BusinessLogicLayer
-
-* Each class have field like date creation, date modification and a uniq id needed by the Database to identify the place, the review, the amenity or the user.
-
-* This class diagram provide data and function usefull for the interaction between the facade patern and the database
-* You can create, update, delete a REVIEW
-* You can create, update, delete a PLACE
-* You can create, update, delete a AMENITY
-* You can create, update, delete a USER
-
-* Interaction between class : 
-  - First the place have some amenity, a amenity cannot exist without place. 
-  - A place is located by a user, this user can make a review about the quality of service. 
-  - Relation between place and review : 
-  - 1 place can have many review
-  - 1 Review is written by one user and one place
-  - 1 user can create many review
-
-```mermaid
 classDiagram
 direction TB
 namespace BusinessLogicLayer {
@@ -137,6 +109,4 @@ namespace BusinessLogicLayer {
     PlaceEntity *-- AmenityEntity
     PlaceEntity "1" -- "*" ReviewEntity
     ReviewEntity "*" -- "1" UserEntity
-
-
 ```
