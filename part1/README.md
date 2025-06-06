@@ -9,18 +9,15 @@ In this document you will see the diagram use for the project.
 ## Package Diagram 
 
 ```mermaid
-graph TD
-    subgraph Package
-        UI[UserInterface]
-    end
+classDiagram
+    package UserInterface {
+    }
 
-    subgraph Package
-        BL[BusinessLogic]
-    end
+    package BusinessLogic {
+    }
 
-    subgraph Package
-        DB[DataBase]
-    end
+    package DataBase {
+    }
 
     UI --> BL
     BL --> DB
