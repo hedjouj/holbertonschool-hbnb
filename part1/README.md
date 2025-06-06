@@ -16,23 +16,24 @@ This diagram helps developers quickly understand the structure and responsibilit
 
 ```mermaid
 graph TD
-    subgraph UserInterface
-        UI[+ Services API]
+    subgraph "User Interface"
+        UI["+ Services API"]
     end
-
-    subgraph BusinessLogic
-        BL[+ ModelClasses]
+    subgraph "Business Logic"
+        BL["+ ModelClasses"]
     end
-
-    subgraph DataBase
-        DB[+ DataBaseAccess]
+    subgraph "Data Base"
+        DB["+ DataBaseAccess"]
     end
-
-    UI --> BL:::facade
-    BL --> DB:::dbops
-
-    classDef facade stroke-width:2,stroke-dasharray: 5 5,stroke:#1f77b4,color:#1f77b4
-    classDef dbops stroke-width:2,stroke:#2ca02c,color:#2ca02c
+    
+    UI --> BL
+    BL --> DB
+    
+    classDef facade stroke-width:2px,stroke-dasharray:5 5,stroke:#1f77b4,color:#1f77b4
+    classDef dbops stroke-width:2px,stroke:#2ca02c,color:#2ca02c
+    
+    class BL facade
+    class DB dbops
 ```
 
 🔹Key components
