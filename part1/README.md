@@ -1,62 +1,6 @@
+# holbertonschool-hbnb
+Technical documentation of mini version of Airbnb
 
-# HBnB Project
-
-## Introduction
-The HBNB project is a mini-version of the Airbnb website.
-The user can set some informations about the place, users, review and amenity.
-This document constitutes the complete technical information for this project.
-It brings together all the UML diagrams produced to illustrate the application architecture, the business logic and the communication flows between layers. 
-The goal is to provide a clear, readable and structured explanation of our project.
-
-
-
-## Package Diagram 
-In this diagramm, the purpose is to show how the global architecture of the application work. It illustrates how to application is modularly divided into three keys logical layers. 
-This diagram helps developers quickly understand the structure and responsibility of each major part of the application without diving into the implementation details.
-
-```mermaid
-graph TD
-    subgraph UI [User Interface]
-        A[Services API]
-    end
-    subgraph BL [Business Logic]
-        B[ModelClasses]
-    end
-    subgraph DB [Database]
-        C[DatabaseAccess]
-    end
-    
-    A --> B
-    B --> C
-```
-
-🔹Key components
-
-1️⃣ UserInterface
-
-Contains Services and API components.
-
-Handles external user interactions, such as HTTP requests.
-
-2️⃣ BusinessLogic
-
-Contains core ModelClasses such as User, Place, Review, and Amenity.
-
-Implements the application's rules and workflows.
-
-3️⃣ DataBase
-
-Contains DataBaseAccess components, typically involving repositories or data mappers.
-
-Responsible for storing and retrieving persistent data.
-
-↪️ Communication Arrows
-
-UserInterface --> BusinessLogic is done via a Facade to decouple the frontend logic from core rules.
-
-BusinessLogic --> DataBase represents Database Operations.
-
-    
 ## Class Diagram 
 
 This diagram describe the interaction with the différent Logic component.
