@@ -49,6 +49,8 @@ Relation between place and review.
 
 1 user can create many review
 
+The BusinessLogicLayer give function and method use to communicate between le website and the database.
+
 ```mermaid
 classDiagram
 direction TB
