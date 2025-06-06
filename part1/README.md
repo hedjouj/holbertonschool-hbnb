@@ -9,19 +9,21 @@ In this document you will see the diagram use for the project.
 ## Package Diagram 
 
 ```mermaid
-classDiagram
-package UserInterface {
-}
+graph TD
+    subgraph Package
+        UI[UserInterface]
+    end
 
-package BusinessLogic {
-}
+    subgraph Package
+        BL[BusinessLogic]
+    end
 
-package DataBase {
-}
+    subgraph Package
+        DB[DataBase]
+    end
 
-UserInterface --> BusinessLogic
-BusinessLogic --> DataBase
-
+    UI --> BL
+    BL --> DB
 ```
 
 
