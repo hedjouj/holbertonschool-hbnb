@@ -10,28 +10,18 @@ In this document you will see the diagram use for the project.
 
 ```mermaid
 classDiagram
-direction TB
-    class PresentationLayer {
-	    +ServiceAPI
-    }
+package UserInterface {
+}
 
-    class BusinessLogicLayer {
-	    +User
-        +Review
-        +Place
-        +Amenity
-    }
+package BusinessLogic {
+}
 
-    class PersistenceLayer {
-	    +DatabaseAccess
-    }
+package DataBase {
+}
 
- 
+UserInterface --> BusinessLogic
+BusinessLogic --> DataBase
 
-	<<WebsiteHBNB>> PresentationLayer
-
-    PresentationLayer --> BusinessLogicLayer : Facade Pattern
-    BusinessLogicLayer --> PersistenceLayer : Database Operations
 ```
 
 
