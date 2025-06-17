@@ -1,5 +1,3 @@
-# app/models/place.py
-
 from app.models.base_model import BaseModel
 from app.models.user import User
 
@@ -27,4 +25,4 @@ class Place(BaseModel):
         self.reviews = []
         self.amenities = []
 
-        owner.places.append(self)  # lien vers le user
+        owner.places.append(self)
