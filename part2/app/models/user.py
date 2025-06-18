@@ -26,3 +26,8 @@ class User(BaseModel):
         self.places = []
 
         User.emails_seen.add(email)
+    def __str__(self):
+        """
+        Used to return object as we want
+        """
+        return "{} {}".format(self.first_name, self.last_name)
