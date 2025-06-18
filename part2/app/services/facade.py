@@ -23,18 +23,31 @@ class HBnBFacade:
         pass
 
     
+    # Amenity Facade
     def create_amenity(self, amenity_data):
+        """Create a new amenity."""
         amenity = Amenity(**amenity_data)
         self.amenity_repo.add(amenity)
         return amenity
 
     def get_amenity(self, amenity_id):
+        """Retrieve an amenity by ID."""
         return self.amenity_repo.get(amenity_id)
 
     def get_all_amenities(self):
-        return self.amenity_repo
+        """Retrieve all amenities."""
+        return self.amenity_repo.get_all()
 
     def update_amenity(self, amenity_id, amenity_data):
-        # Placeholder for logic to update an amenity
-        pass
-        
+        """Update an amenity."""
+        amenity = self.get_amenity(amenity_id)
+        if not amenity:
+            raise ValueError("Amenity not found")
+
+        amenity.update(amenity_data)
+        self.amenity_repo.save(amenity)
+        return amenity
+
+    def get_amenity_by_name(self, name):
+        """Retrieve an amenity by name."""
+        return self.amenity_repo.get_by_attribute('name', name)
