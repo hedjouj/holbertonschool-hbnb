@@ -1,5 +1,6 @@
 from app.models.base_model import BaseModel
 from app.models.user import User
+from app.services import facade
 
 class Place(BaseModel):
     def __init__(self, title: str, price: float, latitude: float, longitude: float, owner_id: str, amenities=[], description=""):
@@ -38,6 +39,5 @@ class Place(BaseModel):
             "longitude": self.longitude,
             "owner_id": self.owner_id,
             "reviews": [review.to_dict() for review in self.reviews],
-            "amenities": [amenity.to_dict() for
-                          amenity in self.amenities if amenity]
+            "amenities": self.amenities
         }
