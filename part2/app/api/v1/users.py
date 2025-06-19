@@ -10,8 +10,6 @@ user_model = api.model("User", {
     "last_name": fields.String(required=True, max_length=50),
     "email": fields.String(required=True),
     "is_admin": fields.Boolean,
-    "created_at": fields.DateTime,
-    "updated_at": fields.DateTime,
 })
 @api.route('/')
 class UserList(Resource):
@@ -31,6 +29,12 @@ class UserList(Resource):
         new_user = facade.create_user(user_data)
         return {'id': new_user.id, 'first_name': new_user.first_name, 'last_name': new_user.last_name, 'email': new_user.email}, 201
 
+    @api.response(200, 'List of places retrieved successfully')
+    def get(self):
+        """Retrieve a list of all places"""
+        users = facade.get_all_users()
+        return [user.to_dict()
+                for user in users], 200
 
 @api.route('/<user_id>')
 class UserResource(Resource):
@@ -43,22 +47,22 @@ class UserResource(Resource):
             return {'error': 'User not found'}, 404
         return {'id': user.id, 'first_name': user.first_name, 'last_name': user.last_name, 'email': user.email}, 200
     
-@api.expect(user_model, validate=True)
-@api.response(200, 'User updated successfully')
-@api.response(404, 'User not found')
-def put(self, user_id):
-    """Update user information"""
-    user = facade.get_user(user_id)
-    if not user:
-        return {'error': 'User not found'}, 404
-    
-    update_data = api.payload
-    updated_user = facade.update_user(user_id, update_data)
+    @api.expect(user_model, validate=True)
+    @api.response(200, 'User updated successfully')
+    @api.response(404, 'User not found')
+    def put(self, user_id):
+        """Update user information"""
+        user = facade.get_user(user_id)
+        if not user:
+            return {'error': 'User not found'}, 404
 
-    return {
+        update_data = api.payload
+        updated_user = facade.update_user(user_id, update_data)
+
+        return {
         'id': updated_user.id,
         'first_name': updated_user.first_name,
         'last_name': updated_user.last_name,
         'email': updated_user.email,
         'updated_at': updated_user.updated_at
-        }, 200
+    }, 200
