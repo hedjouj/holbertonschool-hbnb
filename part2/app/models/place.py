@@ -3,7 +3,7 @@ from app.models.user import User
 from app.services import facade
 
 class Place(BaseModel):
-    def __init__(self, title: str, price: float, latitude: float, longitude: float, owner_id: str, amenities=[], description=""):
+    def __init__(self, title: str, price: float, latitude: float, longitude: float, owner_id: str, amenities=[], reviews=[], description=""):
         super().__init__()
 
         if not title or len(title) > 100:
@@ -23,7 +23,7 @@ class Place(BaseModel):
         self.latitude = latitude
         self.longitude = longitude
         self.owner_id = owner_id
-        self.reviews = []
+        self.reviews = reviews
         self.amenities = amenities
 
         #owner.places.append(self)
