@@ -2,6 +2,7 @@
 
 from app.models.base_model import BaseModel
 
+
 class User(BaseModel):
     emails_seen = set()  # pour valider l'unicité des emails
 
@@ -26,6 +27,7 @@ class User(BaseModel):
         self.places = []
 
         User.emails_seen.add(email)
+        
     def __str__(self):
         """
         Used to return object as we want
