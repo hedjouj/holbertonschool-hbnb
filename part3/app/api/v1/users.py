@@ -6,10 +6,6 @@ api = Namespace("users", description="User operations")
 user_model = api.model("User", {
     "first_name": fields.String(required=True, max_length=50),
     "last_name": fields.String(required=True, max_length=50),
-<<<<<<< HEAD
-    "password": fields.String(required=True, max_length=50),
-=======
->>>>>>> 55418de (feat: added all folders/files from part2 to part3)
     "email": fields.String(required=True),
 })
 @api.route('/')
@@ -27,14 +23,8 @@ class UserList(Resource):
         if existing_user:
             return {'error': 'Email already registered'}, 400
 
-<<<<<<< HEAD
-        
-        new_user = facade.create_user(user_data)
-        return {'id': new_user.id, 'first_name': new_user.first_name, 'last_name': new_user.last_name, "password": new_user.password, 'email': new_user.email}, 201
-=======
         new_user = facade.create_user(user_data)
         return {'id': new_user.id, 'first_name': new_user.first_name, 'last_name': new_user.last_name, 'email': new_user.email}, 201
->>>>>>> 55418de (feat: added all folders/files from part2 to part3)
 
     @api.response(200, 'List of users retrieved successfully')
     def get(self):
@@ -97,6 +87,7 @@ class UserResource(Resource):
         'first_name': updated_user.first_name,
         'last_name': updated_user.last_name,
         'email': updated_user.email
+<<<<<<< HEAD:part3/app/api/v1/users.py
     }, 200
 >>>>>>> 1186d9a (pb of label)
 =======
@@ -106,3 +97,6 @@ class UserResource(Resource):
             return {'error': str(e)}, 404
 >>>>>>> 4560d9a (fix bug facade)
 >>>>>>> 55418de (feat: added all folders/files from part2 to part3)
+=======
+    }, 200
+>>>>>>> 1186d9a (pb of label):part2/app/api/v1/users.py
