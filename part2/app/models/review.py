@@ -23,3 +23,13 @@ class Review(BaseModel):
         self.user = user
 
         place.reviews.append(self)
+
+    def to_dict(self):
+        '''Convert the Review object to a dictionary'''
+        return {
+            'id': self.id,
+            'text': self.text,
+            'user_id': self.user.id,
+            'place_id': self.place.id,
+            'rating': self.rating
+        }
