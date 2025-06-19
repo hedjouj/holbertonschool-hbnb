@@ -50,6 +50,9 @@ class UserResource(Resource):
     @api.response(400, 'Invalid input data')
     def put(self, user_id):
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> cf9a765 (fix pb on update a user fct put)
         """Update user details with ID"""
         user_data = api.payload
         try:
@@ -61,6 +64,7 @@ class UserResource(Resource):
                 'email': updated_user.email
             }, 200
         except ValueError as e:
+<<<<<<< HEAD
             return {'error': str(e)}, 404
 =======
         """Update user information"""
@@ -78,3 +82,6 @@ class UserResource(Resource):
         'email': updated_user.email
     }, 200
 >>>>>>> 1186d9a (pb of label)
+=======
+            return {'error': str(e)}, 404
+>>>>>>> cf9a765 (fix pb on update a user fct put)
