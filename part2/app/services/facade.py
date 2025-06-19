@@ -1,8 +1,8 @@
 from app.persistence.repository import InMemoryRepository
-from app.models.user import User
-from app.models.place import Place
-from app.models.amenity import Amenity
-from app.models.review import Review
+from app.models.place import Place 
+from app.models.amenity import Amenity 
+from app.models.user import User 
+from app.models.review import Review 
 
 
 class HBnBFacade:
@@ -11,6 +11,8 @@ class HBnBFacade:
         self.place_repo = InMemoryRepository()
         self.review_repo = InMemoryRepository()
         self.amenity_repo = InMemoryRepository()
+        self.user_repo = InMemoryRepository()
+        self.review_repo = InMemoryRepository()
 
     def create_place(self, place_data):
         """Create a new place."""
@@ -104,13 +106,31 @@ class HBnBFacade:
         """Update an user."""
         user = self.get_user(user_id)
         if not user:
-            raise ValueError("User not found")
-
-        user.update(update_data)
-        self.user_repo.save(user)
-        return user
+            return None
+        for key, value in update_data.items():
+            setattr(user, key, value)
+            self.user_repo.update(user)
+            return user
         
+    # Review Facade
+    def create_review(self, text, user_id, place_id, rating):
+        """Create a new review."""
+        user = self.get_user(user_id)
+        if not user:
+            raise ValueError("User not found.")
 
+        place = self.get_place(place_id)
+        if not place:
+            raise ValueError("Place not found.")
+
+        review = Review(
+            text=text,
+            user_id=user_id,
+            place_id=place_id,
+            rating=rating,
+        )
+        self.review_repo.add(review)
+        return review
 
     def get_review(self, review_id):
         review = self.review_repo.get(review_id)
@@ -144,7 +164,3 @@ class HBnBFacade:
             raise ValueError("Review not found")
         self.review_repo.delete(review_id)
         return {'message': 'Review deleted succesessfully'}
-
-
-# Instance globale
-facade = HBnBFacade()
