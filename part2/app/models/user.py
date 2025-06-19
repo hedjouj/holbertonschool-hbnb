@@ -4,7 +4,7 @@ from app.models.base_model import BaseModel
 
 
 class User(BaseModel):
-    emails_seen = set()  # pour valider l'unicité des emails
+    emails_seen = set()  # pour valider les mails
 
     def __init__(self, first_name: str, last_name: str, email: str, is_admin=False):
         super().__init__()
