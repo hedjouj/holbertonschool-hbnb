@@ -4,7 +4,8 @@ from app.models.base_model import BaseModel
 class User(BaseModel):
     emails_seen = set()  # pour valider les mails
 
-    def __init__(self, first_name: str, last_name: str, email: str, is_admin=False):
+    def __init__(self, first_name: str, last_name: str, email: str,
+                 is_admin=False):
         super().__init__()
 
         if not first_name or len(first_name) > 50:
