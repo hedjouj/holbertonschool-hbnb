@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+# app/models/amenity.py
 ''' Amenity Class represents an amenity, inheriting from BaseModel'''
 
 
