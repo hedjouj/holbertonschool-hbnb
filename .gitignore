@@ -1,1 +1,11 @@
 *.pyc
+*main.py
+__pycache__
+main*.py
+.venv
+.csv
+*.txt
+*.json
+*my*
+*_2*
+**venv/
