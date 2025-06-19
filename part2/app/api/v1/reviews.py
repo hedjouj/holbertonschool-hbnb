@@ -11,7 +11,6 @@ review_model = api.model('Review', {
     'place_id': fields.String(required=True, description='ID of the place')
 })
 
-
 @api.route('/')
 class ReviewList(Resource):
     @api.expect(review_model)
