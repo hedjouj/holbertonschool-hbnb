@@ -29,9 +29,9 @@ class UserList(Resource):
         new_user = facade.create_user(user_data)
         return {'id': new_user.id, 'first_name': new_user.first_name, 'last_name': new_user.last_name, 'email': new_user.email}, 201
 
-    @api.response(200, 'List of places retrieved successfully')
+    @api.response(200, 'List of users retrieved successfully')
     def get(self):
-        """Retrieve a list of all places"""
+        """Retrieve a list of all users"""
         users = facade.get_all_users()
         return [user.to_dict()
                 for user in users], 200
@@ -63,6 +63,5 @@ class UserResource(Resource):
         'id': updated_user.id,
         'first_name': updated_user.first_name,
         'last_name': updated_user.last_name,
-        'email': updated_user.email,
-        'updated_at': updated_user.updated_at
+        'email': updated_user.email
     }, 200
