@@ -1,3 +1,4 @@
+from app.models.base_model import BaseModel
 # app/models/amenity.py
 ''' Amenity Class represents an amenity, inheriting from BaseModel'''
 
