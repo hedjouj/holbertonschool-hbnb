@@ -3,7 +3,9 @@ from app.models.user import User
 
 
 class Place(BaseModel):
-    def __init__(self, title: str, price: float, latitude: float, longitude: float, owner: User, description=""):
+    def __init__(self,
+                 title: str, price: float, latitude: float, longitude: float,
+                 owner: User, description=""):
         super().__init__()
 
         if not title or len(title) > 100:
