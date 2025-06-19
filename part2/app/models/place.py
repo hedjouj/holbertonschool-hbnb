@@ -2,7 +2,6 @@ from app.models.base_model import BaseModel
 from app.models.user import User
 from app.services import facade
 
-
 class Place(BaseModel):
     def __init__(self, title: str, price: float, latitude: float, longitude: float, owner_id: str, amenities=[], description=""):
         super().__init__()
@@ -28,6 +27,20 @@ class Place(BaseModel):
         self.amenities = amenities
 
         #owner.places.append(self)
+
+    def to_dict(self):
+        """Convert the Place object to a dictionary."""
+        return {
+            "id": self.id,
+            "title": self.title,
+            "description": self.description,
+            "price": self.price,
+            "latitude": self.latitude,
+            "longitude": self.longitude,
+            "owner_id": self.owner_id,
+            "reviews": [review.to_dict() for review in self.reviews],
+            "amenities": self.amenities
+        }
 
     def to_dict(self):
         """Convert the Place object to a dictionary."""

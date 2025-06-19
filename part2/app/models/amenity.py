@@ -1,6 +1,10 @@
 # app/models/amenity.py
 ''' Amenity Class represents an amenity, inheriting from BaseModel'''
 
+from app.models.base_model import BaseModel
+
+#!/usr/bin/python3
+''' Amenity Class represents an amenity, inheriting from BaseModel'''
 
 class Amenity(BaseModel):
     '''Represents an amenity with attributes and restrictions'''
