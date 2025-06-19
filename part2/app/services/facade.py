@@ -81,7 +81,16 @@ class HBnBFacade:
         return self.user_repo.get_all()
     
     def update_user(self, user_id, update_data):
-        user = self.user_repo.get(user_id)
+        #user = self.user_repo.get(user_id)
+        #if not user:
+        #    return None
+        #for key, value in update_data.items():
+        #    setattr(user, key, value)
+        #    self.user_repo.update(user)
+        #    return user
+        
+        """Update an amenity."""
+        user = self.get_user(user_id)
         if not user:
             return None
         for key, value in update_data.items():

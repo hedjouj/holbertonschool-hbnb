@@ -34,3 +34,13 @@ class User(BaseModel):
         Used to return object as we want
         """
         return "{} {}".format(self.first_name, self.last_name)
+    
+    def to_dict(self):
+        """Convert the Place object to a dictionary."""
+        return {
+            "id": self.id,
+            "first_name": self.first_name,
+            "last_name": self.last_name,
+            "email": self.email,
+            "is_admin": self.is_admin,
+        }
