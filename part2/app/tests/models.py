@@ -6,6 +6,7 @@ from app.models.amenity import Amenity
 This module tests Objects and their relations
 """
 
+
 def main():
     """
     This Function calls all possibilities
@@ -70,7 +71,7 @@ def main():
     print("commenting {}".format(review2.place))
     print("rating: {} stars".format(review2.rating))
     print("comment: {}".format(review2.text))
-    
+
     # Check relation user/place, user/review
 
     owner.add_place(place)
@@ -114,5 +115,6 @@ def main():
     print("So, {} offers:".format(place))
     for ame in place.amenities:
         print(ame)
+
 
 main()
