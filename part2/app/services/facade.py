@@ -9,6 +9,8 @@ class HBnBFacade:
         self.place_repo = InMemoryRepository()
         self.amenity_repo = InMemoryRepository()
         self.user_repo = InMemoryRepository()
+        self.review_repo = InMemoryRepository()
+
 
     def create_place(self, place_data):
         """Create a new place."""
@@ -87,25 +89,23 @@ class HBnBFacade:
             return user
     
     def create_review(self, review_data):
-    # Placeholder for logic to create a review, including validation for user_id, place_id, and rating
-        pass
+        review = review(**review_data)
+        self.review_repo_repo.add(review)
+        return review
 
 def get_review(self, review_id):
-    # Placeholder for logic to retrieve a review by ID
-    pass
+    return self.review_repo.get(review_id)
+
 
 def get_all_reviews(self):
-    # Placeholder for logic to retrieve all reviews
-    pass
+    return self.user_repo.get_all()
+
 
 def get_reviews_by_place(self, place_id):
-    # Placeholder for logic to retrieve all reviews for a specific place
-    pass
+    return self.review_repo
 
 def update_review(self, review_id, review_data):
-    # Placeholder for logic to update a review
-    pass
+    return self.review_repo.update(review_id, review_data) 
 
 def delete_review(self, review_id):
-    # Placeholder for logic to delete a review
-    pass
+    return self.review_repo.delete(review_id)
