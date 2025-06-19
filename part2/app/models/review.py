@@ -1,8 +1,8 @@
 # app/models/review.py
-
 from app.models.base_model import BaseModel
 from app.models.user import User
 from app.models.place import Place
+
 
 class Review(BaseModel):
     def __init__(self, text: str, rating: int, place: Place, user: User):

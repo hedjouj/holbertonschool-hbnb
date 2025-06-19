@@ -3,6 +3,7 @@ from app.models.place import Place
 from app.models.amenity import Amenity 
 from app.models.user import User 
 
+
 class HBnBFacade:
     def __init__(self):
         self.place_repo = InMemoryRepository()
@@ -72,3 +73,15 @@ class HBnBFacade:
 
     def get_user_by_email(self, email):
         return self.user_repo.get_by_attribute('email', email)
+    
+    def get_all_users(self):
+        return self.user_repo.get_all()
+    
+    def update_user(self, user_id, update_data):
+        user = self.user_repo.get(user_id)
+        if not user:
+            return None
+        for key, value in update_data.items():
+            setattr(user, key, value)
+            self.user_repo.update(user)
+            return user

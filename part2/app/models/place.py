@@ -41,3 +41,17 @@ class Place(BaseModel):
             "reviews": [review.to_dict() for review in self.reviews],
             "amenities": self.amenities
         }
+
+    def to_dict(self):
+        """Convert the Place object to a dictionary."""
+        return {
+            "id": self.id,
+            "title": self.title,
+            "description": self.description,
+            "price": self.price,
+            "latitude": self.latitude,
+            "longitude": self.longitude,
+            "owner_id": self.owner_id,
+            "reviews": [review.to_dict() for review in self.reviews],
+            "amenities": self.amenities
+        }

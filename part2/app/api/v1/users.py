@@ -1,17 +1,18 @@
 from flask_restx import Namespace, Resource, fields
-from app.services import facade
+from app.services.facade import HBnBFacade
 
-api = Namespace('users', description='User operations')
+api = Namespace("users", description="User operations")
+facade = HBnBFacade()
 
-# Define the user model for input validation and documentation
 user_model = api.model("User", {
     "id": fields.String(readonly=True),
     "first_name": fields.String(required=True, max_length=50),
     "last_name": fields.String(required=True, max_length=50),
     "email": fields.String(required=True),
     "is_admin": fields.Boolean,
+    "created_at": fields.DateTime,
+    "updated_at": fields.DateTime,
 })
-
 @api.route('/')
 class UserList(Resource):
     @api.expect(user_model, validate=True)
@@ -41,3 +42,23 @@ class UserResource(Resource):
         if not user:
             return {'error': 'User not found'}, 404
         return {'id': user.id, 'first_name': user.first_name, 'last_name': user.last_name, 'email': user.email}, 200
+    
+@api.expect(user_model, validate=True)
+@api.response(200, 'User updated successfully')
+@api.response(404, 'User not found')
+def put(self, user_id):
+    """Update user information"""
+    user = facade.get_user(user_id)
+    if not user:
+        return {'error': 'User not found'}, 404
+    
+    update_data = api.payload
+    updated_user = facade.update_user(user_id, update_data)
+
+    return {
+        'id': updated_user.id,
+        'first_name': updated_user.first_name,
+        'last_name': updated_user.last_name,
+        'email': updated_user.email,
+        'updated_at': updated_user.updated_at
+        }, 200
