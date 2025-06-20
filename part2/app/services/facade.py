@@ -72,6 +72,8 @@ class HBnBFacade:
         return user
 
     def get_user(self, user_id):
+        for i in self.user_repo.get_all():
+            print ( "coucou " + str(i) )
         return self.user_repo.get(user_id)
 
     def get_user_by_email(self, email):
@@ -92,15 +94,30 @@ class HBnBFacade:
         """Update an amenity."""
         user = self.get_user(user_id)
         if not user:
-            return None
-        for key, value in update_data.items():
-            setattr(user, key, value)
-            self.user_repo.update(user)
-            return user
-    
-    def create_review(self, review_data):
-        review = review(**review_data)
-        self.review_repo_repo.add(review)
+            raise ValueError("User not found")
+
+        user.update(update_data)
+        self.user_repo.save(user)
+        return user
+        
+    # Review Facade
+    def create_review(self, text, user_id, place_id, rating):
+        """Create a new review."""
+        user = self.get_user(user_id)
+        if not user:
+            raise ValueError("User not found." + user_id)
+
+        place = self.get_place(place_id)
+        if not place:
+            raise ValueError("Place not found.")
+
+        review = Review(
+            text=text,
+            user=user,
+            place=place,
+            rating=rating,
+        )
+        self.review_repo.add(review)
         return review
 
 def get_review(self, review_id):
