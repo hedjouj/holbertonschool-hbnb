@@ -111,7 +111,6 @@ class HBnBFacade:
         return user
         
 
-
     def get_review(self, review_id):
         review = self.review_repo.get(review_id)
         if not review:
