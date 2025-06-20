@@ -1,3 +1,4 @@
+
 from flask_restx import Namespace, Resource, fields
 from app.services.facade import facade
 
@@ -11,7 +12,6 @@ review_model = api.model('Review', {
     'place_id': fields.String(required=True, description='ID of the place')
 })
 
-
 @api.route('/')
 class ReviewList(Resource):
     @api.expect(review_model)
@@ -21,17 +21,23 @@ class ReviewList(Resource):
         """Register a new review"""
         review_data = api.payload
         try:
+            required_fields = {'text', 'rating', 'user_id', 'place_id'}
+            if not required_fields.issubset(review_data):
+                return {'message': 'Missing required fields'}, 400
 
             new_review = facade.create_review(
-                review_data
+                review_data['text'],
+                review_data['user_id'],
+                review_data['place_id'],
+                review_data['rating']
             )
 
             return {
                 'id': new_review.id,
                 'text': new_review.text,
                 'rating': new_review.rating,
-                'user_id': new_review.user.id,
-                'place_id': new_review.place.id
+                'user_id': new_review.user_id,
+                'place_id': new_review.place_id
             }, 201
         except ValueError as e:
             return {'error': str(e)}, 400
@@ -86,13 +92,7 @@ class ReviewResource(Resource):
                 return {'error': 'Review not found'}, 404
 
             updated_review = facade.update_review(review_id, review_data)
-            return {
-                'id': updated_review.id,
-                'text': updated_review.text,
-                'user_id': updated_review.user_id,
-                'place_id': updated_review.place_id,
-                'rating': updated_review.rating
-            }, 200
+            return updated_review.to_dict(), 200
         except ValueError as e:
             return {'error': str(e)}, 400
 
