@@ -1,14 +1,16 @@
 from app.persistence.repository import InMemoryRepository
-from app.models.place import Place 
-from app.models.amenity import Amenity 
-from app.models.user import User 
-from app.models.review import Review 
+from app.models.user import User
+from app.models.place import Place
+from app.models.amenity import Amenity
+from app.models.review import Review
 
 
 class HBnBFacade:
     def __init__(self):
         self.user_repo = InMemoryRepository()
+        self.place_repo = InMemoryRepository()
         self.review_repo = InMemoryRepository()
+        self.amenity_repo = InMemoryRepository()
 
     def create_place(self, place_data):
         """Create a new place."""
@@ -70,10 +72,13 @@ class HBnBFacade:
 
     def get_user(self, user_id):
 <<<<<<< HEAD
+<<<<<<< HEAD
         return self.user_repo.get_by_attribute('id', user_id)
 =======
         for i in self.user_repo.get_all():
             print ( "coucou " + str(i) )
+=======
+>>>>>>> 6c7fa63 (try to fix bug user not found)
         return self.user_repo.get(user_id)
 >>>>>>> 154c17d (try review bug bug with get user function)
 
@@ -123,21 +128,20 @@ class HBnBFacade:
         return user
         
     # Review Facade
-    def create_review(self, text, user_id, place_id, rating):
-        """Create a new review."""
+    def create_review(self, review_data, user_id, rating, place_id):
         user = self.get_user(user_id)
         if not user:
-            raise ValueError("User not found." + user_id)
+            raise ValueError("User not found." + str(user_id))
 
         place = self.get_place(place_id)
         if not place:
             raise ValueError("Place not found.")
 
         review = Review(
-            text=text,
-            user=user,
-            place=place,
-            rating=rating,
+            text=review_data["text"],
+            user_id=user.id,
+            place_id=place.id,
+            rating=rating
         )
         self.review_repo.add(review)
         return review
