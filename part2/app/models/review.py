@@ -18,10 +18,10 @@ class Review(BaseModel):
             raise TypeError("User must be a valid User instance.")
 
         self.text = text
-        self.rating = rating
-        self.place = place
         self.user = user
-
+        self.place = place
+        self.rating = rating
+        
         place.reviews.append(self)
 
     def to_dict(self):
