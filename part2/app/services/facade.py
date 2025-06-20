@@ -71,6 +71,8 @@ class HBnBFacade:
         return user
 
     def get_user(self, user_id):
+        for i in self.user_repo.get_all():
+            print ( "coucou " + str(i) )
         return self.user_repo.get(user_id)
 
     def get_user_by_email(self, email):
@@ -102,7 +104,7 @@ class HBnBFacade:
         """Create a new review."""
         user = self.get_user(user_id)
         if not user:
-            raise ValueError("User not found.")
+            raise ValueError("User not found." + user_id)
 
         place = self.get_place(place_id)
         if not place:
@@ -110,8 +112,8 @@ class HBnBFacade:
 
         review = Review(
             text=text,
-            user_id=user_id,
-            place_id=place_id,
+            user=user,
+            place=place,
             rating=rating,
         )
         self.review_repo.add(review)
