@@ -46,3 +46,9 @@ $ python3 -m unittest discover app/tests
 Ran 5 tests in 0.032s
 
 OK
+```
+
+## Authors
+
+- [@Sebastien Salgues](https://github.com/SebSa12000)
+- [@Elhadj Reziga](https://www.github.com/hedjouj)
