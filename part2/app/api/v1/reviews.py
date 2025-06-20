@@ -5,12 +5,16 @@ from app.services.facade import facade
 api = Namespace('reviews', description='Review operations')
 
 # Define the review model for input validation and documentation
-review_model = api.model('Review', {
-    'text': fields.String(required=True, description='Text of the review'),
-    'rating': fields.Integer(required=True, description='Rating of the place (1-5)'),
-    'user_id': fields.String(required=True, description='ID of the user'),
-    'place_id': fields.String(required=True, description='ID of the place')
-})
+review_model = api.model(
+    'Review', {
+        'text': fields.String(required=True, description='Text of the review'),
+        'user_id': fields.String(required=True, description='ID of the user'),
+        'place_id': fields.String(required=True, description='ID of the place'),
+        'rating': fields.Integer(required=True,
+                                 description='Rating of the place (1-5)'),
+    }
+)
+
 
 @api.route('/')
 class ReviewList(Resource):
@@ -26,10 +30,10 @@ class ReviewList(Resource):
                 return {'message': 'Missing required fields'}, 400
 
             new_review = facade.create_review(
-                review_data['text'],
+                review_data,
                 review_data['user_id'],
-                review_data['place_id'],
-                review_data['rating']
+                review_data['rating'],
+                review_data['place_id']
             )
 
             return {
@@ -92,7 +96,13 @@ class ReviewResource(Resource):
                 return {'error': 'Review not found'}, 404
 
             updated_review = facade.update_review(review_id, review_data)
-            return updated_review.to_dict(), 200
+            return {
+                'id': updated_review.id,
+                'text': updated_review.text,
+                'rating': updated_review.rating,
+                'user_id': updated_review.user_id,
+                'place_id': updated_review.place_id
+            }, 200
         except ValueError as e:
             return {'error': str(e)}, 400
 
