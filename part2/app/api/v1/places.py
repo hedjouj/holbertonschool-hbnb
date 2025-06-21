@@ -1,5 +1,6 @@
 from flask_restx import Namespace, Resource, fields
-from app.services import facade
+from app.services.facade import facade
+
 
 api = Namespace('places', description='Place operations')
 
@@ -32,8 +33,7 @@ place_model = api.model('Place', {
     'latitude': fields.Float(required=True, description='Latitude of the place'),
     'longitude': fields.Float(required=True, description='Longitude of the place'),
     'owner_id': fields.String(required=True, description='ID of the owner'),
-    'amenities': fields.List(fields.Nested(amenity_model), description='List of amenities'),
-    'reviews': fields.List(fields.Nested(review_model), description='List of reviews')
+    'amenities': fields.List(fields.Nested(amenity_model), description='List of amenities')
 })
 
 @api.route('/')
@@ -43,7 +43,7 @@ class PlaceList(Resource):
     @api.response(400, 'Invalid input data')
     def post(self):
         """Register a new place"""
-        data = api.payload
+        # data = api.payload
         # title = data.get('title')
         # description = data.get('description')
         # price = data.get('price')
