@@ -1,6 +1,4 @@
 from app.models.base_model import BaseModel
-from app.models.user import User
-from app.services import facade
 
 class Place(BaseModel):
     def __init__(self, title: str, price: float, latitude: float, longitude: float, owner_id: str, amenities=[], reviews=[], description=""):
