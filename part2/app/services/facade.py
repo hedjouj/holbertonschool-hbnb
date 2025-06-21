@@ -73,6 +73,7 @@ class HBnBFacade:
     def get_user(self, user_id):
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         return self.user_repo.get_by_attribute('id', user_id)
 =======
         for i in self.user_repo.get_all():
@@ -81,6 +82,9 @@ class HBnBFacade:
 >>>>>>> 6c7fa63 (try to fix bug user not found)
         return self.user_repo.get(user_id)
 >>>>>>> 154c17d (try review bug bug with get user function)
+=======
+        return self.user_repo.get_by_attribute('id', user_id)
+>>>>>>> 4560d9a (fix bug facade)
 
     def get_user_by_email(self, email):
         return self.user_repo.get_by_attribute('email', email)
@@ -110,15 +114,7 @@ class HBnBFacade:
         return review
 
     def update_user(self, user_id, update_data):
-        #user = self.user_repo.get(user_id)
-        #if not user:
-        #    return None
-        #for key, value in update_data.items():
-        #    setattr(user, key, value)
-        #    self.user_repo.update(user)
-        #    return user
-        
-        """Update an amenity."""
+        """Update an user."""
         user = self.get_user(user_id)
         if not user:
             raise ValueError("User not found")
@@ -127,24 +123,7 @@ class HBnBFacade:
         self.user_repo.save(user)
         return user
         
-    # Review Facade
-    def create_review(self, review_data, user_id, rating, place_id):
-        user = self.get_user(user_id)
-        if not user:
-            raise ValueError("User not found." + str(user_id))
 
-        place = self.get_place(place_id)
-        if not place:
-            raise ValueError("Place not found.")
-
-        review = Review(
-            text=review_data["text"],
-            user_id=user.id,
-            place_id=place.id,
-            rating=rating
-        )
-        self.review_repo.add(review)
-        return review
 
     def get_review(self, review_id):
         review = self.review_repo.get(review_id)
@@ -178,3 +157,10 @@ class HBnBFacade:
             raise ValueError("Review not found")
         self.review_repo.delete(review_id)
         return {'message': 'Review deleted succesessfully'}
+<<<<<<< HEAD
+=======
+
+
+# Instance globale
+facade = HBnBFacade()
+>>>>>>> 4560d9a (fix bug facade)

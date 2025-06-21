@@ -1,19 +1,15 @@
-
 from flask_restx import Namespace, Resource, fields
-from app.services import facade
+from app.services.facade import facade
 
 api = Namespace('reviews', description='Review operations')
 
 # Define the review model for input validation and documentation
-review_model = api.model(
-    'Review', {
-        'text': fields.String(required=True, description='Text of the review'),
-        'user_id': fields.String(required=True, description='ID of the user'),
-        'place_id': fields.String(required=True, description='ID of the place'),
-        'rating': fields.Integer(required=True,
-                                 description='Rating of the place (1-5)'),
-    }
-)
+review_model = api.model('Review', {
+    'text': fields.String(required=True, description='Text of the review'),
+    'rating': fields.Integer(required=True, description='Rating of the place (1-5)'),
+    'user_id': fields.String(required=True, description='ID of the user'),
+    'place_id': fields.String(required=True, description='ID of the place')
+})
 
 
 @api.route('/')
@@ -25,23 +21,17 @@ class ReviewList(Resource):
         """Register a new review"""
         review_data = api.payload
         try:
-            required_fields = {'text', 'rating', 'user_id', 'place_id'}
-            if not required_fields.issubset(review_data):
-                return {'message': 'Missing required fields'}, 400
 
             new_review = facade.create_review(
-                review_data,
-                review_data['user_id'],
-                review_data['rating'],
-                review_data['place_id']
+                review_data
             )
 
             return {
                 'id': new_review.id,
                 'text': new_review.text,
                 'rating': new_review.rating,
-                'user_id': new_review.user_id,
-                'place_id': new_review.place_id
+                'user_id': new_review.user.id,
+                'place_id': new_review.place.id
             }, 201
         except ValueError as e:
             return {'error': str(e)}, 400

@@ -34,11 +34,15 @@ place_model = api.model('Place', {
     'longitude': fields.Float(required=True, description='Longitude of the place'),
     'owner_id': fields.String(required=True, description='ID of the owner'),
 <<<<<<< HEAD
+<<<<<<< HEAD
     'amenities': fields.List(fields.Nested(amenity_model), description='List of amenities')
 =======
     'amenities': fields.List(fields.Nested(amenity_model), description='List of amenities'),
     'reviews': fields.List(fields.Nested(review_model), description='List of reviews')
 >>>>>>> 6f33dcb (last update with review)
+=======
+    'amenities': fields.List(fields.Nested(amenity_model), description='List of amenities')
+>>>>>>> 4560d9a (fix bug facade)
 })
 
 @api.route('/')

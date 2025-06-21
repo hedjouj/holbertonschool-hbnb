@@ -65,6 +65,7 @@ class UserResource(Resource):
             }, 200
         except ValueError as e:
 <<<<<<< HEAD
+<<<<<<< HEAD
             return {'error': str(e)}, 404
 =======
         """Update user information"""
@@ -85,3 +86,6 @@ class UserResource(Resource):
 =======
             return {'error': str(e)}, 404
 >>>>>>> cf9a765 (fix pb on update a user fct put)
+=======
+            return {'error': str(e)}, 404
+>>>>>>> 4560d9a (fix bug facade)
