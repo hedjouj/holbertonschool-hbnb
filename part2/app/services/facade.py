@@ -72,7 +72,7 @@ class HBnBFacade:
         return user
 
     def get_user(self, user_id):
-        return self.user_repo.get(user_id)
+        return self.user_repo.get_by_attribute('id', user_id)
 
     def get_user_by_email(self, email):
         return self.user_repo.get_by_attribute('email', email)
@@ -80,16 +80,29 @@ class HBnBFacade:
     def get_all_users(self):
         return self.user_repo.get_all()
     
+    # Review Facade
+    def create_review(self, review_data):
+        id_place = review_data["place_id"]
+
+        place = self.place_repo.get(id_place)
+        if not place:
+            raise ValueError("Place not found.")
+
+        user1 = self.user_repo.get(review_data["user_id"])
+        if not user1:
+            raise ValueError("User not found.")
+
+        review = Review(
+            text=review_data["text"],
+            user=user1,
+            place=place,
+            rating=review_data["rating"]
+        )
+        self.review_repo.add(review)
+        return review
+
     def update_user(self, user_id, update_data):
-        #user = self.user_repo.get(user_id)
-        #if not user:
-        #    return None
-        #for key, value in update_data.items():
-        #    setattr(user, key, value)
-        #    self.user_repo.update(user)
-        #    return user
-        
-        """Update an amenity."""
+        """Update an user."""
         user = self.get_user(user_id)
         if not user:
             raise ValueError("User not found")
@@ -98,24 +111,7 @@ class HBnBFacade:
         self.user_repo.save(user)
         return user
         
-    # Review Facade
-    def create_review(self, review_data, user_id, rating, place_id):
-        user = self.get_user(user_id)
-        if not user:
-            raise ValueError("User not found." + str(user_id))
 
-        place = self.get_place(place_id)
-        if not place:
-            raise ValueError("Place not found.")
-
-        review = Review(
-            text=review_data["text"],
-            user_id=user.id,
-            place_id=place.id,
-            rating=rating
-        )
-        self.review_repo.add(review)
-        return review
 
 def get_review(self, review_id):
     return self.review_repo.get(review_id)
@@ -131,5 +127,15 @@ def get_reviews_by_place(self, place_id):
 def update_review(self, review_id, review_data):
     return self.review_repo.update(review_id, review_data) 
 
+    def delete_review(self, review_id):
+        review = self.review_repo.get(review_id)
+        if not review:
+            raise ValueError("Review not found")
+        self.review_repo.delete(review_id)
+        return {'message': 'Review deleted succesessfully'}
+
+
+# Instance globale
+facade = HBnBFacade()
 def delete_review(self, review_id):
     return self.review_repo.delete(review_id)
