@@ -5,6 +5,7 @@ from flask_restx import Api
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 from config import config
 from flask_jwt_extended import JWTManager
 
@@ -30,10 +31,13 @@ from config import config
 from flask_jwt_extended import JWTManager
 
 >>>>>>> 284bc61 (fix: resolve merge conflicts in __init__.py, config.py, and run.py)
+=======
+>>>>>>> 55418de (feat: added all folders/files from part2 to part3)
 from app.api.v1.amenities import api as amenities_ns
 from app.api.v1.places import api as places_ns
 from app.api.v1.users import api as users_ns
 from app.api.v1.reviews import api as review_ns
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -107,10 +111,20 @@ def create_app():
 >>>>>>> d120c30 (fix: move jwt.init_app call to the correct position in create_app function)
 
 >>>>>>> 9594fa4 (fix: add auth namespace to the API in create_app function)
+=======
+
+
+def create_app():
+    app = Flask(__name__)
+    api = Api(app, version='1.0', title='HBnB API', doc='/api/v1/',
+              description='HBnB Application API')
+    
+>>>>>>> 55418de (feat: added all folders/files from part2 to part3)
     api.add_namespace(users_ns, path='/api/v1/users')
     api.add_namespace(amenities_ns, path='/api/v1/amenities')
     api.add_namespace(places_ns, path='/api/v1/places')
     api.add_namespace(review_ns, path='/api/v1/reviews')
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -123,4 +137,6 @@ def create_app():
     bcrypt.init_app(app)
     
 >>>>>>> 3d4122e (task 01 : add password)
+=======
+>>>>>>> 55418de (feat: added all folders/files from part2 to part3)
     return app
