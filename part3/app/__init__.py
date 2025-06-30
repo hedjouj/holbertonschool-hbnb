@@ -69,6 +69,7 @@ def create_app(config_name='default'):
     
     api = Api(app, version='1.0', title='HBnB API', doc='/api/v1/',
               description='HBnB Application API')
+<<<<<<< HEAD
     
 >>>>>>> 55418de (feat: added all folders/files from part2 to part3)
 =======
@@ -85,6 +86,10 @@ def create_app():
               description='HBnB Application API')
     
 >>>>>>> 55418de (feat: added all folders/files from part2 to part3)
+=======
+    jwt.init_app(app)
+
+>>>>>>> 9594fa4 (fix: add auth namespace to the API in create_app function)
     api.add_namespace(users_ns, path='/api/v1/users')
     api.add_namespace(amenities_ns, path='/api/v1/amenities')
     api.add_namespace(places_ns, path='/api/v1/places')
