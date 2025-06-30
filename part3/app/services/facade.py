@@ -12,6 +12,10 @@ class HBnBFacade:
         self.review_repo = InMemoryRepository()
         self.amenity_repo = InMemoryRepository()
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> Elhadj
     def create_place(self, place_data):
         """Create a new place."""
         place = Place(**place_data)
@@ -112,6 +116,7 @@ class HBnBFacade:
         
 
 
+<<<<<<< HEAD
     def get_review(self, review_id):
         review = self.review_repo.get(review_id)
         if not review:
@@ -137,6 +142,21 @@ class HBnBFacade:
                 setattr(review, key, value)
         self.review_repo.update(review_id, review.__dict__)
         return review
+=======
+def get_review(self, review_id):
+    return self.review_repo.get(review_id)
+
+
+def get_all_reviews(self):
+    return self.user_repo.get_all()
+
+
+def get_reviews_by_place(self, place_id):
+    return self.review_repo
+
+def update_review(self, review_id, review_data):
+    return self.review_repo.update(review_id, review_data) 
+>>>>>>> Elhadj
 
     def delete_review(self, review_id):
         review = self.review_repo.get(review_id)
@@ -147,4 +167,10 @@ class HBnBFacade:
 
 
 # Instance globale
+<<<<<<< HEAD
 facade = HBnBFacade()
+=======
+facade = HBnBFacade()
+def delete_review(self, review_id):
+    return self.review_repo.delete(review_id)
+>>>>>>> Elhadj

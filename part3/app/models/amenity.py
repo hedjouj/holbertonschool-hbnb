@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+from app.models.base_model import BaseModel
+>>>>>>> Elhadj
 # app/models/amenity.py
 ''' Amenity Class represents an amenity, inheriting from BaseModel'''
 

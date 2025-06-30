@@ -52,4 +52,8 @@ class Place(BaseModel):
             "owner_id": self.owner_id,
             "reviews": [review.to_dict() for review in self.reviews],
             "amenities": self.amenities
+<<<<<<< HEAD
         }
+=======
+        }
+>>>>>>> Elhadj
