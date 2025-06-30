@@ -41,6 +41,7 @@ from app.api.v1.reviews import api as review_ns
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 from flask_bcrypt import Bcrypt
 from app.extensions import bcrypt
 
@@ -112,10 +113,15 @@ def create_app():
 
 >>>>>>> 9594fa4 (fix: add auth namespace to the API in create_app function)
 =======
+=======
+from flask_bcrypt import Bcrypt
+>>>>>>> 3d4122e (task 01 : add password)
 
+bcrypt = Bcrypt()
 
 def create_app():
     app = Flask(__name__)
+    
     api = Api(app, version='1.0', title='HBnB API', doc='/api/v1/',
               description='HBnB Application API')
     
@@ -124,6 +130,7 @@ def create_app():
     api.add_namespace(amenities_ns, path='/api/v1/amenities')
     api.add_namespace(places_ns, path='/api/v1/places')
     api.add_namespace(review_ns, path='/api/v1/reviews')
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -139,4 +146,8 @@ def create_app():
 >>>>>>> 3d4122e (task 01 : add password)
 =======
 >>>>>>> 55418de (feat: added all folders/files from part2 to part3)
+=======
+    bcrypt.init_app(app)
+    
+>>>>>>> 3d4122e (task 01 : add password)
     return app

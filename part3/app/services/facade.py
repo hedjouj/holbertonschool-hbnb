@@ -71,6 +71,7 @@ class HBnBFacade:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         user.hash_password(user_data['password'])
 =======
 >>>>>>> 55418de (feat: added all folders/files from part2 to part3)
@@ -81,6 +82,9 @@ class HBnBFacade:
 >>>>>>> 3d4122e (task 01 : add password)
 =======
 >>>>>>> 55418de (feat: added all folders/files from part2 to part3)
+=======
+        user.hash_password(user_data['password'])
+>>>>>>> 3d4122e (task 01 : add password)
         self.user_repo.add(user)
         return user
 

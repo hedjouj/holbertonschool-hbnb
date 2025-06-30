@@ -3,6 +3,7 @@ from app.models.base_model import BaseModel
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 from flask_bcrypt import Bcrypt
 
 bcrypt = Bcrypt()
@@ -20,6 +21,11 @@ bcrypt = Bcrypt()
 =======
 
 >>>>>>> 55418de (feat: added all folders/files from part2 to part3)
+=======
+from flask_bcrypt import Bcrypt
+
+bcrypt = Bcrypt()
+>>>>>>> 3d4122e (task 01 : add password)
 
 class User(BaseModel):
     emails_seen = set()  # pour valider les mails
@@ -28,6 +34,7 @@ class User(BaseModel):
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     def __init__(self, first_name: str, last_name: str, email: str, password: str,
 =======
     def __init__(self, first_name: str, last_name: str, email: str,
@@ -41,6 +48,9 @@ class User(BaseModel):
 =======
     def __init__(self, first_name: str, last_name: str, email: str,
 >>>>>>> 55418de (feat: added all folders/files from part2 to part3)
+=======
+    def __init__(self, first_name: str, last_name: str, email: str, password: str,
+>>>>>>> 3d4122e (task 01 : add password)
                  is_admin=False):
         super().__init__()
 
@@ -66,6 +76,9 @@ class User(BaseModel):
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 3d4122e (task 01 : add password)
 =======
 >>>>>>> 3d4122e (task 01 : add password)
         self.password = self.hash_password(password) 
@@ -80,6 +93,7 @@ class User(BaseModel):
         """Verifies if the provided password matches the hashed password."""
         return bcrypt.check_password_hash(self.password, password)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 
@@ -98,6 +112,8 @@ class User(BaseModel):
         User.emails_seen.add(email)
 
 >>>>>>> 55418de (feat: added all folders/files from part2 to part3)
+=======
+>>>>>>> 3d4122e (task 01 : add password)
     def __str__(self):
         """
         Used to return object as we want
@@ -116,6 +132,7 @@ class User(BaseModel):
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             "password": self.password, 
 =======
 >>>>>>> 55418de (feat: added all folders/files from part2 to part3)
@@ -126,4 +143,7 @@ class User(BaseModel):
 >>>>>>> 3d4122e (task 01 : add password)
 =======
 >>>>>>> 55418de (feat: added all folders/files from part2 to part3)
+=======
+            "password": self.password, 
+>>>>>>> 3d4122e (task 01 : add password)
         }
