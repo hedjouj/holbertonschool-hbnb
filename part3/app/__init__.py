@@ -33,6 +33,7 @@ from app.extensions import bcrypt
 
 jwt = JWTManager()
 
+<<<<<<< HEAD
 def create_app(config_name='default'):
     app = Flask(__name__)
     app.config.from_object(config[config_name])
@@ -58,6 +59,13 @@ def create_app(config_class=config.DevelopmentConfig):
 =======
     app.config.from_object(config_class)
 >>>>>>> 55f278a (fix: modify the argument in the create app)
+=======
+jwt = JWTManager()
+
+def create_app(config_name='default'):
+    app = Flask(__name__)
+    app.config.from_object(config[config_name])
+>>>>>>> c5cac65 (fix: modify the argument in the create app)
     
     api = Api(app, version='1.0', title='HBnB API', doc='/api/v1/',
               description='HBnB Application API')
