@@ -9,6 +9,7 @@ from flask_jwt_extended import JWTManager
 >>>>>>> 55418de (feat: added all folders/files from part2 to part3)
 =======
 from config import config
+from flask_jwt_extended import JWTManager
 
 >>>>>>> a9e2282 (fix: update create_app function to accept config_name argument and add production config)
 from app.api.v1.amenities import api as amenities_ns
