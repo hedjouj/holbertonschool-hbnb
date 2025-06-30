@@ -21,8 +21,16 @@ config = {
 class DevelopmentConfig(Config):
     DEBUG = True
 
+class ProductionConfig(Config):
+    DEBUG = False
+
 config = {
     'development': DevelopmentConfig,
+<<<<<<< HEAD
     'default': DevelopmentConfig
 >>>>>>> 55418de (feat: added all folders/files from part2 to part3)
+=======
+    'default': DevelopmentConfig,
+    'production': ProductionConfig,
+>>>>>>> a9e2282 (fix: update create_app function to accept config_name argument and add production config)
 }
