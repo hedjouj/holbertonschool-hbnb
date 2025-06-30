@@ -68,13 +68,17 @@ class HBnBFacade:
     def create_user(self, user_data):
         user = User(**user_data)
 <<<<<<< HEAD
+<<<<<<< HEAD
         user.hash_password(user_data['password'])
+=======
+>>>>>>> 55418de (feat: added all folders/files from part2 to part3)
 =======
 >>>>>>> 55418de (feat: added all folders/files from part2 to part3)
         self.user_repo.add(user)
         return user
 
     def get_user(self, user_id):
+<<<<<<< HEAD
 <<<<<<< HEAD
         return self.user_repo.get_by_attribute('id', user_id)
 =======
@@ -92,6 +96,9 @@ class HBnBFacade:
 =======
         return self.user_repo.get_by_attribute('id', user_id)
 >>>>>>> 4560d9a (fix bug facade)
+>>>>>>> 55418de (feat: added all folders/files from part2 to part3)
+=======
+        return self.user_repo.get_by_attribute('id', user_id)
 >>>>>>> 55418de (feat: added all folders/files from part2 to part3)
 
     def get_user_by_email(self, email):
@@ -166,6 +173,7 @@ class HBnBFacade:
         self.review_repo.delete(review_id)
         return {'message': 'Review deleted succesessfully'}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
 # Instance globale
@@ -178,4 +186,10 @@ facade = HBnBFacade()
 # Instance globale
 facade = HBnBFacade()
 >>>>>>> 4560d9a (fix bug facade)
+>>>>>>> 55418de (feat: added all folders/files from part2 to part3)
+=======
+
+
+# Instance globale
+facade = HBnBFacade()
 >>>>>>> 55418de (feat: added all folders/files from part2 to part3)

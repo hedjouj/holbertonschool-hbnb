@@ -34,6 +34,9 @@ place_model = api.model('Place', {
     'longitude': fields.Float(required=True, description='Longitude of the place'),
     'owner_id': fields.String(required=True, description='ID of the owner'),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 55418de (feat: added all folders/files from part2 to part3)
     'amenities': fields.List(fields.Nested(amenity_model), description='List of amenities')
 })
 
@@ -92,6 +95,7 @@ class PlaceResource(Resource):
         except ValueError as e:
             api.abort(400, str(e))
         except KeyError as e:
+<<<<<<< HEAD
             api.abort(404, str(e))
 from flask_restx import Namespace, Resource, fields
 from app.services.facade import facade
@@ -205,4 +209,6 @@ class PlaceResource(Resource):
         except ValueError as e:
             api.abort(400, str(e))
         except KeyError as e:
+=======
+>>>>>>> 55418de (feat: added all folders/files from part2 to part3)
             api.abort(404, str(e))

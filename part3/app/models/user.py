@@ -1,8 +1,12 @@
 from app.models.base_model import BaseModel
 <<<<<<< HEAD
+<<<<<<< HEAD
 from flask_bcrypt import Bcrypt
 
 bcrypt = Bcrypt()
+=======
+
+>>>>>>> 55418de (feat: added all folders/files from part2 to part3)
 =======
 
 >>>>>>> 55418de (feat: added all folders/files from part2 to part3)
@@ -11,7 +15,11 @@ class User(BaseModel):
     emails_seen = set()  # pour valider les mails
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     def __init__(self, first_name: str, last_name: str, email: str, password: str,
+=======
+    def __init__(self, first_name: str, last_name: str, email: str,
+>>>>>>> 55418de (feat: added all folders/files from part2 to part3)
 =======
     def __init__(self, first_name: str, last_name: str, email: str,
 >>>>>>> 55418de (feat: added all folders/files from part2 to part3)
@@ -37,6 +45,7 @@ class User(BaseModel):
         self.is_admin = is_admin
         self.places = []
 <<<<<<< HEAD
+<<<<<<< HEAD
         self.password = self.hash_password(password) 
 
         User.emails_seen.add(email)
@@ -49,6 +58,11 @@ class User(BaseModel):
         """Verifies if the provided password matches the hashed password."""
         return bcrypt.check_password_hash(self.password, password)
 
+=======
+
+        User.emails_seen.add(email)
+
+>>>>>>> 55418de (feat: added all folders/files from part2 to part3)
 =======
 
         User.emails_seen.add(email)
@@ -69,7 +83,10 @@ class User(BaseModel):
             "email": self.email,
             "is_admin": self.is_admin,
 <<<<<<< HEAD
+<<<<<<< HEAD
             "password": self.password, 
+=======
+>>>>>>> 55418de (feat: added all folders/files from part2 to part3)
 =======
 >>>>>>> 55418de (feat: added all folders/files from part2 to part3)
         }
