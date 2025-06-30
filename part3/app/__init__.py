@@ -36,6 +36,7 @@ from flask_jwt_extended import JWTManager
 >>>>>>> 55418de (feat: added all folders/files from part2 to part3)
 =======
 from config import config
+from flask_jwt_extended import JWTManager
 
 >>>>>>> a9e2282 (fix: update create_app function to accept config_name argument and add production config)
 from app.api.v1.amenities import api as amenities_ns
@@ -51,6 +52,7 @@ from flask_bcrypt import Bcrypt
 from app.extensions import bcrypt
 
 jwt = JWTManager()
+<<<<<<< HEAD
 
 <<<<<<< HEAD
 def create_app(config_name='default'):
@@ -80,9 +82,12 @@ def create_app(config_class=config.DevelopmentConfig):
 >>>>>>> 55f278a (fix: modify the argument in the create app)
 =======
 jwt = JWTManager()
+=======
+>>>>>>> 55f278a (fix: modify the argument in the create app)
 
-def create_app(config_name='default'):
+def create_app(config_class=config.DevelopmentConfig):
     app = Flask(__name__)
+<<<<<<< HEAD
     app.config.from_object(config[config_name])
 <<<<<<< HEAD
 >>>>>>> c5cac65 (fix: modify the argument in the create app)
@@ -105,6 +110,9 @@ def create_app(config_name='default'):
 =======
     app.config.from_object(config[config_name])
 >>>>>>> a9e2282 (fix: update create_app function to accept config_name argument and add production config)
+=======
+    app.config.from_object(config_class)
+>>>>>>> 55f278a (fix: modify the argument in the create app)
     
     api = Api(app, version='1.0', title='HBnB API', doc='/api/v1/',
               description='HBnB Application API')
