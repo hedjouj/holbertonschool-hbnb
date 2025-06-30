@@ -1,10 +1,12 @@
 from app.models.base_model import BaseModel
+from flask_bcrypt import Bcrypt
 
+bcrypt = Bcrypt()
 
 class User(BaseModel):
     emails_seen = set()  # pour valider les mails
 
-    def __init__(self, first_name: str, last_name: str, email: str,
+    def __init__(self, first_name: str, last_name: str, email: str, password: str,
                  is_admin=False):
         super().__init__()
 
@@ -26,8 +28,17 @@ class User(BaseModel):
         self.email = email
         self.is_admin = is_admin
         self.places = []
+        self.password = self.hash_password(password) 
 
         User.emails_seen.add(email)
+
+    def hash_password(self, password):
+        """Hashes the password before storing it."""
+        self.password = bcrypt.generate_password_hash(password).decode('utf-8')
+
+    def verify_password(self, password):
+        """Verifies if the provided password matches the hashed password."""
+        return bcrypt.check_password_hash(self.password, password)
 
     def __str__(self):
         """
@@ -43,4 +54,5 @@ class User(BaseModel):
             "last_name": self.last_name,
             "email": self.email,
             "is_admin": self.is_admin,
+            "password": self.password, 
         }
