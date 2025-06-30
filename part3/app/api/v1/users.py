@@ -6,6 +6,7 @@ api = Namespace("users", description="User operations")
 user_model = api.model("User", {
     "first_name": fields.String(required=True, max_length=50),
     "last_name": fields.String(required=True, max_length=50),
+    "password": fields.String(required=True, max_length=50),
     "email": fields.String(required=True),
 })
 @api.route('/')
@@ -23,8 +24,9 @@ class UserList(Resource):
         if existing_user:
             return {'error': 'Email already registered'}, 400
 
+        
         new_user = facade.create_user(user_data)
-        return {'id': new_user.id, 'first_name': new_user.first_name, 'last_name': new_user.last_name, 'email': new_user.email}, 201
+        return {'id': new_user.id, 'first_name': new_user.first_name, 'last_name': new_user.last_name, "password": new_user.password, 'email': new_user.email}, 201
 
     @api.response(200, 'List of users retrieved successfully')
     def get(self):
