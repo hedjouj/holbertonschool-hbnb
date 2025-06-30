@@ -6,6 +6,7 @@ from flask_restx import Api
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 from config import config
 from flask_jwt_extended import JWTManager
 
@@ -33,6 +34,10 @@ from flask_jwt_extended import JWTManager
 >>>>>>> 284bc61 (fix: resolve merge conflicts in __init__.py, config.py, and run.py)
 =======
 >>>>>>> 55418de (feat: added all folders/files from part2 to part3)
+=======
+from config import config
+
+>>>>>>> a9e2282 (fix: update create_app function to accept config_name argument and add production config)
 from app.api.v1.amenities import api as amenities_ns
 from app.api.v1.places import api as places_ns
 from app.api.v1.users import api as users_ns
@@ -94,8 +99,12 @@ from flask_bcrypt import Bcrypt
 
 bcrypt = Bcrypt()
 
-def create_app():
+def create_app(config_name='default'):
     app = Flask(__name__)
+<<<<<<< HEAD
+=======
+    app.config.from_object(config[config_name])
+>>>>>>> a9e2282 (fix: update create_app function to accept config_name argument and add production config)
     
     api = Api(app, version='1.0', title='HBnB API', doc='/api/v1/',
               description='HBnB Application API')
