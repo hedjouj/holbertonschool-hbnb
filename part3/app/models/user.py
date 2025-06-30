@@ -1,12 +1,20 @@
 from app.models.base_model import BaseModel
+<<<<<<< HEAD
 from flask_bcrypt import Bcrypt
 
 bcrypt = Bcrypt()
+=======
+
+>>>>>>> 55418de (feat: added all folders/files from part2 to part3)
 
 class User(BaseModel):
     emails_seen = set()  # pour valider les mails
 
+<<<<<<< HEAD
     def __init__(self, first_name: str, last_name: str, email: str, password: str,
+=======
+    def __init__(self, first_name: str, last_name: str, email: str,
+>>>>>>> 55418de (feat: added all folders/files from part2 to part3)
                  is_admin=False):
         super().__init__()
 
@@ -28,6 +36,7 @@ class User(BaseModel):
         self.email = email
         self.is_admin = is_admin
         self.places = []
+<<<<<<< HEAD
         self.password = self.hash_password(password) 
 
         User.emails_seen.add(email)
@@ -40,6 +49,11 @@ class User(BaseModel):
         """Verifies if the provided password matches the hashed password."""
         return bcrypt.check_password_hash(self.password, password)
 
+=======
+
+        User.emails_seen.add(email)
+
+>>>>>>> 55418de (feat: added all folders/files from part2 to part3)
     def __str__(self):
         """
         Used to return object as we want
@@ -54,5 +68,8 @@ class User(BaseModel):
             "last_name": self.last_name,
             "email": self.email,
             "is_admin": self.is_admin,
+<<<<<<< HEAD
             "password": self.password, 
+=======
+>>>>>>> 55418de (feat: added all folders/files from part2 to part3)
         }

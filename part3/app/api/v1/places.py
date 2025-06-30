@@ -33,6 +33,7 @@ place_model = api.model('Place', {
     'latitude': fields.Float(required=True, description='Latitude of the place'),
     'longitude': fields.Float(required=True, description='Longitude of the place'),
     'owner_id': fields.String(required=True, description='ID of the owner'),
+<<<<<<< HEAD
     'amenities': fields.List(fields.Nested(amenity_model), description='List of amenities')
 })
 
@@ -135,6 +136,18 @@ place_model = api.model('Place', {
     'longitude': fields.Float(required=True, description='Longitude of the place'),
     'owner_id': fields.String(required=True, description='ID of the owner'),
     'amenities': fields.List(fields.Nested(amenity_model), description='List of amenities')
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+    'amenities': fields.List(fields.Nested(amenity_model), description='List of amenities')
+=======
+    'amenities': fields.List(fields.Nested(amenity_model), description='List of amenities'),
+    'reviews': fields.List(fields.Nested(review_model), description='List of reviews')
+>>>>>>> 6f33dcb (last update with review)
+=======
+    'amenities': fields.List(fields.Nested(amenity_model), description='List of amenities')
+>>>>>>> 4560d9a (fix bug facade)
+>>>>>>> 55418de (feat: added all folders/files from part2 to part3)
 })
 
 @api.route('/')
