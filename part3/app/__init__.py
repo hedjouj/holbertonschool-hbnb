@@ -21,6 +21,7 @@ from app.api.v1.users import api as users_ns
 from app.api.v1.reviews import api as review_ns
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 from flask_bcrypt import Bcrypt
 from app.extensions import bcrypt
 
@@ -49,10 +50,15 @@ def create_app(config_name='default'):
     
 >>>>>>> 55418de (feat: added all folders/files from part2 to part3)
 =======
+=======
+from flask_bcrypt import Bcrypt
+>>>>>>> 3d4122e (task 01 : add password)
 
+bcrypt = Bcrypt()
 
 def create_app():
     app = Flask(__name__)
+    
     api = Api(app, version='1.0', title='HBnB API', doc='/api/v1/',
               description='HBnB Application API')
     
@@ -63,9 +69,14 @@ def create_app():
     api.add_namespace(review_ns, path='/api/v1/reviews')
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     
 =======
 >>>>>>> 55418de (feat: added all folders/files from part2 to part3)
 =======
 >>>>>>> 55418de (feat: added all folders/files from part2 to part3)
+=======
+    bcrypt.init_app(app)
+    
+>>>>>>> 3d4122e (task 01 : add password)
     return app
