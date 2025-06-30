@@ -104,6 +104,7 @@ from flask_bcrypt import Bcrypt
 
 bcrypt = Bcrypt()
 
+<<<<<<< HEAD
 def create_app(config_name='default'):
     app = Flask(__name__)
 <<<<<<< HEAD
@@ -113,6 +114,13 @@ def create_app(config_name='default'):
 =======
     app.config.from_object(config_class)
 >>>>>>> 55f278a (fix: modify the argument in the create app)
+=======
+jwt = JWTManager()
+
+def create_app(config_name='default'):
+    app = Flask(__name__)
+    app.config.from_object(config[config_name])
+>>>>>>> c5cac65 (fix: modify the argument in the create app)
     
     api = Api(app, version='1.0', title='HBnB API', doc='/api/v1/',
               description='HBnB Application API')
