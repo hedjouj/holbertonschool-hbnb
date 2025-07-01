@@ -65,6 +65,7 @@ jwt = JWTManager()
 def create_app(config_name='default'):
     app = Flask(__name__)
     app.config.from_object(config[config_name])
+<<<<<<< HEAD
 >>>>>>> c5cac65 (fix: modify the argument in the create app)
     
     api = Api(app, version='1.0', title='HBnB API', doc='/api/v1/',
@@ -88,6 +89,13 @@ def create_app():
 >>>>>>> 55418de (feat: added all folders/files from part2 to part3)
 =======
     jwt.init_app(app)
+=======
+    jwt.init_app(app)
+
+    
+    api = Api(app, version='1.0', title='HBnB API', doc='/api/v1/',
+              description='HBnB Application API')
+>>>>>>> d120c30 (fix: move jwt.init_app call to the correct position in create_app function)
 
 >>>>>>> 9594fa4 (fix: add auth namespace to the API in create_app function)
     api.add_namespace(users_ns, path='/api/v1/users')
