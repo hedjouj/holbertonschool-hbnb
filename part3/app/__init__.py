@@ -4,6 +4,7 @@ from flask_restx import Api
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 from config import config
 from flask_jwt_extended import JWTManager
 
@@ -21,6 +22,14 @@ from config import config
 from flask_jwt_extended import JWTManager
 
 >>>>>>> a9e2282 (fix: update create_app function to accept config_name argument and add production config)
+=======
+
+from config import config
+from flask_jwt_extended import JWTManager
+from config import config
+from flask_jwt_extended import JWTManager
+
+>>>>>>> 284bc61 (fix: resolve merge conflicts in __init__.py, config.py, and run.py)
 from app.api.v1.amenities import api as amenities_ns
 from app.api.v1.places import api as places_ns
 from app.api.v1.users import api as users_ns

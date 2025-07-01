@@ -1,6 +1,7 @@
 <<<<<<< HEAD
 =======
 from app import create_app
+<<<<<<< HEAD
 
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -11,6 +12,15 @@ app = create_app('DevelopmentConfig')
 =======
 app = create_app('development')
 >>>>>>> 19486a6 (fix: correct configuration name in create_app call)
+=======
+from flask_bcrypt import Bcrypt
+
+app = create_app('development')
+bcrypt = Bcrypt()
+
+app = create_app()
+app = create_app('development')
+>>>>>>> 284bc61 (fix: resolve merge conflicts in __init__.py, config.py, and run.py)
 
 if __name__ == '__main__':
     app.run(debug=True)
