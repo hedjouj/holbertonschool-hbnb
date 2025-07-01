@@ -112,9 +112,19 @@ class ReviewResource(Resource):
 
     @api.response(200, 'Review deleted successfully')
     @api.response(404, 'Review not found')
+    @jwt_required()
     def delete(self, review_id):
         """Delete a review"""
         try:
+            review_get = facade.get_review(review_id)
+            if not review_get:
+                return {'error': 'Review not found'}, 404
+
+            current_user = get_jwt_identity()
+
+            if current_user['id'] != review_get.user.id:
+                return {'error': 'Unauthorized action'}, 403
+
             review = facade.delete_review(review_id)
             if review:
                 return {'message': 'Review deleted.'}, 200
