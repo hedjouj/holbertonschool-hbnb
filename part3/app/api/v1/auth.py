@@ -1,6 +1,6 @@
 from flask_restx import Namespace, Resource, fields
 from flask_jwt_extended import create_access_token
-from app.services import facade
+from app.services.facade import facade
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
 
@@ -21,7 +21,8 @@ class Login(Resource):
         
         # Step 1: Retrieve the user based on the provided email
         user = facade.get_user_by_email(credentials['email'])
-        
+        print("coucou" + str(credentials['email']))
+        print("coucou" + str(user.id))
         # Step 2: Check if the user exists and the password is correct
         if not user or not user.verify_password(credentials['password']):
             return {'error': 'Invalid credentials'}, 401

@@ -48,6 +48,10 @@ from app.api.v1.reviews import api as review_ns
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+from app.api.v1.auth import api as auth_ns
+>>>>>>> 522e97d (task 2 try login)
 from flask_bcrypt import Bcrypt
 from app.extensions import bcrypt
 
@@ -173,12 +177,16 @@ def create_app():
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     
 =======
 >>>>>>> 55418de (feat: added all folders/files from part2 to part3)
 =======
 >>>>>>> 55418de (feat: added all folders/files from part2 to part3)
 =======
+=======
+    api.add_namespace(auth_ns, path='/api/v1/auth')
+>>>>>>> 522e97d (task 2 try login)
     bcrypt.init_app(app)
     
 >>>>>>> 3d4122e (task 01 : add password)
