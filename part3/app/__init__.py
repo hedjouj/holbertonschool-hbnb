@@ -16,6 +16,7 @@ def create_app(config_name='default'):
     app = Flask(__name__)
     app.config.from_object(config[config_name])
     jwt.init_app(app)
+    Bcrypt.init_app(app)
 
     
     api = Api(app, version='1.0', title='HBnB API', doc='/api/v1/',
@@ -25,6 +26,5 @@ def create_app(config_name='default'):
     api.add_namespace(amenities_ns, path='/api/v1/amenities')
     api.add_namespace(places_ns, path='/api/v1/places')
     api.add_namespace(review_ns, path='/api/v1/reviews')
-    Bcrypt.init_app(app)
     
     return app
