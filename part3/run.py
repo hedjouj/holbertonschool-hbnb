@@ -19,9 +19,13 @@ from flask_bcrypt import Bcrypt
 app = create_app('development')
 bcrypt = Bcrypt()
 
+<<<<<<< HEAD
 app = create_app()
 app = create_app('development')
 >>>>>>> 284bc61 (fix: resolve merge conflicts in __init__.py, config.py, and run.py)
+=======
+app = create_app('DevelopmentConfig')
+>>>>>>> 52f027e (fix: update create_app function to use config_name and correct config reference)
 
 if __name__ == '__main__':
     app.run(debug=True)
