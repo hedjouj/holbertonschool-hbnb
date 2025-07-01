@@ -51,7 +51,10 @@ class UserResource(Resource):
     @api.response(404, 'User not found')
     @api.response(400, 'Invalid input data')
 <<<<<<< HEAD
+<<<<<<< HEAD
     @api.response(400, 'Invalid input data')
+=======
+>>>>>>> 4fcf277 (Keep all files as in main after merge)
     def put(self, user_id):
 =======
     def put(self, user_id):

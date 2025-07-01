@@ -7,6 +7,7 @@ from flask_restx import Api
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 from config import config
 from flask_jwt_extended import JWTManager
 
@@ -39,10 +40,16 @@ from config import config
 from flask_jwt_extended import JWTManager
 
 >>>>>>> a9e2282 (fix: update create_app function to accept config_name argument and add production config)
+=======
+from config import config
+from flask_jwt_extended import JWTManager
+
+>>>>>>> 4fcf277 (Keep all files as in main after merge)
 from app.api.v1.amenities import api as amenities_ns
 from app.api.v1.places import api as places_ns
 from app.api.v1.users import api as users_ns
 from app.api.v1.reviews import api as review_ns
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -135,6 +142,18 @@ def create_app(config_name='default'):
 =======
     jwt.init_app(app)
 =======
+=======
+from app.api.v1.auth import api as auth_ns
+from flask_bcrypt import Bcrypt
+
+bcrypt = Bcrypt()
+
+jwt = JWTManager()
+
+def create_app(config_name='default'):
+    app = Flask(__name__)
+    app.config.from_object(config[config_name])
+>>>>>>> 4fcf277 (Keep all files as in main after merge)
     jwt.init_app(app)
 =======
     jwt.init_app(app)
@@ -142,8 +161,8 @@ def create_app(config_name='default'):
     
     api = Api(app, version='1.0', title='HBnB API', doc='/api/v1/',
               description='HBnB Application API')
->>>>>>> d120c30 (fix: move jwt.init_app call to the correct position in create_app function)
 
+<<<<<<< HEAD
     
     api = Api(app, version='1.0', title='HBnB API', doc='/api/v1/',
               description='HBnB Application API')
@@ -168,10 +187,13 @@ def create_app():
     jwt.init_app(app)
 
 >>>>>>> 9594fa4 (fix: add auth namespace to the API in create_app function)
+=======
+>>>>>>> 4fcf277 (Keep all files as in main after merge)
     api.add_namespace(users_ns, path='/api/v1/users')
     api.add_namespace(amenities_ns, path='/api/v1/amenities')
     api.add_namespace(places_ns, path='/api/v1/places')
     api.add_namespace(review_ns, path='/api/v1/reviews')
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -193,7 +215,9 @@ def create_app():
 =======
 >>>>>>> 55418de (feat: added all folders/files from part2 to part3)
 =======
+=======
+    api.add_namespace(auth_ns, path='/api/v1/auth')
+>>>>>>> 4fcf277 (Keep all files as in main after merge)
     bcrypt.init_app(app)
     
->>>>>>> 3d4122e (task 01 : add password)
     return app

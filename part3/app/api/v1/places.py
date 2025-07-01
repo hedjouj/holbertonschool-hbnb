@@ -18,6 +18,13 @@ review_model = api.model('PlaceReview', {
     'user_id': fields.String(description='ID of the user')
 })
 
+# Adding the review model
+review_model = api.model('PlaceReview', {
+    'id': fields.String(description='Review ID'),
+    'text': fields.String(description='Text of the review'),
+    'rating': fields.Integer(description='Rating of the place (1-5)'),
+    'user_id': fields.String(description='ID of the user')
+})
 user_model = api.model('PlaceUser', {
     'id': fields.String(description='User ID'),
     'first_name': fields.String(description='First name of the owner'),
@@ -36,10 +43,13 @@ place_model = api.model('Place', {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 55418de (feat: added all folders/files from part2 to part3)
 =======
 >>>>>>> 55418de (feat: added all folders/files from part2 to part3)
+=======
+>>>>>>> 4fcf277 (Keep all files as in main after merge)
     'amenities': fields.List(fields.Nested(amenity_model), description='List of amenities')
 })
 
@@ -98,6 +108,7 @@ class PlaceResource(Resource):
         except ValueError as e:
             api.abort(400, str(e))
         except KeyError as e:
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
             api.abort(404, str(e))
@@ -218,3 +229,6 @@ class PlaceResource(Resource):
 =======
 >>>>>>> 55418de (feat: added all folders/files from part2 to part3)
             api.abort(404, str(e))
+=======
+            api.abort(404, str(e))
+>>>>>>> 4fcf277 (Keep all files as in main after merge)

@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 from app import create_app
 <<<<<<< HEAD
@@ -42,3 +43,11 @@ app = create_app('development')
 if __name__ == '__main__':
     app.run(debug=True)
 >>>>>>> 55418de (feat: added all folders/files from part2 to part3)
+=======
+from app import create_app
+
+app = create_app('development')
+
+if __name__ == '__main__':
+    app.run(debug=True)
+>>>>>>> 4fcf277 (Keep all files as in main after merge)

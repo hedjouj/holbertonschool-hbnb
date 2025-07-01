@@ -72,6 +72,7 @@ class HBnBFacade:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         user.hash_password(user_data['password'])
 =======
 >>>>>>> 55418de (feat: added all folders/files from part2 to part3)
@@ -85,10 +86,14 @@ class HBnBFacade:
 =======
         user.hash_password(user_data['password'])
 >>>>>>> 3d4122e (task 01 : add password)
+=======
+        user.hash_password(user_data['password'])
+>>>>>>> 4fcf277 (Keep all files as in main after merge)
         self.user_repo.add(user)
         return user
 
     def get_user(self, user_id):
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -115,6 +120,9 @@ class HBnBFacade:
 =======
         return self.user_repo.get_by_attribute('id', user_id)
 >>>>>>> 55418de (feat: added all folders/files from part2 to part3)
+=======
+        return self.user_repo.get_by_attribute('id', user_id)
+>>>>>>> 4fcf277 (Keep all files as in main after merge)
 
     def get_user_by_email(self, email):
         return self.user_repo.get_by_attribute('email', email)
@@ -193,12 +201,16 @@ class HBnBFacade:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 55418de (feat: added all folders/files from part2 to part3)
+=======
+>>>>>>> 4fcf277 (Keep all files as in main after merge)
 
 
 # Instance globale
 facade = HBnBFacade()
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
@@ -217,3 +229,5 @@ facade = HBnBFacade()
 >>>>>>> 55418de (feat: added all folders/files from part2 to part3)
 =======
 >>>>>>> 55418de (feat: added all folders/files from part2 to part3)
+=======
+>>>>>>> 4fcf277 (Keep all files as in main after merge)
