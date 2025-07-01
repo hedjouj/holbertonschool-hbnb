@@ -120,6 +120,7 @@ jwt = JWTManager()
 def create_app(config_name='default'):
     app = Flask(__name__)
     app.config.from_object(config[config_name])
+<<<<<<< HEAD
 >>>>>>> c5cac65 (fix: modify the argument in the create app)
     
     api = Api(app, version='1.0', title='HBnB API', doc='/api/v1/',
@@ -131,6 +132,13 @@ def create_app(config_name='default'):
     jwt.init_app(app)
 =======
     jwt.init_app(app)
+=======
+    jwt.init_app(app)
+
+    
+    api = Api(app, version='1.0', title='HBnB API', doc='/api/v1/',
+              description='HBnB Application API')
+>>>>>>> d120c30 (fix: move jwt.init_app call to the correct position in create_app function)
 
     
     api = Api(app, version='1.0', title='HBnB API', doc='/api/v1/',
