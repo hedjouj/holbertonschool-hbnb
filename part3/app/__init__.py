@@ -8,7 +8,7 @@ from app.api.v1.places import api as places_ns
 from app.api.v1.users import api as users_ns
 from app.api.v1.reviews import api as review_ns
 from flask_bcrypt import Bcrypt
-
+from app.extensions import bcrypt
 
 jwt = JWTManager()
 
@@ -16,7 +16,8 @@ def create_app(config_name='default'):
     app = Flask(__name__)
     app.config.from_object(config[config_name])
     jwt.init_app(app)
-    Bcrypt.init_app(app)
+    
+    bcrypt.init_app(app)
 
     
     api = Api(app, version='1.0', title='HBnB API', doc='/api/v1/',
