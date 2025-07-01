@@ -67,62 +67,12 @@ class HBnBFacade:
     # Placeholder method for creating a user
     def create_user(self, user_data):
         user = User(**user_data)
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
         user.hash_password(user_data['password'])
-=======
->>>>>>> 55418de (feat: added all folders/files from part2 to part3)
-=======
->>>>>>> 55418de (feat: added all folders/files from part2 to part3)
-=======
-        user.hash_password(user_data['password'])
->>>>>>> 3d4122e (task 01 : add password)
-=======
->>>>>>> 55418de (feat: added all folders/files from part2 to part3)
-=======
-        user.hash_password(user_data['password'])
->>>>>>> 3d4122e (task 01 : add password)
-=======
-        user.hash_password(user_data['password'])
->>>>>>> 4fcf277 (Keep all files as in main after merge)
         self.user_repo.add(user)
         return user
 
     def get_user(self, user_id):
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
         return self.user_repo.get_by_attribute('id', user_id)
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        return self.user_repo.get_by_attribute('id', user_id)
-=======
-        for i in self.user_repo.get_all():
-            print ( "coucou " + str(i) )
-=======
->>>>>>> 6c7fa63 (try to fix bug user not found)
-        return self.user_repo.get(user_id)
->>>>>>> 154c17d (try review bug bug with get user function)
-=======
-        return self.user_repo.get_by_attribute('id', user_id)
->>>>>>> 4560d9a (fix bug facade)
->>>>>>> 55418de (feat: added all folders/files from part2 to part3)
-=======
-        return self.user_repo.get_by_attribute('id', user_id)
->>>>>>> 55418de (feat: added all folders/files from part2 to part3)
-=======
-        return self.user_repo.get_by_attribute('id', user_id)
->>>>>>> 55418de (feat: added all folders/files from part2 to part3)
-=======
-        return self.user_repo.get_by_attribute('id', user_id)
->>>>>>> 4fcf277 (Keep all files as in main after merge)
 
     def get_user_by_email(self, email):
         return self.user_repo.get_by_attribute('email', email)
@@ -162,10 +112,7 @@ class HBnBFacade:
         return user
         
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 55418de (feat: added all folders/files from part2 to part3)
     def get_review(self, review_id):
         review = self.review_repo.get(review_id)
         if not review:
@@ -198,36 +145,7 @@ class HBnBFacade:
             raise ValueError("Review not found")
         self.review_repo.delete(review_id)
         return {'message': 'Review deleted succesessfully'}
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 55418de (feat: added all folders/files from part2 to part3)
-=======
->>>>>>> 4fcf277 (Keep all files as in main after merge)
 
 
 # Instance globale
 facade = HBnBFacade()
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-
-
-# Instance globale
-facade = HBnBFacade()
->>>>>>> 4560d9a (fix bug facade)
->>>>>>> 55418de (feat: added all folders/files from part2 to part3)
-=======
-
-
-# Instance globale
-facade = HBnBFacade()
->>>>>>> 55418de (feat: added all folders/files from part2 to part3)
-=======
->>>>>>> 55418de (feat: added all folders/files from part2 to part3)
-=======
->>>>>>> 4fcf277 (Keep all files as in main after merge)

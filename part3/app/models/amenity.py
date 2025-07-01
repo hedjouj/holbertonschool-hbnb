@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-from app.models.base_model import BaseModel
-=======
->>>>>>> 55418de (feat: added all folders/files from part2 to part3)
-=======
->>>>>>> 55418de (feat: added all folders/files from part2 to part3)
-=======
->>>>>>> 4fcf277 (Keep all files as in main after merge)
 # app/models/amenity.py
 ''' Amenity Class represents an amenity, inheriting from BaseModel'''
 

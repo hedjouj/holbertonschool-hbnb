@@ -1,66 +1,12 @@
 from app.models.base_model import BaseModel
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 from flask_bcrypt import Bcrypt
 
 bcrypt = Bcrypt()
-=======
-
->>>>>>> 55418de (feat: added all folders/files from part2 to part3)
-=======
-
->>>>>>> 55418de (feat: added all folders/files from part2 to part3)
-=======
-from flask_bcrypt import Bcrypt
-
-bcrypt = Bcrypt()
->>>>>>> 3d4122e (task 01 : add password)
-=======
-
->>>>>>> 55418de (feat: added all folders/files from part2 to part3)
-=======
-from flask_bcrypt import Bcrypt
-
-bcrypt = Bcrypt()
->>>>>>> 3d4122e (task 01 : add password)
-=======
-from flask_bcrypt import Bcrypt
-
-bcrypt = Bcrypt()
->>>>>>> 4fcf277 (Keep all files as in main after merge)
 
 class User(BaseModel):
     emails_seen = set()  # pour valider les mails
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
     def __init__(self, first_name: str, last_name: str, email: str, password: str,
-=======
-    def __init__(self, first_name: str, last_name: str, email: str,
->>>>>>> 55418de (feat: added all folders/files from part2 to part3)
-=======
-    def __init__(self, first_name: str, last_name: str, email: str,
->>>>>>> 55418de (feat: added all folders/files from part2 to part3)
-=======
-    def __init__(self, first_name: str, last_name: str, email: str, password: str,
->>>>>>> 3d4122e (task 01 : add password)
-=======
-    def __init__(self, first_name: str, last_name: str, email: str,
->>>>>>> 55418de (feat: added all folders/files from part2 to part3)
-=======
-    def __init__(self, first_name: str, last_name: str, email: str, password: str,
->>>>>>> 3d4122e (task 01 : add password)
-=======
-    def __init__(self, first_name: str, last_name: str, email: str, password: str,
->>>>>>> 4fcf277 (Keep all files as in main after merge)
                  is_admin=False):
         super().__init__()
 
@@ -82,18 +28,6 @@ class User(BaseModel):
         self.email = email
         self.is_admin = is_admin
         self.places = []
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 3d4122e (task 01 : add password)
-=======
->>>>>>> 3d4122e (task 01 : add password)
-=======
->>>>>>> 4fcf277 (Keep all files as in main after merge)
         self.password = self.hash_password(password) 
 
         User.emails_seen.add(email)
@@ -106,30 +40,6 @@ class User(BaseModel):
         """Verifies if the provided password matches the hashed password."""
         return bcrypt.check_password_hash(self.password, password)
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
-        User.emails_seen.add(email)
-
->>>>>>> 55418de (feat: added all folders/files from part2 to part3)
-=======
-
-        User.emails_seen.add(email)
-
->>>>>>> 55418de (feat: added all folders/files from part2 to part3)
-=======
->>>>>>> 3d4122e (task 01 : add password)
-=======
-
-        User.emails_seen.add(email)
-
->>>>>>> 55418de (feat: added all folders/files from part2 to part3)
-=======
->>>>>>> 3d4122e (task 01 : add password)
-=======
->>>>>>> 4fcf277 (Keep all files as in main after merge)
     def __str__(self):
         """
         Used to return object as we want
@@ -144,26 +54,5 @@ class User(BaseModel):
             "last_name": self.last_name,
             "email": self.email,
             "is_admin": self.is_admin,
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
             "password": self.password, 
-=======
->>>>>>> 55418de (feat: added all folders/files from part2 to part3)
-=======
->>>>>>> 55418de (feat: added all folders/files from part2 to part3)
-=======
-            "password": self.password, 
->>>>>>> 3d4122e (task 01 : add password)
-=======
->>>>>>> 55418de (feat: added all folders/files from part2 to part3)
-=======
-            "password": self.password, 
->>>>>>> 3d4122e (task 01 : add password)
-=======
-            "password": self.password, 
->>>>>>> 4fcf277 (Keep all files as in main after merge)
         }
