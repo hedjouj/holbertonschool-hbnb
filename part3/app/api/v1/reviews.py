@@ -1,5 +1,6 @@
 from flask_restx import Namespace, Resource, fields
 from app.services.facade import facade
+from flask_jwt_extended import jwt_required, get_jwt_identity
 
 api = Namespace('reviews', description='Review operations')
 
@@ -17,10 +18,17 @@ class ReviewList(Resource):
     @api.expect(review_model)
     @api.response(201, 'Review successfully created')
     @api.response(400, 'Invalid input data')
+    @jwt_required()
     def post(self):
         """Register a new review"""
         review_data = api.payload
         try:
+
+            current_user = get_jwt_identity()
+            place = facade.get_place(review_data['place_id'])
+
+            if current_user['id'] == place.owner_id:
+                return {'error': 'Unauthorized action'}, 403
 
             new_review = facade.create_review(
                 review_data
@@ -45,8 +53,8 @@ class ReviewList(Resource):
                 'id': review.id,
                 'text': review.text,
                 'rating': review.rating,
-                'user_id': review.user_id,
-                'place_id': review.place_id
+                'user_id': review.user.id,
+                'place_id': review.place.id
             }
             for review in reviews
         ], 200
@@ -77,6 +85,7 @@ class ReviewResource(Resource):
     @api.response(200, 'Review updated successfully')
     @api.response(404, 'Review not found')
     @api.response(400, 'Invalid input data')
+    @jwt_required()
     def put(self, review_id):
         """Update a review's information"""
         review_data = api.payload
@@ -85,12 +94,17 @@ class ReviewResource(Resource):
             if not review:
                 return {'error': 'Review not found'}, 404
 
+            current_user = get_jwt_identity()
+
+            if current_user['id'] != review.user.id:
+                return {'error': 'Unauthorized action'}, 403
+
             updated_review = facade.update_review(review_id, review_data)
             return {
                 'id': updated_review.id,
                 'text': updated_review.text,
-                'user_id': updated_review.user_id,
-                'place_id': updated_review.place_id,
+                'user_id': updated_review.user.id,
+                'place_id': updated_review.place.id,
                 'rating': updated_review.rating
             }, 200
         except ValueError as e:
