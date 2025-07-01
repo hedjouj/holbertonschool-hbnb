@@ -12,9 +12,10 @@ from app.api.v1.auth import api as auth_ns
 
 jwt = JWTManager()
 
-def create_app(config_class=config.DevelopmentConfig):
+def create_app(config_name='default'):
     app = Flask(__name__)
-    app.config.from_object(config_class)
+    app.config.from_object(config[config_name])
+
     
     api = Api(app, version='1.0', title='HBnB API', doc='/api/v1/',
               description='HBnB Application API')
@@ -25,4 +26,5 @@ def create_app(config_class=config.DevelopmentConfig):
     api.add_namespace(places_ns, path='/api/v1/places')
     api.add_namespace(review_ns, path='/api/v1/reviews')
     api.add_namespace(auth_ns, path='/api/v1/auth')
+
     return app
