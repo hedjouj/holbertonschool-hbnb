@@ -4,6 +4,9 @@ class Config:
     SECRET_KEY = os.getenv('SECRET_KEY', 'default_secret_key')
     DEBUG = False
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> bd0056d (fix: add JWT_SECRET_KEY to the Config class)
     JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY', 'jwt_secret')
     
 class DevelopmentConfig(Config):
