@@ -6,6 +6,8 @@ class Config:
     JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY', 'jwt_secret')
     
 class DevelopmentConfig(Config):
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///development.db'
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
     DEBUG = True
 
 class ProductionConfig(Config):
