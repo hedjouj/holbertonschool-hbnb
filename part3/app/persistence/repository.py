@@ -1,6 +1,12 @@
 from abc import ABC, abstractmethod
+<<<<<<< HEAD
 from app import db
 from app.models.user import User
+=======
+from app import db  # Assuming you have set up SQLAlchemy in your Flask app
+from app.models import User, Place, Review, Amenity  # Import your models
+
+>>>>>>> b917ad8 (feat: transition to SQL Alchemy repository)
 
 class Repository(ABC):
     @abstractmethod
