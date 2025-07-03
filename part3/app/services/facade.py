@@ -146,6 +146,22 @@ class HBnBFacade:
             raise ValueError("Review not found")
         self.review_repo.delete(review_id)
         return {'message': 'Review deleted succesessfully'}
+    
+place_repo = PlaceRepository()
+review_repo = ReviewRepository()
+amenity_repo = AmenityRepository()
+
+def get_place(place_id):
+    return place_repo.get(place_id)
+
+def create_place(data):
+    return place_repo.create(data)
+
+def update_place(place_id, data):
+    return place_repo.update(place_id, data)
+
+def delete_place(place_id):
+    return place_repo.delete(place_id)
 
 
 # Instance globale
