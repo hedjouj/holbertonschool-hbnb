@@ -5,7 +5,6 @@ from app.models.review import Review
 from app.models.user import User
 from app.persistence.repository import InMemoryRepository, UserRepository, PlaceRepository, ReviewRepository, AmenityRepository
 
-
 class HBnBFacade:
     def __init__(self):
         self.user_repo = UserRepository()
