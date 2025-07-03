@@ -30,4 +30,7 @@ def create_app(config_name='default'):
     api.add_namespace(auth_ns, path='/api/v1/auth')
     bcrypt.init_app(app)
     
+    api.add_namespace(auth_ns, path='/api/v1/auth')
+    bcrypt.init_app(app)
+    
     return app

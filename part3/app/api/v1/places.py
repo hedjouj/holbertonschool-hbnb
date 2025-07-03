@@ -1,5 +1,6 @@
 from flask_restx import Namespace, Resource, fields
 from app.services.facade import facade
+from flask_jwt_extended import jwt_required, get_jwt_identity
 from flask_jwt_extended import jwt_required, get_jwt_identity, get_jwt
 
 
@@ -50,6 +51,7 @@ class PlaceList(Resource):
     @api.expect(place_model)
     @api.response(201, 'Place successfully created')
     @api.response(400, 'Invalid input data')
+    @jwt_required()
     def post(self):
         """Register a new place"""
         # data = api.payload
@@ -61,6 +63,9 @@ class PlaceList(Resource):
         # owner_id = data.get('owner_id')
         # amenities = data.get('amenities', [])
         place_data = api.payload
+        current_user = get_jwt_identity()
+        if current_user['id'] != place_data['owner_id']:
+            return {'error': 'Unauthorized action'}, 403
         try:
             new_place = facade.create_place(place_data)
             return new_place.to_dict(), 201
@@ -91,9 +96,14 @@ class PlaceResource(Resource):
     @api.response(200, 'Place updated successfully')
     @api.response(404, 'Place not found2')
     @api.response(400, 'Invalid input data')
+    @jwt_required()
     def put(self, place_id):
         '''Update amenity details with ID'''
+
         place_data = api.payload
+        current_user = get_jwt_identity()
+        if current_user['id'] != place_data['owner_id']:
+            return {'error': 'Unauthorized action'}, 403
         try:
             updated_place = facade.update_place(place_id, place_data)
             return updated_place.to_dict(), 200
@@ -101,6 +111,7 @@ class PlaceResource(Resource):
             api.abort(400, str(e))
         except KeyError as e:
             api.abort(404, str(e))
+
 
 @api.route('/places/<place_id>')
 class AdminPlaceModify(Resource):
