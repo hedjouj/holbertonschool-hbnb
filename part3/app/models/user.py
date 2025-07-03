@@ -36,33 +36,22 @@ class User(BaseModel2):
     email = db.Column(db.String(120), nullable=False, unique=True)
     password = db.Column(db.String(128), nullable=False)
     is_admin = db.Column(db.Boolean, default=False)
-    emails_seen = set()  # pour valider les mails
 
-    def __init__(self, first_name: str, last_name: str, email: str, password: str,
-                 is_admin=False):
+    def __init__(self, first_name: str, last_name: str, email: str, password: str, is_admin=False):
         super().__init__()
-
         if not first_name or len(first_name) > 50:
-            raise ValueError(
-                "First name is required and must be ≤ 50 characters.")
+            raise ValueError("First name is required and must be ≤ 50 characters.")
         if not last_name or len(last_name) > 50:
-            raise ValueError(
-                "Last name is required and must be ≤ 50 characters.")
+            raise ValueError("Last name is required and must be ≤ 50 characters.")
         if not email or len(email) > 100:
             raise ValueError("Email is required and must be ≤ 100 characters.")
-        if email in User.emails_seen:
-            raise ValueError("Email must be unique.")
         if '@' not in email:
             raise ValueError("Invalid email format.")
-    
-    __tablename__ = 'users'
-
-    first_name = db.Column(db.String(50), nullable=False)
-    last_name = db.Column(db.String(50), nullable=False)
-    email = db.Column(db.String(120), nullable=False, unique=True)
-    password = db.Column(db.String(128), nullable=False)
-    is_admin = db.Column(db.Boolean, default=False)
-    user.emails_seen.add(email)
+        self.first_name = first_name
+        self.last_name = last_name
+        self.email = email
+        self.is_admin = is_admin
+        self.hash_password(password)
 
     def hash_password(self, password):
         """Hashes the password before storing it."""
