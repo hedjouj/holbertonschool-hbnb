@@ -2,9 +2,16 @@
 ''' Amenity Class represents an amenity, inheriting from BaseModel'''
 
 from app.models.base_model import BaseModel
+from app import db
 
 
 class Amenity(BaseModel):
+
+
+    __tablename__='Amenity'
+    id = db.Column(db.Integer(50), primary_key=True )
+    title = db.Column(db.String(50), nullable=False)
+    
     '''Represents an amenity with attributes and restrictions'''
     def __init__(self, name):
         '''Initialize a new Amenity instance with restrictions'''
