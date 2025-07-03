@@ -12,7 +12,7 @@ class Place(BaseModel):
     longitude = db.Column(db.Float, nullable=False)
     owner_id = db.Column(db.Integer, nullable=False)
 
-    def __init__(self, title: str, price: float, latitude: float, longitude: float, owner_id: int, amenities=None, reviews=None, description=""):
+    def __init__(self, title: str, price: float, latitude: float, longitude: float, owner_id: int, description=""):
         super().__init__()
 
         if not title or len(title) > 100:
@@ -30,8 +30,6 @@ class Place(BaseModel):
         self.latitude = latitude
         self.longitude = longitude
         self.owner_id = owner_id
-        self.reviews = reviews if reviews is not None else []
-        self.amenities = amenities if amenities is not None else []
 
     def to_dict(self):
         """Convert the Place object to a dictionary."""
@@ -42,7 +40,5 @@ class Place(BaseModel):
             "price": self.price,
             "latitude": self.latitude,
             "longitude": self.longitude,
-            "owner_id": self.owner_id,
-            "reviews": [review.to_dict() for review in self.reviews],
-            "amenities": self.amenities
+            "owner_id": self.owner_id
         }
