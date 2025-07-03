@@ -29,7 +29,7 @@ class BaseModel2(db.Model):
         self.save()  # Mets à jour la date de modif
 
 class User(BaseModel2):
-    __tablename__ = 'users'
+    __tablename__ = 'user'
 
     first_name = db.Column(db.String(50), nullable=False)
     last_name = db.Column(db.String(50), nullable=False)
