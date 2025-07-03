@@ -2,9 +2,16 @@
 from app.models.base_model import BaseModel
 from app.models.user import User
 from app.models.place import Place
-
+from app import db
 
 class Review(BaseModel):
+
+    __tablename__ = 'Review'
+
+    id = db.Column(db.Integer(50), primary_key=True)
+    text = db.Column(db.String(50), nullable=False)
+    rating = db.Column(db.Integer(120), nullable=False)
+
     def __init__(self, text: str, rating: int, place: Place, user: User):
         super().__init__()
 
