@@ -1,5 +1,9 @@
 from app.models.base_model import BaseModel
 from flask_bcrypt import Bcrypt
+import uuid
+from app import db
+from part2.app.models import user
+
 
 bcrypt = Bcrypt()
 
@@ -22,15 +26,15 @@ class User(BaseModel):
             raise ValueError("Email must be unique.")
         if '@' not in email:
             raise ValueError("Invalid email format.")
+    
+    __tablename__ = 'users'
 
-        self.first_name = first_name
-        self.last_name = last_name
-        self.email = email
-        self.is_admin = is_admin
-        self.places = []
-        self.password = self.hash_password(password) 
-
-        User.emails_seen.add(email)
+    first_name = db.Column(db.String(50), nullable=False)
+    last_name = db.Column(db.String(50), nullable=False)
+    email = db.Column(db.String(120), nullable=False, unique=True)
+    password = db.Column(db.String(128), nullable=False)
+    is_admin = db.Column(db.Boolean, default=False)
+    user.emails_seen.add(email)
 
     def hash_password(self, password):
         """Hashes the password before storing it."""
