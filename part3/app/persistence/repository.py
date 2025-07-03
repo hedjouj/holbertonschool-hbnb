@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from app import db
+from app.extensions import db
 from app.models.user import User
 
 class Repository(ABC):
@@ -28,43 +28,39 @@ class Repository(ABC):
         pass
 
 
-class InMemoryRepository(Repository):
+class InMemoryRepository:
+    """A simple in-memory repository for testing (not used with SQLAlchemy)."""
     def __init__(self):
-        self._storage = {}
+        self._data = {}
 
     def add(self, obj):
-        self._storage[obj.id] = obj
+        self._data[obj.id] = obj
 
     def get(self, obj_id):
-        return self._storage.get(obj_id)
+        return self._data.get(obj_id)
 
     def get_all(self):
-        return list(self._storage.values())
+        return list(self._data.values())
 
     def update(self, obj_id, data):
         obj = self.get(obj_id)
         if obj:
-            obj.update(data)
+            for key, value in data.items():
+                setattr(obj, key, value)
+        return obj
 
     def delete(self, obj_id):
-        if obj_id in self._storage:
-            del self._storage[obj_id]
+        return self._data.pop(obj_id, None)
 
-    def get_by_attribute(self, attr_name, attr_value):
-        return next(
-            (
-                obj for obj in self._storage.values()
-                if getattr(obj, attr_name) == attr_value
-            ),
-            None,
-        )
-
-    def save(self, obj):
-        self._storage[obj.id] = obj
+    def get_by_attribute(self, attr, value):
+        for obj in self._data.values():
+            if getattr(obj, attr, None) == value:
+                return obj
+        return None
 
 
-
-class SQLAlchemyRepository(Repository):
+# SQLAlchemy repositories
+class BaseRepository:
     def __init__(self, model):
         self.model = model
 
@@ -84,17 +80,20 @@ class SQLAlchemyRepository(Repository):
             for key, value in data.items():
                 setattr(obj, key, value)
             db.session.commit()
+        return obj
 
     def delete(self, obj_id):
         obj = self.get(obj_id)
         if obj:
             db.session.delete(obj)
             db.session.commit()
+        return obj
 
-    def get_by_attribute(self, attr_name, attr_value):
-        return self.model.query.filter_by(**{attr_name: attr_value}).first()
+    def get_by_attribute(self, attr, value):
+        return self.model.query.filter(getattr(self.model, attr) == value).first()
 
-class UserRepository(SQLAlchemyRepository):
+
+class UserRepository(BaseRepository):
     def __init__(self):
         super().__init__(User)
 
