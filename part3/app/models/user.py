@@ -2,12 +2,13 @@ from datetime import datetime
 import uuid
 from app.extension_bcrypt import bcrypt
 from app.extensions import db
-<<<<<<< HEAD
+
 from app.models import user
 from app.models.base_model import BaseModel
-=======
+
 from part2.app.models import user
->>>>>>> 7501f7e (fix: import user model from part2 for proper functionality)
+
+from app.models import user
 
 class User(BaseModel):
     __tablename__ = 'users'
