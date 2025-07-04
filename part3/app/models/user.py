@@ -3,39 +3,19 @@ import uuid
 from app.extension_bcrypt import bcrypt
 from app.extensions import db
 from app.models import user
-
-class BaseModel2(db.Model):
-
-    __abstract__ = True  # This ensures SQLAlchemy does not create a table for BaseModel
-
-    def __init__(self):
-        self.id = str(uuid.uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
-    
-    id = db.Column(db.String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
-    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
-
-    def save(self):
-        """Mets à jour la modif date(upadate_at) quand l'obj est changé"""
-        self.updated_at = datetime.now()
-
-    def update(self, data):
-        """Mets à jours les attributs de l'obj à l'aide d'un dico"""
-        for key, value in data.items():
-            if hasattr(self, key):
-                setattr(self, key, value)
-        self.save()  # Mets à jour la date de modif
+from app.models.base_model import BaseModel2
 
 class User(BaseModel2):
     __tablename__ = 'users'  # Use plural for consistency
+
+    __tablename__ = 'users'
 
     first_name = db.Column(db.String(50), nullable=False)
     last_name = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(120), nullable=False, unique=True)
     password = db.Column(db.String(128), nullable=False)
     is_admin = db.Column(db.Boolean, default=False)
+    places = db.relationship('Place', backref='owner', lazy=True)  # One-to-many
 
     def __init__(self, first_name: str, last_name: str, email: str, password: str, is_admin=False):
         super().__init__()
