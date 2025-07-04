@@ -108,3 +108,13 @@ class UserRepository(BaseRepository):
 class PlaceRepository(BaseRepository):
     def __init__(self):
         super().__init__(Place)
+
+
+class ReviewRepository(BaseRepository):
+    def __init__(self):
+        super().__init__(Review)
+
+
+class AmenityRepository(BaseRepository):
+    def __init__(self):
+        super().__init__(Amenity)
