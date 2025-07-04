@@ -2,7 +2,7 @@ from app.models.base_model import BaseModel
 from app import db
 
 class Place(BaseModel):
-    __tablename__ = 'place'
+    __tablename__ = 'places'
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
@@ -10,7 +10,7 @@ class Place(BaseModel):
     price = db.Column(db.Float, nullable=False)
     latitude = db.Column(db.Float, nullable=False)
     longitude = db.Column(db.Float, nullable=False)
-    owner_id = db.Column(db.Integer, nullable=False)
+    owner_id = db.Column(db.String(36), db.ForeignKey('users.id'), nullable=False)  # FK to User
 
     def __init__(self, title: str, price: float, latitude: float, longitude: float, owner_id: int, description=""):
         super().__init__()
