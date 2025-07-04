@@ -2,7 +2,7 @@ from datetime import datetime
 import uuid
 from app.extension_bcrypt import bcrypt
 from app.extensions import db
-from part2.app.models import user
+from app.models import user
 
 class BaseModel2(db.Model):
 
