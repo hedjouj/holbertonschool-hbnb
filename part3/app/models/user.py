@@ -29,7 +29,7 @@ class BaseModel2(db.Model):
         self.save()  # Mets à jour la date de modif
 
 class User(BaseModel2):
-    __tablename__ = 'user'
+    __tablename__ = 'users'  # Use plural for consistency
 
     first_name = db.Column(db.String(50), nullable=False)
     last_name = db.Column(db.String(50), nullable=False)
@@ -47,15 +47,11 @@ class User(BaseModel2):
             raise ValueError("Email is required and must be ≤ 100 characters.")
         if '@' not in email:
             raise ValueError("Invalid email format.")
-    
-    __tablename__ = 'users'
-
-    first_name = db.Column(db.String(50), nullable=False)
-    last_name = db.Column(db.String(50), nullable=False)
-    email = db.Column(db.String(120), nullable=False, unique=True)
-    password = db.Column(db.String(128), nullable=False)
-    is_admin = db.Column(db.Boolean, default=False)
-    user.emails_seen.add(email)
+        self.first_name = first_name
+        self.last_name = last_name
+        self.email = email
+        self.is_admin = is_admin
+        self.hash_password(password)
 
     def hash_password(self, password):
         """Hashes the password before storing it."""
