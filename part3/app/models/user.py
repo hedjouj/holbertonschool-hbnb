@@ -12,6 +12,32 @@ from app.models import user
 
 class User(BaseModel):
     __tablename__ = 'users'
+class BaseModel2(db.Model):
+
+    __abstract__ = True  # This ensures SQLAlchemy does not create a table for BaseModel
+
+    def __init__(self):
+        self.id = str(uuid.uuid4())
+        self.created_at = datetime.now()
+        self.updated_at = datetime.now()
+    
+    id = db.Column(db.String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+    def save(self):
+        """Mets à jour la modif date(upadate_at) quand l'obj est changé"""
+        self.updated_at = datetime.now()
+
+    def update(self, data):
+        """Mets à jours les attributs de l'obj à l'aide d'un dico"""
+        for key, value in data.items():
+            if hasattr(self, key):
+                setattr(self, key, value)
+        self.save()  # Mets à jour la date de modif
+
+class User(BaseModel2):
+    __tablename__ = 'users'  # Use plural for consistency
 
     first_name = db.Column(db.String(50), nullable=False)
     last_name = db.Column(db.String(50), nullable=False)
