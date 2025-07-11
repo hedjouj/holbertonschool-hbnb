@@ -3,9 +3,9 @@ import uuid
 from app.extension_bcrypt import bcrypt
 from app.extensions import db
 from app.models import user
-from app.models.base_model import BaseModel2
+from app.models.base_model import BaseModel
 
-class User(BaseModel2):
+class User(BaseModel):
     __tablename__ = 'users'
 
     first_name = db.Column(db.String(50), nullable=False)
