@@ -5,14 +5,6 @@ from app.models.place import Place
 from app.models.review import Review
 from app.models.amenity import Amenity
 
-
-from app import db
-from app.models.user import User
-
-from app import db  # Assuming you have set up SQLAlchemy in your Flask app
-from app.models import User, Place, Review, Amenity  # Import your models
-
-
 class Repository(ABC):
     @abstractmethod
     def add(self, obj):
