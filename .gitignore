@@ -24,3 +24,4 @@ part2/app/__pycache__/__init__.cpython-310.pyc
 env
 .db
 instance
+*.db
