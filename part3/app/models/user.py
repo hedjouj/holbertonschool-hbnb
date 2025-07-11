@@ -6,7 +6,7 @@ from app.extensions import db
 from app.models import user
 from app.models.base_model import BaseModel
 
-from part2.app.models import user
+from app.models import user
 
 from app.models import user
 
