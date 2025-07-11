@@ -1,7 +1,6 @@
 import uuid
 from datetime import datetime
 from app import db
-from app.models.base_model import BaseModel
 
 class BaseModel(db.Model):
     __abstract__ = True  # This ensures SQLAlchemy does not create a table for BaseModel
