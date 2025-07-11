@@ -8,8 +8,8 @@ class Review(BaseModel):
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.String(255), nullable=False)
     rating = db.Column(db.Integer, nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    place_id = db.Column(db.Integer, db.ForeignKey('place.id'), nullable=False)
+    user_id = db.Column(db.String(36), db.ForeignKey('users.id'), nullable=False)
+    place_id = db.Column(db.Integer, db.ForeignKey('places.id'), nullable=False)
 
     user = db.relationship('User', backref='reviews')
     place = db.relationship('Place', backref='reviews')
