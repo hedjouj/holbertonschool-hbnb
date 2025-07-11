@@ -10,7 +10,12 @@ class Place(BaseModel):
     price = db.Column(db.Float, nullable=False)
     latitude = db.Column(db.Float, nullable=False)
     longitude = db.Column(db.Float, nullable=False)
-    owner_id = db.Column(db.String(36), db.ForeignKey('users.id'), nullable=False)  # FK to User
+    owner_id = db.Column(db.String(36), db.ForeignKey('users.id'), nullable=False)
+    place_id = db.Column(db.Integer, db.ForeignKey('places.id'), nullable=True)
+
+    owner = db.relationship('User', back_populates='places')
+    reviews = db.relationship('Review', backref='place', lazy=True)
+    amenities = db.relationship('Amenity', secondary='place_amenity', backref='places', lazy='dynamic')
 
     def __init__(self, title: str, price: float, latitude: float, longitude: float, owner_id: int, description=""):
         super().__init__()
