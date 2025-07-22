@@ -55,4 +55,22 @@ margin: 0;
 padding: 0;
 text-align: center;
 }
+.place-card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 12px 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+.details-button {
+    background: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.details-button:hover {
+    background: #0056b3;
+}
 
