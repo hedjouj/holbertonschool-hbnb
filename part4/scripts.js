@@ -8,7 +8,7 @@ fetchPlaces();
 });
 
 function fetchPlaces() {
-    fetch('http://localhost:5000/api/places')
+    fetch('http://localhost:5000/api/v1')
         .then(response => response.json())
         .then(data => {
             displayPlaces(data);
