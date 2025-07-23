@@ -1,5 +1,6 @@
 from app.models.base_model import BaseModel
 from app import db
+from .association_tables import place_amenity
 
 class Place(BaseModel):
     __tablename__ = 'places'
