@@ -73,4 +73,11 @@ text-align: center;
 .details-button:hover {
     background: #0056b3;
 }
-
+.review-card {
+  border: 1px solid #aaa;
+  border-radius: 6px;
+  padding: 12px;
+  margin: 10px 0;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
