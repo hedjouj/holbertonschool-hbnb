@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const placeId = getPlaceIdFromURL();
     if (placeId) {
       fetchPlaceDetails(placeId);
+      fetchPlaceReviews(placeId);
     }
   }
   if (document.getElementById('places-list')) {
@@ -117,5 +118,56 @@ function displayPlaces(places) {
       <button class="details-button" data-id="${place.id}">View Details</button>
     `;
     placesList.appendChild(card);
+  });
+}
+
+
+function fetchPlaceReviews(placeId) {
+  fetch(`http://localhost:5000/api/v1/reviews/places/${placeId}/reviews`)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(reviews => {
+      displayPlaceReviews(reviews);
+    })
+    .catch(error => {
+      console.error('Error fetching reviews:', error);
+    });
+}
+
+function displayPlaceReviews(reviews) {
+  const reviewsSection = document.getElementById('reviews');
+  if (!reviewsSection) return;
+  reviewsSection.innerHTML = '<h2>Reviews</h2>';
+  if (!Array.isArray(reviews) || reviews.length === 0) {
+    reviewsSection.innerHTML += '<p>No reviews yet.</p>';
+    return;
+  }
+
+  // For each review, fetch the user name and display the review card
+  reviews.forEach(review => {
+    fetch(`http://localhost:5000/api/v1/users/${review.user_id}`)
+      .then(response => response.ok ? response.json() : { first_name: 'Unknown', last_name: '' })
+      .then(user => {
+        const card = document.createElement('div');
+        card.className = 'review-card';
+        card.innerHTML = `
+          <p><strong>${user.first_name || 'Unknown'} ${user.last_name || ''}</strong> rated: ${review.rating}/5</p>
+          <p>${review.text}</p>
+        `;
+        reviewsSection.appendChild(card);
+      })
+      .catch(() => {
+        const card = document.createElement('div');
+        card.className = 'review-card';
+        card.innerHTML = `
+          <p><strong>Unknown User</strong> rated: ${review.rating}/5</p>
+          <p>${review.text}</p>
+        `;
+        reviewsSection.appendChild(card);
+      });
   });
 }
