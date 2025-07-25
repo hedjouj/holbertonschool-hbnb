@@ -2,9 +2,24 @@
   This is a SAMPLE FILE to get you started.
   Please, follow the project instructions to complete the tasks.
 */
+function checkAuthentication() {
+    const token = getCookie('token');
+    const loginLink = document.getElementById('login-link');
+
+    if (!token) {
+        loginLink.style.display = 'block';
+    } else {
+        loginLink.style.display = 'none';
+        // Fetch places data if the user is authenticated
+        fetchPlaces(token);
+    }
+}
+function getCookie(name) {
+    // Function to get a cookie value by its name
+    // Your code here
+}
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Only run on place.html
   if (document.getElementById('place-details')) {
     const placeId = getPlaceIdFromURL();
     if (placeId) {
@@ -42,7 +57,6 @@ function displayPlaceDetails(place) {
   const detailsSection = document.getElementById('place-details');
   if (!detailsSection) return;
 
-  // Host info (if available)
   let hostInfo = '';
   if (place.owner) {
     hostInfo = `
@@ -52,7 +66,6 @@ function displayPlaceDetails(place) {
     `;
   }
 
-  // Amenities
   let amenities = '';
   if (Array.isArray(place.amenities) && place.amenities.length > 0) {
     amenities = `
@@ -84,16 +97,13 @@ function fetchPlaces() {
     })
     .then(data => {
       let places = [];
-      // If backend returns { places: [...] }
       if (data && Array.isArray(data.places)) {
         places = data.places;
       } else if (Array.isArray(data)) {
-        // If backend returns an array directly
         places = data;
       } else {
-        // Log the unexpected data for debugging
         console.error('Unexpected response format:', data);
-        return; // Don't call displayPlaces with bad data
+        return;
       }
       displayPlaces(places);
     })
@@ -147,7 +157,6 @@ function displayPlaceReviews(reviews) {
     return;
   }
 
-  // For each review, fetch the user name and display the review card
   reviews.forEach(review => {
     fetch(`http://localhost:5000/api/v1/users/${review.user_id}`)
       .then(response => response.ok ? response.json() : { first_name: 'Unknown', last_name: '' })
