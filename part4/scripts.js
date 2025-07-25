@@ -10,6 +10,16 @@ function getCookie(name) {
   return null;
 }
 
+function setCookie(name, value, days) {
+  let expires = '';
+  if (days) {
+    const date = new Date();
+    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+    expires = "; expires=" + date.toUTCString();
+  }
+  document.cookie = name + "=" + (value || "") + expires + "; path=/";
+}
+
 function checkAuthentication() {
   const token = getCookie('token');
   const loginLink = document.getElementById('login-link');
@@ -30,6 +40,38 @@ function checkAuthentication() {
 window.allPlaces = [];
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Login form handling
+  const loginForm = document.getElementById('login-form');
+  if (loginForm) {
+    loginForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      try {
+        const response = await fetch('http://localhost:5000/api/v1/auth/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ email, password })
+        });
+        if (!response.ok) {
+          throw new Error('Invalid credentials');
+        }
+        const data = await response.json();
+        if (data && data.token) {
+          setCookie('token', data.token, 7); // Store token for 7 days
+          window.location.href = 'index.html';
+        } else {
+          alert('Login failed: No token received');
+        }
+      } catch (error) {
+        alert('Login failed: ' + error.message);
+      }
+    });
+    return; // Don't run the rest of the code on login.html
+  }
+
   if (document.getElementById('place-details')) {
     const placeId = getPlaceIdFromURL();
     if (placeId) {
