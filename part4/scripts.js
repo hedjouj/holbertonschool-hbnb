@@ -59,8 +59,9 @@ document.addEventListener('DOMContentLoaded', () => {
           throw new Error('Invalid credentials');
         }
         const data = await response.json();
-        if (data && data.token) {
-          setCookie('token', data.token, 7); // Store token for 7 days
+        const token = data.token || data.access_token;
+        if (token) {
+          setCookie('token', token, 7);
           window.location.href = 'index.html';
         } else {
           alert('Login failed: No token received');
