@@ -23,4 +23,3 @@ class BaseModel(db.Model):
             if hasattr(self, key):
                 setattr(self, key, value)
         self.save()  # Mets à jour la date de modif
-

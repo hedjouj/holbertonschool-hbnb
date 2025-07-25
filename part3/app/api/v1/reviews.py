@@ -1,153 +1,110 @@
+from flask import request
 from flask_restx import Namespace, Resource, fields
 from app.services.facade import facade
 from flask_jwt_extended import jwt_required, get_jwt_identity
+from flask_jwt_extended import jwt_required, get_jwt_identity, get_jwt
 
-api = Namespace('reviews', description='Review operations')
+api = Namespace("users", description="User operations")
 
-# Define the review model for input validation and documentation
-review_model = api.model('Review', {
-    'text': fields.String(required=True, description='Text of the review'),
-    'rating': fields.Integer(required=True, description='Rating of the place (1-5)'),
-    'user_id': fields.String(required=True, description='ID of the user'),
-    'place_id': fields.String(required=True, description='ID of the place')
+user_model = api.model("User", {
+    "first_name": fields.String(required=True, max_length=50),
+    "last_name": fields.String(required=True, max_length=50),
+    "password": fields.String(required=True, max_length=50),
+    "email": fields.String(required=True),
 })
 
-
 @api.route('/')
-class ReviewList(Resource):
-    @api.expect(review_model)
-    @api.response(201, 'Review successfully created')
+class UserList(Resource):
+    @api.expect(user_model, validate=True)
+    @api.response(201, 'User successfully created')
+    @api.response(400, 'Email already registered')
     @api.response(400, 'Invalid input data')
+    def post(self):
+        """Register a new user"""
+        user_data = api.payload
+
+        # Simulate email uniqueness check (to be replaced by real validation with persistence)
+        existing_user = facade.get_user_by_email(user_data['email'])
+        if existing_user:
+            return {'error': 'Email already registered'}, 400
+
+        
+        new_user = facade.create_user(user_data)
+        return {'id': new_user.id, 'first_name': new_user.first_name, 'last_name': new_user.last_name, "password": new_user.password, 'email': new_user.email}, 201
+
+    @api.response(200, 'List of users retrieved successfully')
+    def get(self):
+        """Retrieve a list of all users"""
+        users = facade.get_all_users()
+        return [user.to_dict() for user in users], 200
+
+@api.route('/<user_id>')
+class UserResource(Resource):
+    @api.response(200, 'User details retrieved successfully')
+    @api.response(404, 'User not found')
+    def get(self, user_id):
+        """Get user details by ID"""
+        user = facade.get_user(user_id)
+        if not user:
+            return {'error': 'User not found'}, 404
+        return {'id': user.id, 'first_name': user.first_name, 'last_name': user.last_name, 'email': user.email}, 200
+    
+    @api.expect(user_model, validate=True)
+    @api.response(200, 'User updated successfully')
+    @api.response(404, 'User not found')
+    @api.response(400, 'Invalid input data')
+    @jwt_required()
+    def put(self, user_id):
+        """Update user details with ID"""
+        user_data = api.payload
+
+        current_user = get_jwt_identity()
+
+        if current_user['id'] != user_id:
+            return {'error': 'Unauthorized action'}, 403
+
+        try:
+            updated_user = facade.update_user(user_id, user_data)
+            return {
+                'id': updated_user.id,
+                'first_name': updated_user.first_name,
+                'last_name': updated_user.last_name,
+                'email': updated_user.email
+            }, 200
+        except ValueError as e:
+            return {'error': str(e)}, 404
+        
+@api.route('/users/')
+class AdminUserCreate(Resource):
     @jwt_required()
     def post(self):
-        """Register a new review"""
-        review_data = api.payload
-        try:
+        current_user = get_jwt_identity()
+        if not current_user.get('is_admin'):
+            return {'error': 'Admin privileges required'}, 403
 
-            current_user = get_jwt_identity()
-            place = facade.get_place(review_data['place_id'])
+        user_data = request.json
+        email = user_data.get('email')
 
-            if current_user['id'] == place.owner_id:
-                return {'error': 'Unauthorized action'}, 403
+        # Check if email is already in use
+        if facade.get_user_by_email(email):
+            return {'error': 'Email already registered'}, 400
 
-            new_review = facade.create_review(
-                review_data
-            )
+        # Logic to create a new user
+        pass
 
-            return {
-                'id': new_review.id,
-                'text': new_review.text,
-                'rating': new_review.rating,
-                'user_id': new_review.user.id,
-                'place_id': new_review.place.id
-            }, 201
-        except ValueError as e:
-            return {'error': str(e)}, 400
-
-    @api.response(200, 'List of reviews retrieved successfully')
-    def get(self):
-        """Retrieve a list of all reviews"""
-        reviews = facade.get_all_reviews()
-        return [
-            {
-                'id': review.id,
-                'text': review.text,
-                'rating': review.rating,
-                'user_id': review.user.id,
-                'place_id': review.place.id
-            }
-            for review in reviews
-        ], 200
-
-
-@api.route('/<review_id>')
-class ReviewResource(Resource):
-    @api.response(200, 'Review details retrieved successfully')
-    @api.response(404, 'Review not found')
-    def get(self, review_id):
-        """Get review with ID"""
-        try:
-            review = facade.get_review(review_id)
-            if not review:
-                return {'error': 'Review not found'}, 404
-
-            return {
-                'id': review.id,
-                'text': review.text,
-                'rating': review.rating,
-                'user_id': review.user_id,
-                'place_id': review.place_id
-            }, 200
-        except ValueError as e:
-            return {'error': str(e)}, 400
-
-    @api.expect(review_model)
-    @api.response(200, 'Review updated successfully')
-    @api.response(404, 'Review not found')
-    @api.response(400, 'Invalid input data')
+class AdminUserModify(Resource):
     @jwt_required()
-    def put(self, review_id):
-        """Update a review's information"""
-        review_data = api.payload
-        try:
-            review = facade.get_review(review_id)
-            if not review:
-                return {'error': 'Review not found'}, 404
+    def put(self, user_id):
+        current_user = get_jwt_identity()
+        if not current_user.get('is_admin'):
+            return {'error': 'Admin privileges required'}, 403
 
-            current_user = get_jwt_identity()
+        data = request.json
+        email = data.get('email')
 
-            if current_user['id'] != review.user.id:
-                return {'error': 'Unauthorized action'}, 403
+        # Ensure email uniqueness
+        if email:
+            existing_user = facade.get_user_by_email(email)
+            if existing_user and existing_user.id != user_id:
+                return {'error': 'Email already in use'}, 400
 
-            updated_review = facade.update_review(review_id, review_data)
-            return {
-                'id': updated_review.id,
-                'text': updated_review.text,
-                'user_id': updated_review.user.id,
-                'place_id': updated_review.place.id,
-                'rating': updated_review.rating
-            }, 200
-        except ValueError as e:
-            return {'error': str(e)}, 400
-
-    @api.response(200, 'Review deleted successfully')
-    @api.response(404, 'Review not found')
-    @jwt_required()
-    def delete(self, review_id):
-        """Delete a review"""
-        try:
-            review_get = facade.get_review(review_id)
-            if not review_get:
-                return {'error': 'Review not found'}, 404
-
-            current_user = get_jwt_identity()
-
-            if current_user['id'] != review_get.user.id:
-                return {'error': 'Unauthorized action'}, 403
-
-            review = facade.delete_review(review_id)
-            if review:
-                return {'message': 'Review deleted.'}, 200
-            return {'error': 'Review not found'}, 404
-        except ValueError as e:
-            return {'error': str(e)}, 400
-
-
-@api.route('/places/<place_id>/reviews')
-class PlaceReviewList(Resource):
-    @api.response(200, 'List of reviews for the place retrieved successfully')
-    @api.response(404, 'Place not found')
-    def get(self, place_id):
-        """Get all reviews for a specific place"""
-        try:
-            place_reviews = facade.get_reviews_by_place(place_id)
-            return [
-                {
-                    'id': review.id,
-                    'text': review.text,
-                    'rating': review.rating
-                }
-                for review in place_reviews
-            ], 200
-        except ValueError as e:
-            return {'error': str(e)}, 400
