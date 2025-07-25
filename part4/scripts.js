@@ -2,22 +2,32 @@
   This is a SAMPLE FILE to get you started.
   Please, follow the project instructions to complete the tasks.
 */
-function checkAuthentication() {
-    const token = getCookie('token');
-    const loginLink = document.getElementById('login-link');
 
-    if (!token) {
-        loginLink.style.display = 'block';
-    } else {
-        loginLink.style.display = 'none';
-        // Fetch places data if the user is authenticated
-        fetchPlaces(token);
-    }
-}
 function getCookie(name) {
-    // Function to get a cookie value by its name
-    // Your code here
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+  return null;
 }
+
+function checkAuthentication() {
+  const token = getCookie('token');
+  const loginLink = document.getElementById('login-link');
+
+  if (!loginLink) return;
+
+  if (!token) {
+    loginLink.style.display = 'block';
+    fetchPlaces();
+  } else {
+    loginLink.style.display = 'none';
+    // Fetch places data if the user is authenticated
+    fetchPlaces(token);
+  }
+}
+
+// Store all places globally for filtering
+window.allPlaces = [];
 
 document.addEventListener('DOMContentLoaded', () => {
   if (document.getElementById('place-details')) {
@@ -28,7 +38,34 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
   if (document.getElementById('places-list')) {
-    fetchPlaces();
+    checkAuthentication();
+  }
+
+  // Populate the price filter dropdown
+  const priceFilter = document.getElementById('price-filter');
+  if (priceFilter) {
+    const options = [
+      { value: '10', text: '$10' },
+      { value: '50', text: '$50' },
+      { value: '100', text: '$100' },
+      { value: 'all', text: 'All' }
+    ];
+    options.forEach(opt => {
+      const option = document.createElement('option');
+      option.value = opt.value;
+      option.textContent = opt.text;
+      priceFilter.appendChild(option);
+    });
+    // Add event listener for filtering
+    priceFilter.addEventListener('change', (event) => {
+      const selected = event.target.value;
+      let filtered = window.allPlaces;
+      if (selected !== 'all') {
+        const maxPrice = parseFloat(selected);
+        filtered = window.allPlaces.filter(place => Number(place.price) <= maxPrice);
+      }
+      displayPlaces(filtered);
+    });
   }
 });
 
@@ -87,39 +124,46 @@ function displayPlaceDetails(place) {
   `;
 }
 
-function fetchPlaces() {
-  fetch('http://localhost:5000/api/v1/places')
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    })
-    .then(data => {
-      let places = [];
-      if (data && Array.isArray(data.places)) {
-        places = data.places;
-      } else if (Array.isArray(data)) {
-        places = data;
-      } else {
-        console.error('Unexpected response format:', data);
-        return;
-      }
-      displayPlaces(places);
-    })
-    .catch(error => {
-      console.error('Error fetching places:', error);
-    });
+// Fetch places data using Fetch API and handle the response
+async function fetchPlaces(token) {
+  const headers = {};
+  if (token) {
+    headers['Authorization'] = `Bearer ${token}`;
+  }
+  try {
+    const response = await fetch('http://localhost:5000/api/v1/places', { headers });
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const data = await response.json();
+    let places = [];
+    if (data && Array.isArray(data.places)) {
+      places = data.places;
+    } else if (Array.isArray(data)) {
+      places = data;
+    } else {
+      console.error('Unexpected response format:', data);
+      return;
+    }
+    window.allPlaces = places;
+    displayPlaces(places);
+  } catch (error) {
+    console.error('Error fetching places:', error);
+  }
 }
 
+// Populate places list by creating HTML elements for each place
 function displayPlaces(places) {
   const placesList = document.getElementById('places-list');
   if (!placesList) {
-    console.error('No element with id \"places-list\" found in the DOM.');
+    console.error('No element with id "places-list" found in the DOM.');
     return;
   }
+  // Clear the current content of the places list
   placesList.innerHTML = '';
+  // Iterate over the places data
   places.forEach(place => {
+    // For each place, create a div element and set its content
     const card = document.createElement('div');
     card.className = 'place-card';
     card.innerHTML = `
@@ -127,10 +171,10 @@ function displayPlaces(places) {
       <p>Price per night: $${place.price !== undefined ? place.price : 'N/A'}</p>
       <button class="details-button" data-id="${place.id}">View Details</button>
     `;
+    // Append the created element to the places list
     placesList.appendChild(card);
   });
 }
-
 
 function fetchPlaceReviews(placeId) {
   fetch(`http://localhost:5000/api/v1/reviews/places/${placeId}/reviews`)
@@ -157,6 +201,7 @@ function displayPlaceReviews(reviews) {
     return;
   }
 
+  // For each review, fetch the user name and display the review card
   reviews.forEach(review => {
     fetch(`http://localhost:5000/api/v1/users/${review.user_id}`)
       .then(response => response.ok ? response.json() : { first_name: 'Unknown', last_name: '' })
