@@ -15,11 +15,48 @@
             <a href="login.html" class="login-button" id="login-link">Login</a>
         </nav>
     </header>
+    
     <main>
-        <section id="place-details" class="place-details"></section>
-        <section id="reviews"></section>
+        <section id="place-details" class="place-details">
+            <div class="place-info">
+                <h1 class="detailedTitle" id="place-title">Loading...</h1>
+                
+                <div class="host-info">
+                    <h3>Hosted by <span class="host-name" id="host-name">Loading...</span></h3>
+                    <p>Host since: <span class="host-since" id="host-since">Loading...</span></p>
+                </div>
+
+                <div class="place-description">
+                    <h3>About this place</h3>
+                    <p class="detailedDescription" id="place-description">Loading...</p>
+                </div>
+
+                <div class="price-info">
+                    <h3>Price: <span class="place-price" id="place-price">Loading...</span> per night</h3>
+                </div>
+
+                <div class="amenities">
+                    <h3>Amenities</h3>
+                    <p class="amenities-text">What this place offers:</p>
+                    <ul class="amenities-list" id="amenities-list">
+                        <li>Loading...</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="reviews">
+            <div class="reviews-section">
+                <h3>Reviews</h3>
+                <div id="reviews-container">
+                    <p class="no-reviews">Loading reviews...</p>
+                </div>
+            </div>
+        </section>
+
         <button id="add-review-btn" class="add-review" style="display:none;">Add Review</button>
     </main>
+    
     <footer>
         All rights reserved
     </footer>
