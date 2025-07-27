@@ -33,7 +33,7 @@ function getCookie(name) {
       if (placesList) {
         placesList.innerHTML =
           `<a href="login.html">
-            <p class='noLogged'>You need to be logged in to display places.</p>
+            <p class='noLogged'>Login to display places.</p>
           </a>`;
           footer.style.position = 'fixed';
       }
