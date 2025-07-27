@@ -5,5 +5,5 @@ place_amenity = db.Table(
     db.Column('place_id', db.String(60),
               db.ForeignKey('places.id'), primary_key=True, nullable=False),
     db.Column('amenity_id', db.String(60),
-              db.ForeignKey('amenities.id'), primary_key=True, nullable=False)
+              db.ForeignKey('amenity.id'), primary_key=True, nullable=False)
 )

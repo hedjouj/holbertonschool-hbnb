@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
             try {
-                const response = await fetch('http://localhost:5000/api/v1/auth/login', {
+                const response = await fetch('http://localhost:5001/api/v1/auth/login', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email, password })
@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
             try {
-                const response = await fetch(`http://localhost:5000/api/v1/reviews/places/${placeId}/reviews`, {
+                const response = await fetch(`http://localhost:5001/api/v1/reviews/places/${placeId}/reviews`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function fetchPlaces() {
     try {
-        const response = await fetch('http://localhost:5000/api/v1/places');
+        const response = await fetch('http://localhost:5001/api/v1/places');
         if (!response.ok) throw new Error('Network response was not ok');
         const data = await response.json();
         let places = [];
@@ -169,7 +169,7 @@ function displayPlaces(places) {
 
 async function fetchPlaceDetails(placeId) {
     try {
-        const response = await fetch(`http://localhost:5000/api/v1/places/${placeId}`);
+        const response = await fetch(`http://localhost:5001/api/v1/places/${placeId}`);
         if (!response.ok) throw new Error('Network response was not ok');
         const place = await response.json();
         const detailsSection = document.getElementById('place-details');
@@ -196,7 +196,7 @@ async function fetchPlaceDetails(placeId) {
 
 async function fetchPlaceReviews(placeId) {
     try {
-        const response = await fetch(`http://localhost:5000/api/v1/reviews/places/${placeId}/reviews`);
+        const response = await fetch(`http://localhost:5001/api/v1/reviews/places/${placeId}/reviews`);
         if (!response.ok) throw new Error('Network response was not ok');
         const reviews = await response.json();
         displayPlaceReviews(reviews);
@@ -214,7 +214,7 @@ function displayPlaceReviews(reviews) {
         return;
     }
     reviews.forEach(review => {
-        fetch(`http://localhost:5000/api/v1/users/${review.user_id}`)
+        fetch(`http://localhost:5001/api/v1/users/${review.user_id}`)
             .then(response => response.ok ? response.json() : { first_name: 'Unknown', last_name: '' })
             .then(user => {
                 const card = document.createElement('div');
