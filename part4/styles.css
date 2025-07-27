@@ -1,96 +1,445 @@
+/* Palette de couleurs Twix */
+:root {
+    --twix-brown: #8B4513;
+    --twix-dark-brown: #654321;
+    --twix-gold: #FFD700;
+    --twix-light-gold: #FFF8DC;
+    --twix-red: #DC143C;
+    --twix-light-red: #FF6B6B;
+}
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
-    background: #f8f8f8;
-    color: #222;
+    background: linear-gradient(135deg, var(--twix-light-gold) 0%, #FFF5E6 100%);
+    color: var(--twix-red);
+    min-height: 100vh;
 }
+
 header {
     display: flex;
     align-items: center;
-    background: #fff;
+    background: linear-gradient(90deg, var(--twix-gold) 0%, #FFED4E 100%);
     padding: 10px 20px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 3px solid var(--twix-brown);
+    box-shadow: 0 2px 10px rgba(139, 69, 19, 0.2);
 }
+
 .logo {
     height: 50px;
     margin-right: 20px;
+    filter: drop-shadow(2px 2px 4px rgba(139, 69, 19, 0.3));
 }
+
 nav {
     flex: 1;
 }
+
 .nav-link, .login-button {
     margin-right: 15px;
     text-decoration: none;
-    color: #0077cc;
+    color: var(--twix-red);
     font-weight: bold;
+    transition: all 0.3s ease;
 }
+
+.nav-link:hover {
+    color: var(--twix-dark-brown);
+    text-shadow: 1px 1px 2px rgba(220, 20, 60, 0.3);
+}
+
 .login-button {
-    background: #0077cc;
-    color: #fff !important;
+    background: linear-gradient(45deg, var(--twix-brown) 0%, var(--twix-dark-brown) 100%);
+    color: var(--twix-gold) !important;
     border: none;
     padding: 8px 16px;
     border-radius: 5px;
     cursor: pointer;
     text-decoration: none;
+    box-shadow: 0 3px 6px rgba(139, 69, 19, 0.4);
+    transition: all 0.3s ease;
 }
+
+.login-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(139, 69, 19, 0.6);
+    background: linear-gradient(45deg, var(--twix-dark-brown) 0%, #4A2C17 100%);
+}
+
 footer {
     text-align: center;
     padding: 15px 0;
-    background: #fff;
-    border-top: 1px solid #ddd;
+    background: linear-gradient(90deg, var(--twix-gold) 0%, #FFED4E 100%);
+    border-top: 3px solid var(--twix-brown);
     margin-top: 30px;
+    color: var(--twix-red);
+    font-weight: bold;
 }
+
 main {
     max-width: 800px;
     margin: 30px auto;
     padding: 0 20px;
 }
+
 #filter {
     margin-bottom: 20px;
 }
+
 .place-card, .review-card {
-    background: #fff;
+    background: linear-gradient(135deg, white 0%, var(--twix-light-gold) 100%);
     margin: 20px 0;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
+    padding: 20px;
+    border: 2px solid var(--twix-gold);
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(139, 69, 19, 0.2);
+    transition: all 0.3s ease;
 }
+
+.place-card:hover, .review-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(139, 69, 19, 0.3);
+    border-color: var(--twix-brown);
+}
+
 .place-card h3 {
     margin: 0 0 10px 0;
+    color: var(--twix-red);
+    text-shadow: 1px 1px 2px rgba(255, 215, 0, 0.3);
 }
+
 .details-button, .add-review {
-    background: #0077cc;
-    color: #fff;
+    background: linear-gradient(45deg, var(--twix-brown) 0%, var(--twix-dark-brown) 100%);
+    color: var(--twix-gold);
     border: none;
-    padding: 8px 16px;
-    border-radius: 5px;
+    padding: 10px 20px;
+    border-radius: 8px;
     cursor: pointer;
     margin-top: 10px;
+    font-weight: bold;
+    box-shadow: 0 3px 8px rgba(139, 69, 19, 0.4);
+    transition: all 0.3s ease;
 }
+
+.details-button:hover, .add-review:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(139, 69, 19, 0.6);
+    background: linear-gradient(45deg, var(--twix-dark-brown) 0%, #4A2C17 100%);
+}
+
 .place-details, .place-info {
     margin-bottom: 15px;
-}
-.form {
-    background: #fff;
+    background: linear-gradient(135deg, white 0%, var(--twix-light-gold) 100%);
     padding: 20px;
-    border-radius: 10px;
-    border: 1px solid #ddd;
+    border-radius: 15px;
+    border: 2px solid var(--twix-gold);
+    box-shadow: 0 4px 15px rgba(139, 69, 19, 0.2);
+}
+
+.form {
+    background: linear-gradient(135deg, white 0%, var(--twix-light-gold) 100%);
+    padding: 30px;
+    border-radius: 15px;
+    border: 3px solid var(--twix-gold);
     max-width: 400px;
     margin: 0 auto;
+    box-shadow: 0 8px 25px rgba(139, 69, 19, 0.3);
 }
+
+.form h2 {
+    color: var(--twix-red);
+    text-align: center;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 2px rgba(255, 215, 0, 0.3);
+    font-size: 1.8rem;
+}
+
 .form label {
     display: block;
-    margin-top: 10px;
+    margin-top: 15px;
+    color: var(--twix-red);
+    font-weight: bold;
 }
+
 .form input, .form textarea, .form select {
     width: 100%;
-    padding: 8px;
+    padding: 12px;
     margin-top: 5px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+    border-radius: 8px;
+    border: 2px solid var(--twix-gold);
     box-sizing: border-box;
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--twix-red);
+    transition: all 0.3s ease;
 }
+
+.form input:focus, .form textarea:focus, .form select:focus {
+    outline: none;
+    border-color: var(--twix-brown);
+    box-shadow: 0 0 10px rgba(139, 69, 19, 0.3);
+}
+
 .form button {
-    margin-top: 15px;
+    margin-top: 20px;
     width: 100%;
+    background: linear-gradient(45deg, var(--twix-brown) 0%, var(--twix-dark-brown) 100%);
+    color: var(--twix-gold);
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(139, 69, 19, 0.4);
+    transition: all 0.3s ease;
+}
+
+.form button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(139, 69, 19, 0.6);
+    background: linear-gradient(45deg, var(--twix-dark-brown) 0%, #4A2C17 100%);
+}
+
+/* ========== STYLES SUPPLÉMENTAIRES POUR PLACE DETAILS ========== */
+
+/* Titre principal */
+.detailedTitle, .place-info h1 {
+    color: var(--twix-red);
+    margin-bottom: 1.5rem;
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(255, 215, 0, 0.4);
+    text-align: center;
+}
+
+/* Information sur l'hôte */
+.host-info {
+    background: linear-gradient(135deg, var(--twix-gold) 0%, #FFED4E 100%);
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    border-left: 6px solid var(--twix-brown);
+    box-shadow: 0 4px 12px rgba(139, 69, 19, 0.2);
+}
+
+.host-info h3 {
+    margin-bottom: 0.5rem;
+    color: var(--twix-red);
+    font-size: 1.3rem;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+}
+
+.host-info p {
+    margin: 0;
+    color: var(--twix-dark-brown);
+    font-weight: 600;
+}
+
+/* Description du lieu */
+.place-description {
+    margin-bottom: 2rem;
+}
+
+.place-description h3 {
+    color: var(--twix-red);
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    text-shadow: 1px 1px 2px rgba(255, 215, 0, 0.3);
+}
+
+.place-description p, .detailedDescription {
+    line-height: 1.6;
+    color: var(--twix-dark-brown);
+    font-size: 1.1rem;
+}
+
+/* Information sur les prix */
+.price-info {
+    background: linear-gradient(135deg, var(--twix-light-red) 0%, #FF8E8E 100%);
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    text-align: center;
+    border: 3px solid var(--twix-red);
+    box-shadow: 0 4px 12px rgba(220, 20, 60, 0.3);
+}
+
+.price-info h3 {
+    margin: 0;
+    font-size: 1.8rem;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(139, 69, 19, 0.6);
+}
+
+/* Équipements */
+.amenities {
+    margin-bottom: 2rem;
+}
+
+.amenities h3 {
+    color: var(--twix-red);
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    text-shadow: 1px 1px 2px rgba(255, 215, 0, 0.3);
+}
+
+.amenities-text {
+    color: var(--twix-dark-brown);
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.amenities ul, .amenities-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0.8rem;
+}
+
+.amenities li {
+    background: linear-gradient(135deg, var(--twix-gold) 0%, #FFED4E 100%);
+    padding: 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    color: var(--twix-red);
+    display: flex;
+    align-items: center;
+    border: 2px solid var(--twix-brown);
+    transition: all 0.3s ease;
+}
+
+.amenities li:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(139, 69, 19, 0.3);
+}
+
+.amenities li:before {
+    content: "✓";
+    color: var(--twix-red);
+    font-weight: bold;
+    margin-right: 0.5rem;
+    font-size: 1.2rem;
+}
+
+/* Section des avis */
+.reviews-section {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+}
+
+.reviews-section h3 {
+    color: var(--twix-red);
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    border-bottom: 4px solid var(--twix-brown);
+    padding-bottom: 0.5rem;
+    text-shadow: 1px 1px 2px rgba(255, 215, 0, 0.3);
+}
+
+#reviews-container {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.review-header h4 {
+    margin: 0;
+    color: var(--twix-red);
+    font-size: 1.2rem;
+    text-shadow: 1px 1px 2px rgba(255, 215, 0, 0.2);
+}
+
+.rating {
+    color: var(--twix-gold);
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(139, 69, 19, 0.4);
+}
+
+.review-comment {
+    color: var(--twix-dark-brown);
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+.review-date {
+    color: var(--twix-brown);
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.no-reviews {
+    text-align: center;
+    color: var(--twix-red);
+    font-style: italic;
+    padding: 2rem;
+    background: linear-gradient(135deg, var(--twix-light-gold) 0%, white 100%);
+    border-radius: 12px;
+    border: 2px dashed var(--twix-brown);
+}
+
+/* Bouton d'ajout d'avis */
+#add-review-btn {
+    background: linear-gradient(45deg, var(--twix-brown) 0%, var(--twix-dark-brown) 100%);
+    color: var(--twix-gold);
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    margin: 2rem auto;
+    display: block;
+    transition: all 0.3s ease;
+    max-width: 200px;
+    box-shadow: 0 4px 15px rgba(139, 69, 19, 0.4);
+}
+
+#add-review-btn:hover {
+    background: linear-gradient(45deg, var(--twix-dark-brown) 0%, #4A2C17 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(139, 69, 19, 0.6);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .place-details,
+    .reviews-section {
+        padding: 0 1rem;
+    }
+    
+    .place-info,
+    .form {
+        padding: 1.5rem;
+    }
+    
+    .detailedTitle, .place-info h1 {
+        font-size: 2rem;
+    }
+    
+    .amenities ul,
+    .amenities-list {
+        grid-template-columns: 1fr;
+    }
+    
+    .review-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    #add-review-btn {
+        width: 90%;
+        max-width: none;
+    }
 }
