@@ -13,9 +13,11 @@ class Place(BaseModel):
     owner_id = db.Column(db.String(36), db.ForeignKey('users.id'),
                          nullable=False)
     reviews = db.relationship('Review', backref='place', lazy=True)
-    amenities = db.relationship('Amenity', secondary=place_amenity,
-                                lazy='subquery',
-                                backref=db.backref('places', lazy=True))
+    amenities = db.relationship(
+        'Amenity',
+        secondary=place_amenity,
+        back_populates='places'
+    )
 
     def __init__(self, title: str, price: float, latitude: float, longitude: float, owner_id: int, description=""):
         super().__init__()

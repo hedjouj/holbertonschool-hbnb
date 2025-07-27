@@ -3,13 +3,21 @@
 
 from app.models.base_model import BaseModel
 from app import db
-
+from app.models.place import Place
+from app.models.association_tables import place_amenity
 
 class Amenity(BaseModel):
     __tablename__ = 'amenity'
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False)
+
+    # Add this relationship:
+    places = db.relationship(
+        'Place',
+        secondary=place_amenity,
+        back_populates='amenities'
+    )
 
     '''Represents an amenity with attributes and restrictions'''
     def __init__(self, name):
