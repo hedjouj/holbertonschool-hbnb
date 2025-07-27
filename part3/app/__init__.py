@@ -9,11 +9,13 @@ from app.api.v1.users import api as users_ns
 from app.api.v1.reviews import api as review_ns
 from app.api.v1.auth import api as auth_ns
 from app.extension_bcrypt import bcrypt
+from flask_cors import CORS
 
 jwt = JWTManager()
 
 def create_app(config_name='default'):
     app = Flask(__name__)
+    CORS(app)
     app.config.from_object(config[config_name])
     jwt.init_app(app)
     db.init_app(app)
