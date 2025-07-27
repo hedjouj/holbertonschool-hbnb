@@ -16,11 +16,19 @@ function getCookie(name) {
     const loginLink = document.getElementById("login-link");
     // const logoutLink = document.getElementById("logout-link");
     const placesList = document.getElementById("places-list");
+    const addReviewBtn = document.getElementById("add-review-btn");
     const footer = document.querySelector('footer');
   
     if (!token) {
       loginLink.style.display = "block";
+      loginLink.textContent = "Login";
+      loginLink.href = "login.html";
       /**logoutLink.style.display = "none";**/
+
+      // Hide add review button if not logged in
+      if (addReviewBtn) {
+        addReviewBtn.style.display = "none";
+      }
 
       if (placesList) {
         placesList.innerHTML =
@@ -30,9 +38,24 @@ function getCookie(name) {
           footer.style.position = 'fixed';
       }
     } else {
-      loginLink.style.display = "none";
+      loginLink.style.display = "block";
+      loginLink.textContent = "Logout";
+      loginLink.href = "#";
+      loginLink.onclick = function(event) {
+        event.preventDefault();
+        deleteTokenCookie();
+        window.location.href = "login.html";
+      };
+      
+      // Show add review button if logged in and on place details page
+      if (addReviewBtn) {
+        addReviewBtn.style.display = "block";
+      }
+      
       //logoutLink.style.display = "block";
-      fetchPlaces(token);
+      if (placesList) {
+        fetchPlaces(token);
+      }
     }
   }
   
@@ -64,6 +87,49 @@ function getCookie(name) {
           await loginUser(email, password);
         } catch (error) {
           console.log("error:" + error);
+        }
+      });
+    }
+
+    // Add Review Form Submission
+    const reviewForm = document.getElementById("review-form");
+    if (reviewForm) {
+      reviewForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const token = getCookie("token");
+        const urlParams = new URLSearchParams(window.location.search);
+        const placeId = urlParams.get("id");
+        const rating = document.getElementById("rating").value;
+        const text = document.getElementById("text").value;
+
+        if (!token) {
+          alert("You must be logged in to add a review.");
+          window.location.href = "login.html";
+          return;
+        }
+
+        if (!placeId) {
+          alert("Place ID is missing.");
+          return;
+        }
+
+        try {
+          await submitReview(token, placeId, rating, text);
+        } catch (error) {
+          console.error("Error submitting review:", error);
+          alert("Failed to submit review. Please try again.");
+        }
+      });
+    }
+
+    // Add Review Button Click Handler
+    const addReviewBtn = document.getElementById("add-review-btn");
+    if (addReviewBtn) {
+      addReviewBtn.addEventListener("click", function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const placeId = urlParams.get("id");
+        if (placeId) {
+          window.location.href = `add_review.html?id=${placeId}`;
         }
       });
     }
@@ -168,33 +234,103 @@ function getCookie(name) {
   }
   
   function displayDetailedPlaces(place) {
-    document.getElementById("place-details").innerHTML = `
-          <h1 class="detailedTitle">${place.title}</h1>
+    const placeDetailsSection = document.getElementById("place-details");
+    if (!placeDetailsSection) return;
+
+    // Create place info section with required classes
+    placeDetailsSection.innerHTML = `
+      <div class="place-info">
+        <h1 class="detailedTitle">${place.title}</h1>
+        
+        <div class="host-info">
+          <h3>Hosted by <span class="host-name">${place.owner ? place.owner.first_name + ' ' + place.owner.last_name : 'Unknown Host'}</span></h3>
+          <p>Host since: <span class="host-since">${place.owner ? new Date(place.owner.created_at).getFullYear() : 'Unknown'}</span></p>
+        </div>
+
+        <div class="place-description">
+          <h3>About this place</h3>
           <p class="detailedDescription">${place.description}</p>
-          <p class="amenities">What this place offers: 
-  
-          </p>
-          <div class='addButtonContainer'><a href="add_review.html?id=${
-            place.id
-          }"><button>Add a review</button></a></div>
-      `;
-  
-    const reviewsPlace = document.getElementById("reviews");
-  
-    if (place.reviews && place.reviews.length > 0) {
-      place.reviews.forEach((review) => {
-        const reviewCard = document.createElement("div");
-        reviewCard.classList.add("review-card");
-        reviewCard.innerHTML = `
-                  <p>${review.text}</p>
-                  <p><strong>Rating: ${review.rating}/5</strong></p>
-              `;
-        reviewsPlace.appendChild(reviewCard);
+        </div>
+
+        <div class="price-info">
+          <h3>Price: <span class="place-price">${place.price} €</span> per night</h3>
+        </div>
+
+        <div class="amenities">
+          <h3>Amenities</h3>
+          <p class="amenities-text">What this place offers:</p>
+          <ul class="amenities-list">
+            ${place.amenities && place.amenities.length > 0 
+              ? place.amenities.map(amenity => `<li>${amenity.name}</li>`).join('') 
+              : '<li>No amenities listed</li>'}
+          </ul>
+        </div>
+      </div>
+    `;
+
+    // Display reviews
+    displayReviews(place.reviews || []);
+  }
+
+  function displayReviews(reviews) {
+    const reviewsSection = document.getElementById("reviews");
+    if (!reviewsSection) return;
+
+    reviewsSection.innerHTML = `
+      <div class="reviews-section">
+        <h3>Reviews</h3>
+        <div id="reviews-container">
+          ${reviews.length > 0 
+            ? reviews.map(review => `
+                <div class="review-card">
+                  <div class="review-header">
+                    <h4>${review.user ? review.user.first_name + ' ' + review.user.last_name : 'Anonymous'}</h4>
+                    <div class="rating">${createStarRating(review.rating)}</div>
+                  </div>
+                  <p class="review-comment">${review.text}</p>
+                  <small class="review-date">${new Date(review.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</small>
+                </div>
+              `).join('')
+            : '<p class="no-reviews">No reviews available for this place.</p>'
+          }
+        </div>
+      </div>
+    `;
+  }
+
+  function createStarRating(rating) {
+    const fullStars = '★'.repeat(Math.floor(rating));
+    const emptyStars = '☆'.repeat(5 - Math.floor(rating));
+    return fullStars + emptyStars;
+  }
+
+  /** Submit Review */
+  async function submitReview(token, placeId, rating, text) {
+    try {
+      const response = await fetch(`http://127.0.0.1:5000/api/v1/places/${placeId}/reviews`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          rating: parseInt(rating),
+          text: text
+        })
       });
-    } else {
-      reviewsPlace.innerHTML += "<p>No reviews available for this place.</p>";
+
+      if (response.ok) {
+        const result = await response.json();
+        alert("Review submitted successfully!");
+        window.location.href = `place.html?id=${placeId}`;
+      } else {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Failed to submit review");
+      }
+    } catch (error) {
+      console.error("Error submitting review:", error);
+      throw error;
     }
-    //initializeCarousel();
   }
   
   function deleteTokenCookie() {
