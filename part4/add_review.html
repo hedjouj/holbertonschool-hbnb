@@ -18,10 +18,20 @@
     <main>
         <form id="review-form" class="form add-review">
             <h2>Add Review</h2>
+            <div id="place-info-review">
+                <h3 id="review-place-title">Loading place...</h3>
+            </div>
             <label for="rating">Rating (1-5):</label>
-            <input type="number" id="rating" name="rating" min="1" max="5" required>
+            <select id="rating" name="rating" required>
+                <option value="">Select Rating</option>
+                <option value="5">★★★★★ (5 stars)</option>
+                <option value="4">★★★★☆ (4 stars)</option>
+                <option value="3">★★★☆☆ (3 stars)</option>
+                <option value="2">★★☆☆☆ (2 stars)</option>
+                <option value="1">★☆☆☆☆ (1 star)</option>
+            </select>
             <label for="text">Comment:</label>
-            <textarea id="text" name="text" required></textarea>
+            <textarea id="text" name="text" placeholder="Share your experience..." required></textarea>
             <button type="submit">Submit Review</button>
         </form>
     </main>
