@@ -14,13 +14,14 @@ function getCookie(name) {
   function checkAuthentication() {
     const token = getCookie("token");
     const loginLink = document.getElementById("login-link");
-    const logoutLink = document.getElementById("logout-link");
+    // const logoutLink = document.getElementById("logout-link");
     const placesList = document.getElementById("places-list");
     const footer = document.querySelector('footer');
   
     if (!token) {
       loginLink.style.display = "block";
-      logoutLink.style.display = "none";
+      /**logoutLink.style.display = "none";**/
+
       if (placesList) {
         placesList.innerHTML =
           `<a href="login.html">
@@ -30,7 +31,7 @@ function getCookie(name) {
       }
     } else {
       loginLink.style.display = "none";
-      logoutLink.style.display = "block";
+      //logoutLink.style.display = "block";
       fetchPlaces(token);
     }
   }
@@ -84,7 +85,8 @@ function getCookie(name) {
   
   /** Login User */
   async function loginUser(email, password) {
-    const response = await fetch("http://127.0.0.1:500/api/v1/auth/login", {
+    console.log(email, password)
+    const response = await fetch("http://127.0.0.1:5000/api/v1/auth/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -105,7 +107,7 @@ function getCookie(name) {
   /** Places fetch and display */
   async function fetchPlaces(token) {
     try {
-      const response = await fetch("http://127.0.0.1:5001/api/v1/places/", {
+      const response = await fetch("http://127.0.0.1:5000/api/v1/places/", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -146,7 +148,7 @@ function getCookie(name) {
   async function fetchDetailedPlace(token, placeId) {
     try {
       const response = await fetch(
-        `http://127.0.0.1:5001/api/v1/places/${placeId}`,
+        `http://127.0.0.1:5000/api/v1/places/${placeId}`,
         {
           method: "GET",
           headers: {
