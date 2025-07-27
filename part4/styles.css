@@ -5,7 +5,7 @@
     --twix-gold: #FFD700;
     --twix-light-gold: #FFF8DC;
     --twix-red: #DC143C;
-    --twix-light-red: #FF6B6B;
+    --twix-light-red: #f20000;
 }
 
 body {
@@ -58,6 +58,8 @@ nav {
     text-decoration: none;
     box-shadow: 0 3px 6px rgba(139, 69, 19, 0.4);
     transition: all 0.3s ease;
+    top: 50%;
+    text-align: center;
 }
 
 .login-button:hover {
@@ -89,7 +91,7 @@ main {
 .place-card, .review-card {
     background: linear-gradient(135deg, white 0%, var(--twix-light-gold) 100%);
     margin: 20px 0;
-    padding: 20px;
+    padding: 10px;
     border: 2px solid var(--twix-gold);
     border-radius: 15px;
     box-shadow: 0 4px 15px rgba(139, 69, 19, 0.2);
@@ -200,9 +202,7 @@ main {
     background: linear-gradient(45deg, var(--twix-dark-brown) 0%, #4A2C17 100%);
 }
 
-/* ========== STYLES SUPPLÉMENTAIRES POUR PLACE DETAILS ========== */
 
-/* Titre principal */
 .detailedTitle, .place-info h1 {
     color: var(--twix-red);
     margin-bottom: 1.5rem;
@@ -212,7 +212,6 @@ main {
     text-align: center;
 }
 
-/* Information sur l'hôte */
 .host-info {
     background: linear-gradient(135deg, var(--twix-gold) 0%, #FFED4E 100%);
     padding: 1.5rem;
@@ -235,7 +234,6 @@ main {
     font-weight: 600;
 }
 
-/* Description du lieu */
 .place-description {
     margin-bottom: 2rem;
 }
@@ -253,7 +251,6 @@ main {
     font-size: 1.1rem;
 }
 
-/* Information sur les prix */
 .price-info {
     background: linear-gradient(135deg, var(--twix-light-red) 0%, #FF8E8E 100%);
     padding: 1.5rem;
@@ -271,7 +268,6 @@ main {
     text-shadow: 2px 2px 4px rgba(139, 69, 19, 0.6);
 }
 
-/* Équipements */
 .amenities {
     margin-bottom: 2rem;
 }
@@ -323,7 +319,6 @@ main {
     font-size: 1.2rem;
 }
 
-/* Section des avis */
 .reviews-section {
     max-width: 1200px;
     margin: 2rem auto;
@@ -388,7 +383,6 @@ main {
     border: 2px dashed var(--twix-brown);
 }
 
-/* Bouton d'ajout d'avis */
 #add-review-btn {
     background: linear-gradient(45deg, var(--twix-brown) 0%, var(--twix-dark-brown) 100%);
     color: var(--twix-gold);
@@ -411,7 +405,6 @@ main {
     box-shadow: 0 8px 25px rgba(139, 69, 19, 0.6);
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
     .place-details,
     .reviews-section {
