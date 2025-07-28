@@ -2,7 +2,7 @@
 
 ## 🍫 Aperçu
 
-Application web HBnB avec une interface utilisateur inspirée du thème Twix, offrant une expérience visuelle chaleureuse avec des couleurs dorées et chocolat.
+Application web HBnB avec une interface utilisateur inspirée du thème Twix, offrant une expérience visuelle chaleureuse avec des couleurs dorées et chocolat. L'inspiré est venu avec le slogan de mon projet qui fait référence à celui des barres Twix : " Have a break Have a rent". Faisant également, directement référence au projet HBnb ! 
 
 ## 📁 Structure du Projet
 
