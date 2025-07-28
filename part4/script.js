@@ -136,7 +136,7 @@ function getCookie(name) {
   
   });
   
-  // Ftech detailed place if token and place id identified
+  // Fch detailed place if token and place id identified
   const token = getCookie("token");
   const urlParams = new URLSearchParams(window.location.search);
   const placeId = urlParams.get("id");
@@ -150,8 +150,14 @@ function getCookie(name) {
   
   
   /** Login User */
-  async function loginUser(email, password) {
-    console.log(email, password)
+  /** Login User avec gestion d'erreurs améliorée */
+async function loginUser(email, password) {
+  console.log(email, password);
+  
+  // Cacher le message d'erreur précédent s'il existe
+  hideErrorMessage();
+  
+  try {
     const response = await fetch("http://127.0.0.1:5000/api/v1/auth/login", {
       method: "POST",
       headers: {
@@ -159,16 +165,76 @@ function getCookie(name) {
       },
       body: JSON.stringify({ email, password }),
     });
-  
+
     if (response.ok) {
       const data = await response.json();
       document.cookie = `token=${data.access_token}; path=/`;
       window.location.href = "index.html";
       console.log(`${data.access_token}`);
     } else {
-      alert("Login failed: " + response.statusText);
+      // Gérer différents types d'erreurs
+      let errorMessage = "Login failed. Please try again.";
+      
+      if (response.status === 401) {
+        errorMessage = "Invalid email or password.";
+      } else if (response.status === 400) {
+        errorMessage = "Please fill in all required fields.";
+      } else if (response.status >= 500) {
+        errorMessage = "Server error. Please try again later.";
+      }
+      
+      // Essayer de récupérer le message d'erreur du serveur
+      try {
+        const errorData = await response.json();
+        if (errorData.message) {
+          errorMessage = errorData.message;
+        }
+      } catch (e) {
+        // Utiliser le message par défaut si impossible de parser la réponse
+      }
+      
+      displayErrorMessage(errorMessage);
+    }
+  } catch (error) {
+    console.error("Network error:", error);
+    displayErrorMessage("Network error. Please check your connection and try again.");
+  }
+}
+
+/** Afficher le message d'erreur */
+function displayErrorMessage(message) {
+  // Chercher s'il existe déjà un container d'erreur
+  let errorContainer = document.getElementById("error-message");
+  
+  if (!errorContainer) {
+    // Créer le container d'erreur s'il n'existe pas
+    errorContainer = document.createElement("div");
+    errorContainer.id = "error-message";
+    errorContainer.className = "error-message";
+    
+    // L'insérer avant le formulaire de login
+    const loginForm = document.getElementById("login-form");
+    if (loginForm) {
+      loginForm.parentNode.insertBefore(errorContainer, loginForm);
     }
   }
+  
+  errorContainer.textContent = message;
+  errorContainer.style.display = "block";
+  
+  // Faire disparaître le message après 5 secondes
+  setTimeout(() => {
+    hideErrorMessage();
+  }, 5000);
+}
+
+/** Cacher le message d'erreur */
+function hideErrorMessage() {
+  const errorContainer = document.getElementById("error-message");
+  if (errorContainer) {
+    errorContainer.style.display = "none";
+  }
+}
   
   /** Places fetch and display */
   async function fetchPlaces(token) {
