@@ -172,7 +172,7 @@ async function loginUser(email, password) {
   hideErrorMessage();
   
   try {
-    const response = await fetch("http://localhost:5000/api/v1/auth/login", {
+    const response = await fetch("http://127.0.0.1:5000/api/v1/auth/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -266,7 +266,7 @@ function fetchPlaceDetails(placeId) {
     headers['Authorization'] = `Bearer ${token}`;
   }
 
-  fetch(`http://localhost:5000/api/v1/places/${placeId}`, { headers })
+  fetch(`http://127.0.0.1:5000/api/v1/places/${placeId}`, { headers })
     .then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
@@ -332,7 +332,7 @@ async function fetchPlaces(token) {
   }
   
   try {
-    const response = await fetch('http://localhost:5000/api/v1/places/', { headers });
+    const response = await fetch('http://127.0.0.1:5000/api/v1/places/', { headers });
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
@@ -398,7 +398,7 @@ function fetchPlaceReviews(placeId) {
     headers['Authorization'] = `Bearer ${token}`;
   }
 
-  fetch(`http://localhost:5000/api/v1/places/${placeId}/reviews`, { headers })
+  fetch(`http://127.0.0.1:5000/api/v1/places/${placeId}/reviews`, { headers })
     .then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
@@ -449,7 +449,7 @@ function createStarRating(rating) {
 /** Submit Review */
 async function submitReview(token, placeId, rating, text) {
   try {
-    const response = await fetch(`http://localhost:5000/api/v1/places/${placeId}/reviews`, {
+    const response = await fetch(`http://127.0.0.1:5000/api/v1/places/${placeId}/reviews`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
