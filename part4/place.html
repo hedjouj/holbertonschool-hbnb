@@ -5,100 +5,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Place Details</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="icon" href="logo.png">
 </head>
 <body>
     <header>
         <img src="logo.png" alt="logo" class="logo">
+        <h1 id="Toph1"> Have a break Have a rent</h1>
         <nav>
-            <a href="index.html" class="nav-link">Home</a>
-            <a href="login.html" class="login-button" id="login-link">Login</a>
+            <a href="index.html">Home</a>
+            <a href="login.html" id="login-link">Login</a>
         </nav>
     </header>
     
     <main>
         <section id="place-details" class="place-details">
-            <div class="place-info">
-                <h1 class="detailedTitle" id="place-title">Rooftop in Barcelona</h1>
-                
-                <div class="host-info">
-                    <h3>Hosted by <span class="host-name" id="host-name">Fabinho</span></h3>
-                    <p>Host since: <span class="host-since" id="host-since">1970</span></p>
-                </div>
+            <p>Wonderful rooftop in Barcelona</p>
+            <h2 class="place-details">
+                <ul>
+                Swimming pool
+                5 bedrooms
+                3 bathrooms
+                </ul>
+            </h2>
 
-                <div class="place-description">
-                    <h3>About this place</h3>
-                    <p class="detailedDescription" id="place-description">Lovely house in the moutain of Spain with great on the beach and downtown of Barcelona</p>
-                </div>
-
-                <div class="price-info">
-                    <h3>Price: <span class="place-price" id="place-price">300€</span> per night</h3>
-                </div>
-
-                <div class="amenities">
-                    <h3>Amenities</h3>
-                    <p class="amenities-text">What this place offers:</p>
-                    <ul class="amenities-list" id="amenities-list">
-                        <li>
-                            Microwave
-                            5 bedrooms
-                            3 bathrooms
-                            2 toilets
-                            1 swimming pool
-                            a great view to the sea
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="place-info">
-                <h1 class="detailedTitle" id="place-title">Castle in Scotland</h1>
-                <div class="host-info">
-                 <h3>Hosted by <span class="host-name" id="host-name"> Lydinho</span></h3>
-                    <p>Host since: <span class="host-since" id="host-since">1925</span></p>
-                </div>
-
-                <div class="place-description">
-                    <h3>About this place</h3>
-                    <p class="detailedDescription" id="place-description">Cozy castle for a wonderful winter</p>
-                </div>
-
-                <div class="price-info">
-                    <h3>Price: <span class="place-price" id="place-price">400€</span> per night</h3>
-                </div>
-
-                <div class="amenities">
-                    <h3>Amenities</h3>
-                    <p class="amenities-text">What this place offers:</p>
-                    <ul class="amenities-list" id="amenities-list">
-                        <li>
-                            fireplace
-                            hot chocolate machine
-                            16 bedrooms
-                            baby foot
-                            20 umbrella
-                            14 bathrooms
-                        </li>
-                    </ul>   
-                </div>
-                <div id="add-review-btn">
-                </div>
-            </div>
         </section>
-
         <section id="reviews">
-            <div class="reviews-section">
-                <h3>Reviews</h3>
-                <div id="reviews-container">
-                    <p class="no-reviews">Love scotland</p>
-                </div>
-            </div>
+            <h2>Customers reviews</h2>
+            <p>Loading details</p>
         </section>
+        <section id="add-review" style="display: none;" >
+            <h2>Add review</h2>
+            <form id="review-form">
+                <label for="review-text">Your review:</label>
+                <textarea id="review-text" name="review-text" rows="4" placeholder="Share your experience" required></textarea>
+                <label for="rating">Note:</label>
+                <select id="rating" name="rating" required>
+                    <option value="">Choose a note</option>
+                    <option value="1">1 Star</option>
+                    <option value="2">2 Stars</option>
+                    <option value="3">3 Stars</option>
+                    <option value="4">4 Stars</option>
+                    <option value="5">5 Stars</option>
+                </select>
 
-        <button id="add-review-btn" class="add-review" style="display:none;">Add Review</button>
+                <button type="submit">Submit review</button>
+            </form>
+        </section>
     </main>
     
     <footer>
-        All rights reserved
+        <p>© 2024 HBnB - All rights reserved</p>
     </footer>
     <script src="script.js"></script>
 </body>
