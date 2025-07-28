@@ -36,14 +36,6 @@ cd part4
 python -m http.server 8000
 ```
 
-**Option B : Live Server (VS Code)**
-- Installer l'extension "Live Server"
-- Clic droit sur `index.html` → "Open with Live Server"
-
-**Option C : Serveur Node.js**
-```bash
-cd part4
-npx http-server -p 8000
 ```
 
 ### 3. Accéder à l'application
@@ -156,12 +148,6 @@ CORS(app, resources={r"/api/*": {"origins": "*"}})
 2. Vérifier les chemins relatifs
 3. Vider le cache du navigateur
 
-## 📱 Responsive Design
-
-L'application est optimisée pour :
-- 📱 Mobile (320px+)
-- 📱 Tablette (768px+)
-- 💻 Desktop (1024px+)
 
 ## 🔐 Sécurité
 
@@ -170,27 +156,5 @@ L'application est optimisée pour :
 - Protection des routes authentifiées
 - Échappement HTML pour prévenir XSS
 
-## 🎯 Améliorations futures
-
-- [ ] Système de favoris
-- [ ] Pagination des places
-- [ ] Upload d'images
-- [ ] Notifications en temps réel
-- [ ] Mode sombre/clair
-- [ ] Géolocalisation
-
-## 👥 Contribution
-
-1. Fork le projet
-2. Créer une branche feature
-3. Commiter les changements
-4. Pousser vers la branche
-5. Ouvrir une Pull Request
-
-## 📄 Licence
-
-Ce projet est sous licence MIT. Voir le fichier LICENSE pour plus de détails.
-
----
 
 **Développé avec 🍫 et beaucoup de ☕**
