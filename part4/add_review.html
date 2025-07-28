@@ -5,39 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Review</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="icon" href="logo.png">
 </head>
 <body>
     <header>
-        <img src="logo.png" alt="logo" class="logo">
+        <img src="./logo.png" alt="logo" class="logo">
+        <h1 id="Toph1">Have a break Have a rent</h1>
         <nav>
-            <a href="index.html" class="nav-link">Home</a>
-            <a href="login.html" class="login-button" id="login-link">Login</a>
+            <ul>
+                <li><a href="index.html">Index</a></li>
+                <li><a href="login.html" id="login-link">Login</a></li>
+            </ul>
         </nav>
     </header>
     <main>
-        <form id="review-form" class="form add-review">
-            <h2>Add Review</h2>
-            <div id="place-info-review">
-                <h3 id="review-place-title">Loading place...</h3>
-            </div>
-            <label for="rating">Rating (1-5):</label>
+        <div id="place-identifier">
+            <!-- This will be populated with place info -->
+        </div>
+        <form id="review-form">
+            <h2>Add a Review</h2>
+            <label for="text">Your Review:</label>
+            <textarea id="text" name="text" rows="5" required></textarea>
+            
+            <label for="rating">Rating:</label>
             <select id="rating" name="rating" required>
-                <option value="">Select Rating</option>
-                <option value="5">★★★★★ (5 stars)</option>
-                <option value="4">★★★★☆ (4 stars)</option>
-                <option value="3">★★★☆☆ (3 stars)</option>
-                <option value="2">★★☆☆☆ (2 stars)</option>
-                <option value="1">★☆☆☆☆ (1 star)</option>
+                <option value="">Select a rating</option>
+                <option value="1">1 - Poor</option>
+                <option value="2">2 - Fair</option>
+                <option value="3">3 - Good</option>
+                <option value="4">4 - Very Good</option>
+                <option value="5">5 - Excellent</option>
             </select>
-            <label for="text">Comment:</label>
-            <textarea id="text" name="text" placeholder="Share your experience..." required></textarea>
+            
             <button type="submit">Submit Review</button>
         </form>
     </main>
-    <footer>
-        All rights reserved
-    </footer>
-    <script src="script.js"></script>
-</body>
-</html>
+    <footer>All rights reserved</footer>
+    <script src="scripts.js"></script>
+</body
