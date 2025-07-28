@@ -1,9 +1,4 @@
-/* 
-  HBnB Application - JavaScript complet
-  Implémentation de toutes les fonctionnalités requises
-*/
-
-// Fonctions utilitaires pour les cookies
+// Fonctions cookies
 function getCookie(name) {
   const value = `; ${document.cookie}`;
   const parts = value.split(`; ${name}=`);
@@ -59,7 +54,6 @@ function getPlaceIdFromURL() {
 
 // === FONCTIONS POUR LA PAGE INDEX ===
 
-// Récupérer la liste des places
 async function fetchPlaces(token) {
   const headers = {
     'Content-Type': 'application/json'
@@ -75,7 +69,7 @@ async function fetchPlaces(token) {
     });
     
     if (!response.ok) {
-      throw new Error('Erreur lors de la récupération des places');
+      throw new Error('Error during places recuperation');
     }
     
     const data = await response.json();
@@ -90,8 +84,8 @@ async function fetchPlaces(token) {
     window.allPlaces = places;
     displayPlaces(places);
   } catch (error) {
-    console.error('Erreur lors de la récupération des places:', error);
-    showMessage('Erreur lors de la récupération des places', 'error');
+    console.error('Error during places:', error);
+    showMessage('Error during places', 'error');
   }
 }
 
@@ -103,7 +97,7 @@ function displayPlaces(places) {
   placesList.innerHTML = '';
 
   if (!places || places.length === 0) {
-    placesList.innerHTML = '<p>Aucune place disponible.</p>';
+    placesList.innerHTML = '<p>No place available.</p>';
     return;
   }
 
@@ -114,9 +108,9 @@ function displayPlaces(places) {
     
     card.innerHTML = `
       <h3>${place.title || place.name || 'Sans titre'}</h3>
-      <p><strong>Prix par nuit:</strong> $${place.price !== undefined ? place.price : 'N/A'}</p>
-      <p><strong>Description:</strong> ${place.description || 'Aucune description'}</p>
-      <button class="details-button" onclick="viewPlaceDetails('${place.id}')">Voir les détails</button>
+      <p><strong>Price per night:</strong> $${place.price !== undefined ? place.price : 'N/A'}</p>
+      <p><strong>Description:</strong> ${place.description || 'No description'}</p>
+      <button class="details-button" onclick="viewPlaceDetails('${place.id}')">See details</button>
     `;
     
     placesList.appendChild(card);
@@ -146,13 +140,13 @@ async function fetchPlaceDetails(token, placeId) {
     });
 
     if (!response.ok) {
-      throw new Error('Place non trouvée');
+      throw new Error('No place found');
     }
 
     const place = await response.json();
     displayPlaceDetails(place);
   } catch (error) {
-    console.error('Erreur lors de la récupération des détails:', error);
+    console.error('Error during details recuperation:', error);
     showMessage('Erreur lors de la récupération des détails de la place', 'error');
   }
 }
@@ -166,7 +160,7 @@ function displayPlaceDetails(place) {
   if (place.owner) {
     hostInfo = `
       <div class="place-info">
-        <strong>Propriétaire:</strong> ${place.owner.first_name} ${place.owner.last_name}
+        <strong>Landlord:</strong> ${place.owner.first_name} ${place.owner.last_name}
         <br><strong>Email:</strong> ${place.owner.email}
       </div>
     `;
@@ -176,7 +170,7 @@ function displayPlaceDetails(place) {
   if (place.amenities && Array.isArray(place.amenities) && place.amenities.length > 0) {
     amenitiesInfo = `
       <div class="place-info">
-        <strong>Équipements:</strong>
+        <strong>Amenities:</strong>
         <ul>
           ${place.amenities.map(amenity => `<li>${amenity.name}</li>`).join('')}
         </ul>
@@ -188,7 +182,7 @@ function displayPlaceDetails(place) {
   if (place.reviews && Array.isArray(place.reviews) && place.reviews.length > 0) {
     reviewsInfo = `
       <div class="place-info">
-        <strong>Avis (${place.reviews.length}):</strong>
+        <strong>Review (${place.reviews.length}):</strong>
         <div id="place-reviews">
           ${place.reviews.map(review => `
             <div class="review-card">
@@ -204,10 +198,10 @@ function displayPlaceDetails(place) {
   detailsSection.innerHTML = `
     <h1>${place.title || place.name}</h1>
     <div class="place-info">
-      <strong>Prix par nuit:</strong> $${place.price}
+      <strong>Price per night:</strong> $${place.price}
     </div>
     <div class="place-info">
-      <strong>Description:</strong> ${place.description || 'Aucune description'}
+      <strong>Description:</strong> ${place.description || 'No description'}
     </div>
     <div class="place-info">
       <strong>Localisation:</strong> Latitude ${place.latitude}, Longitude ${place.longitude}
@@ -226,14 +220,14 @@ async function fetchPlaceReviews(placeId) {
     const response = await fetch(`http://localhost:5000/api/v1/reviews/places/${placeId}/reviews`);
     
     if (!response.ok) {
-      console.log('Aucun avis trouvé pour cette place');
+      console.log('No review for this place');
       return;
     }
 
     const reviews = await response.json();
     displayPlaceReviews(reviews);
   } catch (error) {
-    console.error('Erreur lors de la récupération des avis:', error);
+    console.error('Error during review recuperation:', error);
   }
 }
 
@@ -242,17 +236,17 @@ function displayPlaceReviews(reviews) {
   const reviewsSection = document.getElementById('reviews');
   if (!reviewsSection) return;
 
-  reviewsSection.innerHTML = '<h2>Avis des clients</h2>';
+  reviewsSection.innerHTML = '<h2>Customers review</h2>';
 
   if (!reviews || reviews.length === 0) {
-    reviewsSection.innerHTML += '<p>Aucun avis pour le moment.</p>';
+    reviewsSection.innerHTML += '<p>No review for the moment.</p>';
     return;
   }
 
   reviews.forEach(async (review) => {
     try {
       const userResponse = await fetch(`http://localhost:5000/api/v1/users/${review.user_id}`);
-      let userName = 'Utilisateur inconnu';
+      let userName = 'Uknown user';
       
       if (userResponse.ok) {
         const user = await userResponse.json();
@@ -268,7 +262,7 @@ function displayPlaceReviews(reviews) {
       
       reviewsSection.appendChild(reviewCard);
     } catch (error) {
-      console.error('Erreur lors de la récupération des informations utilisateur:', error);
+      console.error('Error during ID recuperation:', error);
     }
   });
 }
@@ -276,7 +270,7 @@ function displayPlaceReviews(reviews) {
 // Soumettre un nouvel avis
 async function submitReview(token, placeId, reviewText) {
   if (!reviewText.trim()) {
-    showMessage('Veuillez saisir un avis', 'error');
+    showMessage('Please make a review', 'error');
     return false;
   }
 
@@ -295,19 +289,19 @@ async function submitReview(token, placeId, reviewText) {
     });
 
     if (response.ok) {
-      showMessage('Avis soumis avec succès !', 'success');
+      showMessage('Review submit !', 'success');
       document.getElementById('review-text').value = '';
       // Recharger les avis
       fetchPlaceReviews(placeId);
       return true;
     } else {
       const errorData = await response.json();
-      showMessage('Erreur lors de la soumission: ' + (errorData.error || 'Erreur inconnue'), 'error');
+      showMessage('Error while reviewing: ' + (errorData.error || 'Unknown error'), 'error');
       return false;
     }
   } catch (error) {
-    console.error('Erreur lors de la soumission de l\'avis:', error);
-    showMessage('Erreur lors de la soumission de l\'avis', 'error');
+    console.error('Error while reviewing \'review:', error);
+    showMessage('Error while reviewing \'review', 'error');
     return false;
   }
 }
@@ -356,7 +350,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         if (!response.ok) {
-          throw new Error('Identifiants incorrects');
+          throw new Error('ID incorrect');
         }
 
         const data = await response.json();
@@ -364,16 +358,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (accessToken) {
           setCookie('token', accessToken, 7);
-          showMessage('Connexion réussie ! Redirection...', 'success');
+          showMessage('Login success ! Redirection...', 'success');
           setTimeout(() => {
             window.location.href = 'index.html';
           }, 1500);
         } else {
-          throw new Error('Token non reçu');
+          throw new Error('Token not receive');
         }
       } catch (error) {
-        console.error('Erreur de connexion:', error);
-        showMessage('Échec de la connexion: ' + error.message, 'error');
+        console.error('Login failed:', error);
+        showMessage('Login failed: ' + error.message, 'error');
       }
     });
     return;
@@ -390,10 +384,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (priceFilter) {
       // Ajouter les options de filtre
       const options = [
-        { value: 'all', text: 'Tous les prix' },
-        { value: '10', text: 'Moins de $10' },
-        { value: '50', text: 'Moins de $50' },
-        { value: '100', text: 'Moins de $100' }
+        { value: 'all', text: 'All prices' },
+        { value: '10', text: 'Less than $10' },
+        { value: '50', text: 'Less than $50' },
+        { value: '100', text: 'Less than $100' }
       ];
 
       options.forEach(opt => {
@@ -440,7 +434,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       }
     } else {
-      showMessage('ID de place manquant dans l\'URL', 'error');
+      showMessage('Place ID missing in \'URL', 'error');
     }
     return;
   }
@@ -456,7 +450,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const placeId = getPlaceIdFromURL();
     if (!placeId) {
-      showMessage('ID de place manquant', 'error');
+      showMessage('Place ID missing', 'error');
       return;
     }
 
@@ -480,15 +474,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         if (response.ok) {
-          showMessage('Avis soumis avec succès !', 'success');
+          showMessage('Review submit with success !', 'success');
           reviewForm.reset();
         } else {
           const errorData = await response.json();
-          throw new Error(errorData.error || 'Erreur lors de la soumission');
+          throw new Error(errorData.error || 'Error during review');
         }
       } catch (error) {
         console.error('Erreur:', error);
-        showMessage('Erreur lors de la soumission: ' + error.message, 'error');
+        showMessage('Error while submitting: ' + error.message, 'error');
       }
     });
 
@@ -498,7 +492,7 @@ document.addEventListener('DOMContentLoaded', () => {
       for (let i = 1; i <= 5; i++) {
         const option = document.createElement('option');
         option.value = i;
-        option.textContent = `${i} étoile${i > 1 ? 's' : ''}`;
+        option.textContent = `${i} stars${i > 1 ? 's' : ''}`;
         ratingSelect.appendChild(option);
       }
     }
