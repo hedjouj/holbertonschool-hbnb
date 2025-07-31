@@ -19,7 +19,6 @@ body {
 /* Header avec thème Twix */
 header {
     background: linear-gradient(135deg, #8b4513 0%, #a0522d 50%, #cd853f 100%);
-    background-image: url(twix-chocolate-bar.webp);
     background-size: cover;
     background-position: center;
     background-blend-mode: overlay;
