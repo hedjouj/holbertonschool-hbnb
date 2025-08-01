@@ -21,16 +21,39 @@ class Login(Resource):
         """Authenticate user and return a JWT token"""
         credentials = api.payload  # Get the email and password from the request payload
         
+        print(f"=== DEBUG LOGIN ===")
+        print(f"Email reçu: {credentials['email']}")
+        print(f"Password reçu: {credentials['password']}")
+        
+        # Debug: Lister tous les utilisateurs
+        all_users = facade.get_all_users()
+        print(f"Nombre d'utilisateurs dans la DB: {len(all_users)}")
+        for u in all_users:
+            print(f"  - ID: {u.id}, Email: {u.email}, Admin: {u.is_admin}")
+        
         # Step 1: Retrieve the user based on the provided email
         user = facade.get_user_by_email(credentials['email'])
-        print(str(credentials['email']))
-        print(str(user.id))
+        print(f"Utilisateur trouvé: {user}")
+        
         # Step 2: Check if the user exists and the password is correct
-        if not user or not user.verify_password(credentials['password']):
-            return {'error': 'Invalid credentials'}, 401
+        if not user:
+            print("❌ Utilisateur non trouvé")
+            return {'error': 'Invalid credentials - User not found'}, 401
+            
+        print(f"✅ Utilisateur trouvé - ID: {user.id}")
+        
+        # Vérifier le mot de passe
+        password_valid = user.verify_password(credentials['password'])
+        print(f"Password valide: {password_valid}")
+        
+        if not password_valid:
+            print("❌ Mot de passe incorrect")
+            return {'error': 'Invalid credentials - Wrong password'}, 401
 
         # Step 3: Create a JWT token with the user's id and is_admin flag
         access_token = create_access_token(identity={'id': str(user.id), 'is_admin': user.is_admin})
+        
+        print(f"✅ Token créé avec succès pour l'utilisateur {user.id}")
         
         # Step 4: Return the JWT token to the client
         return {'access_token': access_token}, 200
