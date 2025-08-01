@@ -20,22 +20,29 @@
     
     <main>
         <div id="place-info">
-            <p>You added a review for this place.</p>
         </div>
-        
         <form id="review-form">
-            <h2>Add review</h2>
-            
-            <label for="review">Your review:</label>
-            <textarea id="review" name="review" rows="6" placeholder="Describe your experience" required></textarea>
-            
-            <label for="rating">Note:</label>
-            <select id="rating" name="rating" required>
-                <option value="">Choose a note</option>
-            </select>
-            
-            <button type="submit">Submit review</button>
-        </form>
+    <h2>Add review</h2>
+
+    <label for="review">Your review:</label>
+    <textarea id="review" name="review" rows="6" placeholder="Describe your experience" required></textarea>
+
+    <label>Note:</label>
+    <div class="rating">
+        <span class="star" data-value="1">★</span>
+        <span class="star" data-value="2">★</span>
+        <span class="star" data-value="3">★</span>
+        <span class="star" data-value="4">★</span>
+        <span class="star" data-value="5">★</span>
+        <span id="rating-value">0</span>/5
+    </div>
+    
+    <!-- Champ caché pour envoyer la note -->
+    <input type="hidden" name="rating" id="rating" value="0">
+
+    <button type="submit">Submit</button>
+</form>
+
     </main>
     
     <footer>

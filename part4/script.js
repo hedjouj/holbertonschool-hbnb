@@ -282,3 +282,19 @@ function displayPlaceReviews(reviews) {
     reviewsSection.appendChild(card);
   });
 }
+const stars = document.querySelectorAll('.star');
+const ratingInput = document.getElementById('rating');
+const ratingDisplay = document.getElementById('rating-value');
+
+stars.forEach(star => {
+    star.addEventListener('click', () => {
+        const value = star.getAttribute('data-value');
+        ratingInput.value = value;
+        ratingDisplay.textContent = value;
+
+        // Mettre à jour le style des étoiles
+        stars.forEach(s => {
+            s.classList.toggle('selected', s.getAttribute('data-value') <= value);
+        });
+    });
+});

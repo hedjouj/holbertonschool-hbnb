@@ -163,7 +163,8 @@ button[type="submit"], .details-button {
     box-shadow: 0 4px 8px rgba(139, 69, 19, 0.2);
     text-transform: uppercase;
     letter-spacing: 0.5px;
-}
+
+ }
 
 button[type="submit"]:hover, .details-button:hover {
     background: linear-gradient(135deg, #b8860b 0%, #cd853f 100%);
@@ -370,4 +371,28 @@ footer {
     background: #f8d7da;
     border: 2px solid #f5c6cb;
     color: #721c24;
+}
+.rating {
+  font-size: 24px;
+  cursor: pointer;
+  color: #ccc;
+}
+
+.rating .star {
+  margin: 0 5px;
+  transition: color 0.2s ease-in-out;
+}
+
+.rating .star.filled {
+  color: #ffcc00;
+}   
+.rating .star {
+    font-size: 2rem;
+    color: gray;
+    cursor: pointer;
+}
+.rating .star.selected,
+.rating .star:hover,
+.rating .star:hover ~ .star {
+    color: gold;
 }
