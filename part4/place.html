@@ -35,19 +35,14 @@
         <section id="add-review" style="display: none;" >
             <h2>Add review</h2>
             <form id="review-form">
-                <label for="review-text">Your review:</label>
-                <textarea id="review-text" name="review-text" rows="4" placeholder="Share your experience" required></textarea>
-                <label for="rating">Note:</label>
-                <select id="rating" name="rating" required>
-                    <option value="">Choose a note</option>
-                    <option value="1">1 Star</option>
-                    <option value="2">2 Stars</option>
-                    <option value="3">3 Stars</option>
-                    <option value="4">4 Stars</option>
-                    <option value="5">5 Stars</option>
-                </select>
-
-                <button type="submit">Submit review</button>
+                <textarea id="review" name="review" required placeholder="Votre avis…"></textarea>
+                    <div id="rating-stars" class="stars">
+                        <span data-value="1">★</span><span data-value="2">★</span>
+                        <span data-value="3">★</span><span data-value="4">★</span>
+                        <span data-value="5">★</span>
+                    </div>
+                    <input type="hidden" id="rating" name="rating" value="0">
+                    <button type="submit">Envoyer</button>
             </form>
         </section>
     </main>
