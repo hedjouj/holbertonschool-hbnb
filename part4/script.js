@@ -298,3 +298,30 @@ stars.forEach(star => {
         });
     });
 });
+// Exemple de données de places
+const places = [
+  {
+    id: 1,
+    name: "Sunset Beach Bungalow",
+    description: "A cozy bungalow with ocean view, perfect for romantic getaways.",
+    image: "images/beach-bungalow.jpg",
+    price_per_night: 120,
+    rating: 4.5
+  },
+  {
+    id: 2,
+    name: "Mountain Cabin Retreat",
+    description: "A peaceful cabin surrounded by nature and fresh air in the Alps.",
+    image: "images/mountain-cabin.jpg",
+    price_per_night: 95,
+    rating: 4.8
+  },
+  {
+    id: 3,
+    name: "City Center Apartment",
+    description: "Modern apartment in the heart of Paris with easy access to cafes and museums.",
+    image: "images/city-apartment.jpg",
+    price_per_night: 150,
+    rating: 4.2
+  }
+];

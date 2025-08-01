@@ -48,6 +48,29 @@
     <footer>
         <p>© 2025 HBnB - All rights reserved</p>
     </footer>
-    <script src="script.js"></script>
+  <script>
+    // Récupère l'id du lieu depuis l'URL (ex: place.html?id=2)
+const params = new URLSearchParams(window.location.search);
+const placeId = parseInt(params.get('id'));
+
+// Trouve le lieu correspondant
+const place = places.find(p => p.id === placeId);
+
+// Injecte les détails si trouvés
+if (place) {
+  const placeSection = document.getElementById('place-details');
+  placeSection.innerHTML = `
+    <h2>${place.name}</h2>
+    <img src="${place.image}" alt="${place.name}" class="place-image">
+    <p>${place.description}</p>
+    <p><strong>Price per night:</strong> $${place.price_per_night}</p>
+    <p><strong>Average Rating:</strong> ${place.rating} ★</p>
+    <button onclick="document.getElementById('add-review').style.display='block'">Leave a Review</button>
+  `;
+} else {
+  document.getElementById('place-details').innerHTML = `<p>Place not found.</p>`;
+}
+
+  </script>
 </body>
 </html>
