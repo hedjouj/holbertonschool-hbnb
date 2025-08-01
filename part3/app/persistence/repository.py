@@ -5,14 +5,6 @@ from app.models.place import Place
 from app.models.review import Review
 from app.models.amenity import Amenity
 
-
-from app import db
-from app.models.user import User
-
-from app import db  # Assuming you have set up SQLAlchemy in your Flask app
-from app.models import User, Place, Review, Amenity  # Import your models
-
-
 class Repository(ABC):
     @abstractmethod
     def add(self, obj):
@@ -37,7 +29,6 @@ class Repository(ABC):
     @abstractmethod
     def get_by_attribute(self, attr_name, attr_value):
         pass
-
 
 class InMemoryRepository:
     """A simple in-memory repository for testing (not used with SQLAlchemy)."""
@@ -69,7 +60,6 @@ class InMemoryRepository:
                 return obj
         return None
 
-
 # SQLAlchemy repositories
 class BaseRepository:
     def __init__(self, model):
@@ -78,6 +68,7 @@ class BaseRepository:
     def add(self, obj):
         db.session.add(obj)
         db.session.commit()
+        return obj
 
     def get(self, obj_id):
         return self.model.query.get(obj_id)
@@ -103,6 +94,9 @@ class BaseRepository:
     def get_by_attribute(self, attr, value):
         return self.model.query.filter(getattr(self.model, attr) == value).first()
 
+    def save(self, obj):
+        db.session.add(obj)
+        db.session.commit()
 
 class UserRepository(BaseRepository):
     def __init__(self):
@@ -111,16 +105,13 @@ class UserRepository(BaseRepository):
     def get_user_by_email(self, email):
         return self.model.query.filter_by(email=email).first()
 
-
 class PlaceRepository(BaseRepository):
     def __init__(self):
         super().__init__(Place)
 
-
 class ReviewRepository(BaseRepository):
     def __init__(self):
         super().__init__(Review)
-
 
 class AmenityRepository(BaseRepository):
     def __init__(self):

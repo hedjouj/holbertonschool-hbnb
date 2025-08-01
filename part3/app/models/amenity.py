@@ -1,27 +1,13 @@
-# app/models/amenity.py
-''' Amenity Class represents an amenity, inheriting from BaseModel'''
-
 from app.models.base_model import BaseModel
-from app import db
-from app.models.place import Place
-from app.models.association_tables import place_amenity
+from app.extensions import db
 
 class Amenity(BaseModel):
-    __tablename__ = 'amenity'
+    __tablename__ = 'amenities'
 
-    id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False)
 
-    # Add this relationship:
-    places = db.relationship(
-        'Place',
-        secondary=place_amenity,
-        back_populates='amenities'
-    )
-
-    '''Represents an amenity with attributes and restrictions'''
     def __init__(self, name):
-        '''Initialize a new Amenity instance with restrictions'''
+        """Initialize a new Amenity instance with restrictions"""
         super().__init__()
         if not isinstance(name, str):
             raise TypeError("Amenity name must be a string of characters.")

@@ -1,6 +1,6 @@
 import uuid
 from datetime import datetime
-from app import db
+from app.extensions import db
 
 class BaseModel(db.Model):
     __abstract__ = True  # This ensures SQLAlchemy does not create a table for BaseModel
@@ -10,16 +10,19 @@ class BaseModel(db.Model):
 
     def __init__(self):
         self.id = str(uuid.uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
+        self.created_at = datetime.utcnow()
+        self.updated_at = datetime.utcnow()
 
     def save(self):
-        """Mets à jour la modif date(upadate_at) quand l'obj est changé"""
-        self.updated_at = datetime.now()
+        """Update the updated_at timestamp when the object is changed"""
+        self.updated_at = datetime.utcnow()
+        db.session.add(self)
+        db.session.commit()
 
     def update(self, data):
-        """Mets à jours les attributs de l'obj à l'aide d'un dico"""
+        """Update object attributes using a dictionary"""
         for key, value in data.items():
             if hasattr(self, key):
                 setattr(self, key, value)
-        self.save()  # Mets à jour la date de modif
+        self.updated_at = datetime.utcnow()
+        db.session.commit()

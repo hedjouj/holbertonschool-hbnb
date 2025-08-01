@@ -1,10 +1,6 @@
-from datetime import datetime
-import uuid
 from app.extension_bcrypt import bcrypt
 from app.extensions import db
-from sqlalchemy.orm import validates, relationship
 from app.models.base_model import BaseModel
-
 
 class User(BaseModel):
     __tablename__ = 'users'
@@ -14,8 +10,9 @@ class User(BaseModel):
     email = db.Column(db.String(120), nullable=False, unique=True)
     password = db.Column(db.String(128), nullable=False)
     is_admin = db.Column(db.Boolean, default=False)
-    places = relationship('Place', backref='owner', lazy=True)
-    reviews = relationship('Review', backref='author', lazy=True)
+
+    places = db.relationship('Place', backref='owner', lazy=True)
+    reviews = db.relationship('Review', backref='user', lazy=True)
 
     def __init__(self, first_name: str, last_name: str, email: str, password: str, is_admin=False):
         super().__init__()
@@ -27,6 +24,7 @@ class User(BaseModel):
             raise ValueError("Email is required and must be ≤ 100 characters.")
         if '@' not in email:
             raise ValueError("Invalid email format.")
+        
         self.first_name = first_name
         self.last_name = last_name
         self.email = email
@@ -42,18 +40,15 @@ class User(BaseModel):
         return bcrypt.check_password_hash(self.password, password)
 
     def __str__(self):
-        """
-        Used to return object as we want
-        """
+        """Used to return object as we want"""
         return "{} {}".format(self.first_name, self.last_name)
     
     def to_dict(self):
-        """Convert the Place object to a dictionary."""
+        """Convert the User object to a dictionary."""
         return {
             "id": self.id,
             "first_name": self.first_name,
             "last_name": self.last_name,
             "email": self.email,
-            "is_admin": self.is_admin,
-            "password": self.password, 
+            "is_admin": self.is_admin
         }

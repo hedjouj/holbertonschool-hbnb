@@ -1,4 +1,4 @@
-from flask_jwt_extended import jwt_required, get_jwt_identity, get_jwt
+from flask_jwt_extended import jwt_required, get_jwt_identity
 from flask_restx import Namespace, Resource, fields
 from app.services.facade import facade
 
@@ -7,7 +7,6 @@ api = Namespace('amenities', description='Amenity operations')
 amenity_model = api.model('Amenity', {
     'name': fields.String(required=True, description='Name of the amenity')
 })
-
 
 @api.route('/')
 class AmenityList(Resource):
@@ -19,13 +18,12 @@ class AmenityList(Resource):
         amenity_data = api.payload
         try:
             if not amenity_data['name'] or len(amenity_data['name']) > 50:
-                return {'error':
-                        'Amenity name must be a string of 1 to 50 characters.'
-                        }, 400
-            existing_amenity = facade.get_amenity_by_name(
-                amenity_data['name'])
+                return {'error': 'Amenity name must be a string of 1 to 50 characters.'}, 400
+                
+            existing_amenity = facade.get_amenity_by_name(amenity_data['name'])
             if existing_amenity:
                 return {'error': 'Amenity already registered'}, 400
+                
             new_amenity = facade.create_amenity(amenity_data)
             return {'id': new_amenity.id, 'name': new_amenity.name}, 201
         except Exception as e:
@@ -35,9 +33,7 @@ class AmenityList(Resource):
     def get(self):
         """Retrieve a list of all amenities"""
         amenities = facade.get_all_amenities()
-        return [{'id': amenity.id, 'name': amenity.name}
-                for amenity in amenities], 200
-
+        return [{'id': amenity.id, 'name': amenity.name} for amenity in amenities], 200
 
 @api.route('/<amenity_id>')
 class AmenityResource(Resource):
@@ -56,32 +52,4 @@ class AmenityResource(Resource):
     @api.response(400, 'Invalid input data')
     def put(self, amenity_id):
         '''Update amenity details with ID'''
-        amenity_data = api.payload
-        try:
-            updated_amenity = facade.update_amenity(amenity_id, amenity_data)
-            return {'id': updated_amenity.id, 'name': updated_amenity.name
-                    }, 200
-        except ValueError as e:
-            return {'error': str(e)}, 400
-
-@api.route('/amenities/')
-class AdminAmenityCreate(Resource):
-    @jwt_required()
-    def post(self):
-        current_user = get_jwt_identity()
-        if not current_user.get('is_admin'):
-            return {'error': 'Admin privileges required'}, 403
-
-        # Logic to create a new amenity
-        pass
-
-@api.route('/amenities/<amenity_id>')
-class AdminAmenityModify(Resource):
-    @jwt_required()
-    def put(self, amenity_id):
-        current_user = get_jwt_identity()
-        if not current_user.get('is_admin'):
-            return {'error': 'Admin privileges required'}, 403
-
-        # Logic to update an amenity
-        pass
+        amenity
